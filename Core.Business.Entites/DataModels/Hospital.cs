@@ -17,5 +17,6 @@ namespace Core.Business.Entites.DataModels {
         public int LanguageId { get; set; }
         public string Address { get; set; }
         public string BedCount { get; set; }
+
     }
 }
