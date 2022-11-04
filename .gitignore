@@ -10,3 +10,8 @@ Core.Common/obj/
 Core.Data/bin/
 Core.Business/bin/
 .vs/
+Core.Common/bin/Debug/net5.0/Core.Common.deps.json
+Core.Common/bin/Debug/net5.0/Core.Common.dll
+Core.Common/bin/Debug/net5.0/Core.Common.pdb
+Core.Common/bin/Debug/net5.0/Ignite.Security.Lib.dll
+Core.Common/bin/Debug/net5.0/ref/Core.Common.dll
