@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Business.Entites\Core.Business.Entites.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\Abstract\" />
+    <Folder Include="Repositories\Concrete\" />
+  </ItemGroup>
+
+</Project>
