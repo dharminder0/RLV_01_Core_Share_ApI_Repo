@@ -1,0 +1,12 @@
+Core.Web.API/obj/
+Core.Web.API/bin/
+Core.Data/obj/
+Core.BackgroundService/bin/
+Core.BackgroundService/obj/
+Core.Business.Entites/bin/
+Core.Business.Entites/obj/
+Core.Business/obj/
+Core.Common/obj/
+Core.Data/bin/
+Core.Business/bin/
+.vs/
