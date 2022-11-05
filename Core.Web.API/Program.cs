@@ -24,35 +24,24 @@
 //app.Run();
 
 
-//Host.CreateDefaultBuilder(args)
-//                .ConfigureWebHostDefaults(webBuilder => {
-//                    webBuilder.UseStartup<Core.Web.Api.Startup>();
-//                });
-
-
-//using Core.Web.Api;
-//using Microsoft.AspNetCore.Hosting;
-//using Microsoft.Extensions.Hosting;
-
-//namespace Core.Web.Api {
-//    public class Program {
-//        public static void Main(string[] args) {
-//            CreateHostBuilder(args).Build().Run();
-//        }
-
-//        public static IHostBuilder CreateHostBuilder(string[] args) =>
-//            Host.CreateDefaultBuilder(args)
-//                .ConfigureWebHostDefaults(webBuilder => {
-//                    webBuilder.UseStartup<Startup>();
-//                });
-//    }
-//}
-
 using Core.Web.Api;
 
-var builder = WebApplication.CreateBuilder(args);
+//var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions {
+    Args = args,
+    //ApplicationName = typeof(Program).Assembly.FullName,
+    //ContentRootPath = Directory.GetCurrentDirectory(),
+    //EnvironmentName = Environments.Staging,
+    //WebRootPath = "customwwwroot"
+});
+
+
 var startup = new Startup(builder.Configuration);
 startup.ConfigureServices(builder.Services); // calling ConfigureServices method
 var app = builder.Build();
 startup.Configure(app, builder.Environment);
 app.Run();
+
+
+
+// Reference path : https://learn.microsoft.com/en-us/aspnet/core/migration/50-to-60-samples?view=aspnetcore-6.0
