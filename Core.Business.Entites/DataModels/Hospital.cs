@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Core.Common.Data;
+using System;
 namespace Core.Business.Entites.DataModels {
-    //[Alias(Name = "Hospital ")]
+    [Alias(Name = "Hospital")]
     public class Hospital {
         public Hospital() { }
-        //[Key(AutoNumber = true)]
+        [Key(AutoNumber = true)]
         public int Id { get; set; }
         public int CountryId { get; set; }
         public int CityId { get; set; }

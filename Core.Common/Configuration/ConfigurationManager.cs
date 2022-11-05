@@ -2,8 +2,8 @@
 using System.Collections.Specialized;
 
 namespace Core.Common.Configuration {
-    public class ConfigurationManager {
-        static ConfigurationManager() {
+    public class CoreConfigurationManager {
+        static CoreConfigurationManager() {
             AppSettings = new NameValueCollection();
             ConnectionStrings = new Dictionary<string, ConfigConnection>();
         }

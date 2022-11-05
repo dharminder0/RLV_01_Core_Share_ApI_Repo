@@ -16,7 +16,7 @@ namespace Core.Common.Data {
         }
 
         protected SqlConnection GetConnection(string connectionName = null) {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings[connectionName ?? _connectionName].ConnectionString);
+            return new SqlConnection(CoreConfigurationManager.ConnectionStrings[connectionName ?? _connectionName].ConnectionString);
         }
 
         public IEnumerable<E> Query<E>(string query, object param = null, string connectionName = null) {

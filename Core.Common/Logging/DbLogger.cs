@@ -1,6 +1,6 @@
 ﻿using Core.Common.Data;
 using Core.Common.Extensions;
-using Hub.Common.Settings;
+using Core.Common.Settings;
 using System;
 
 namespace Core.Common.Logging {

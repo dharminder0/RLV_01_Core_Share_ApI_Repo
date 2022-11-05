@@ -1,4 +1,4 @@
-﻿using Hub.Common.Settings;
+﻿using Core.Common.Settings;
 using RLV.Security.Lib;
 using System.Web;
 
