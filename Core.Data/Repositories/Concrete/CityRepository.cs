@@ -13,13 +13,13 @@ namespace Core.Data.Repositories.Concrete
     {
         public IEnumerable<City> GetCity()
         {
-            var sql = $@"SELECT * FROM City ";
+            var sql = $@"SELECT * FROM City  ";
             return Query<City>(sql);
         }
         public IEnumerable<City> GetCityByCountryid(int id)
         {
             var sql= $@"SELECT * FROM  City where CountryId=@id";
-            return Query<City>(sql);
+            return Query<City>(sql, new { id});
         }
 
     }

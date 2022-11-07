@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Core.Business.Services.Abstract
 {
-    public interface ICityServices
+    public interface ICountryService
     {
-        List<City> GetCity();
-
+        List<Country>GetCountries();
     }
 }
