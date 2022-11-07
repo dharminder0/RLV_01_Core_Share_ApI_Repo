@@ -1,13 +1,12 @@
 ﻿using Core.Business.Entites.DataModels;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
-using Core.Data.Repositories.Concrete;
 using Core.Web.Api.Filters;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Web.API.Controllers {
-
+namespace Core.Web.API.Controllers
+{
+    [Route("api/Hospital")]
     [ApiController]
     public class HospitalController : BaseApiController {
 
@@ -18,8 +17,12 @@ namespace Core.Web.API.Controllers {
             _CityService = CityService;
         }
 
+        /// <summary>
+        /// get list
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        [Route("api/Hospital/v1list")]
+        [Route("list")]
         [RequireAuthorization]
         public List<Hospital> Hospitals() {
 
@@ -28,15 +31,15 @@ namespace Core.Web.API.Controllers {
 
         /// <summary>
         /// Get Hospitals
-        /// <param name="obj"
+        /// <param name="requestModel"
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        [Route("api/Hospital/v1/list")]
+        [HttpPost]
+        [Route("GetHospitals")]
         [RequireAuthorization]
-        public List<Hospital> Hospitals(HospitalRequest hospitalRequest) {
-
-            return _hospitalService.GetHospitals(hospitalRequest);
+        public IActionResult Hospitals(HospitalRequest requestModel) {
+            var response = _hospitalService.GetHospitals(requestModel);
+            return JsonExt(response);
         }
 
         [HttpGet]
