@@ -10,4 +10,8 @@
     <Folder Include="DataModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj" />
+  </ItemGroup>
+
 </Project>
