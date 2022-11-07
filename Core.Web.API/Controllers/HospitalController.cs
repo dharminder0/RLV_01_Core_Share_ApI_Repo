@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.API.Controllers {
-    [Route("api/[controller]")]
+
     [ApiController]
     public class HospitalController : BaseApiController {
 
@@ -18,11 +18,24 @@ namespace Core.Web.API.Controllers {
         }
 
         [HttpGet]
-        [Route("list")]
+        [Route("api/Hospital/v1list")]
         [RequireAuthorization]
         public List<Hospital> Hospitals() {
 
             return _hospitalService.GetHospitals();
+        }
+
+        /// <summary>
+        /// Get Hospitals
+        /// <param name="obj"
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("api/Hospital/v1/list")]
+        [RequireAuthorization]
+        public List<Hospital> Hospitals(HospitalRequest hospitalRequest) {
+
+            return _hospitalService.GetHospitals(hospitalRequest);
         }
     }
 }
