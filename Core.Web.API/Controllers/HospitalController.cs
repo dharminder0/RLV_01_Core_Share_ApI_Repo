@@ -2,6 +2,7 @@
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Concrete;
+using Core.Web.Api.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace Core.Web.API.Controllers {
 
         [HttpGet]
         [Route("list")]
+        [RequireAuthorization]
         public List<Hospital> Hospitals() {
 
             return _hospitalService.GetHospitals();
