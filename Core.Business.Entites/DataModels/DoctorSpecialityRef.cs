@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Business.Entites.DataModels {
+﻿namespace Core.Business.Entites.DataModels {
     public class DoctorSpecialityRef {
         public DoctorSpecialityRef() { }
         public int Id { get; set; }
@@ -16,7 +10,8 @@ namespace Core.Business.Entites.DataModels {
         public string Symbol { get; set; }
 
         public decimal TreatmentAmount { get; set; }
+        public int  TreatmentId { get; set; }
 
 
-    }
+}
 }
