@@ -1,12 +1,8 @@
 ﻿using Core.Common.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Business.Entites.DataModels
 {
+    [Alias(Name = "Doctor")]
     public class Doctor
     {
         public Doctor() { }
