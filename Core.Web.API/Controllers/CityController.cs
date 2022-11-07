@@ -6,19 +6,31 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class CityController : BaseApiController
     {
-        private readonly ICityServices _CityService;
+        private readonly ICityService _CityService;
+     
 
-        public CityController(ICityServices CityService)
+        public CityController(ICityService CityService)
         {
             _CityService = CityService;
+          
         }
 
+        
+
         [HttpGet]
-        [Route("GetCitylist")]
+        [Route("GetCitylistbyCountryId")]
+        [RequireAuthorization]
+        public List<City> GetCityByCountryid(int id)
+        {
+            return _CityService.GetCityByCountryid(id);
+        }
+
+
+        [HttpGet]
+        [Route("api/City/GetCitylist")]
         [RequireAuthorization]
         public List<City> City()
         {
