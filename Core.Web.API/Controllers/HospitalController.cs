@@ -12,9 +12,10 @@ namespace Core.Web.API.Controllers {
     public class HospitalController : BaseApiController {
 
         private readonly IHospitalService _hospitalService;
-
-        public HospitalController(IHospitalService hospitalService) {
+        private readonly ICityService _CityService;
+        public HospitalController(IHospitalService hospitalService, ICityService CityService) {
             _hospitalService = hospitalService;
+            _CityService = CityService;
         }
 
         [HttpGet]
@@ -36,6 +37,14 @@ namespace Core.Web.API.Controllers {
         public List<Hospital> Hospitals(HospitalRequest hospitalRequest) {
 
             return _hospitalService.GetHospitals(hospitalRequest);
+        }
+
+        [HttpGet]
+        [Route("api/Hospital/GetCitylistbyCountryId")]
+        [RequireAuthorization]
+        public List<City> GetCityByCountryid(int id)
+        {
+            return _CityService.GetCityByCountryid(id);
         }
     }
 }

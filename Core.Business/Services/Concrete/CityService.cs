@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Core.Business.Services.Concrete
 {
-    public class CityServices : ICityServices
+    public class CityService : ICityService
     {
         private readonly ICityRepository _cityRepository;
-        public CityServices(ICityRepository cityRepository)
+        public CityService(ICityRepository cityRepository)
         {
             _cityRepository = cityRepository;
         }
@@ -22,5 +22,10 @@ namespace Core.Business.Services.Concrete
             return _cityRepository.GetCity().ToList();
         }
 
+
+        public List<City> GetCityByCountryid(int id)
+        {
+            return _cityRepository.GetCityByCountryid(id).ToList(); 
+        }
     }
 }
