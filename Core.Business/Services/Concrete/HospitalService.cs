@@ -1,25 +1,30 @@
 ﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
-using Core.Common.Caching;
-using Core.Common.Data;
 using Core.Data.Repositories.Abstract;
 
-namespace Core.Data.Repositories.Concrete {
+namespace Core.Data.Repositories.Concrete
+{
 
-
-   
-
-    public class HospitalService : IHospitalService {
+    public class HospitalService : IHospitalService
+    {
 
         private readonly IHospitalRepository _hospitalRepository;
-        public HospitalService(IHospitalRepository hospitalRepository) {
+        public HospitalService(IHospitalRepository hospitalRepository)
+        {
             _hospitalRepository = hospitalRepository;
         }
-        public List<Hospital> GetHospitals() {
+        public List<Hospital> GetHospitals()
+        {
 
             return _hospitalRepository.GetHospitals().ToList();
+        } 
+        public List<Hospital> GetHospitals(HospitalRequest hospitalRequest)
+        {
+
+            return _hospitalRepository.GetHospitals(hospitalRequest).ToList();
         }
-        }
-    
+    }
+
 }
 
