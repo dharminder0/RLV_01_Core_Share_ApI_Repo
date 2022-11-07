@@ -13,6 +13,11 @@
 
   <ItemGroup>
     <Folder Include="Services\Abstract\" />
+    <Folder Include="Services\External\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.4.0" />
   </ItemGroup>
 
 </Project>

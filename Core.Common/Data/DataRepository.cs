@@ -2,7 +2,7 @@
 using Dapper;
 using DapperExtensions;
 using DapperExtensions.Predicate;
-using Hub.Common.Settings;
+using Core.Common.Settings;
 using SqlKata;
 using SqlKata.Compilers;
 using SqlKata.Execution;
@@ -29,12 +29,12 @@ namespace Core.Common.Data {
         }
 
         public DataRepository() {
-            //_connectionName = ConfigurationManager.AppSettings["DefaultConnectionName"];
-            _connectionName = GlobalSettings.DefaultConnectionName;
+            //_connectionName = CoreConfigurationManager.AppSettings["DefaultConnectionName"];
+            _connectionName = GlobalSettings.DefaultConnectionName ?? "CoreDb"; //Todo : need to change
         }
 
         protected SqlConnection GetConnection(string connectionName = null) {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings[connectionName ?? _connectionName].ConnectionString);
+            return new SqlConnection(CoreConfigurationManager.ConnectionStrings[connectionName ?? _connectionName].ConnectionString);
         }
 
         //public QueryFactory GetDbInstance(string connectionName = null) {

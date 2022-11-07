@@ -1,9 +1,10 @@
 ﻿using Core.Common.Data;
-
+using System;
 namespace Core.Business.Entites.DataModels
 {
-    [Alias(Name = "Hospital ")]
-    public class Hospital {
+    [Alias(Name = "Hospital")]
+    public class Hospital
+    {
         public Hospital() { }
         [Key(AutoNumber = true)]
         public int Id { get; set; }

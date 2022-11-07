@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 
-namespace Hub.Common.Settings {
+namespace Core.Common.Settings {
     public class GlobalSettings {
-        private static NameValueCollection _appSettings = ConfigurationManager.AppSettings;
+        private static NameValueCollection _appSettings = CoreConfigurationManager.AppSettings;
 
         public static string JobRockAccountsApiUrl => GetString("JobRock.Accounts.ApiUrl");
         public static string JobRockAccountsApiAuthorization => GetString("JobRock.Accounts.AuthorizationBearer");
@@ -25,7 +25,7 @@ namespace Hub.Common.Settings {
         public static string JobRockCampaignApiAuthorization => GetString("JobRock.Campaign.AuthorizationBearer");
 
         public static string JobRockLeadApiUrl => GetString("JobRock.Lead.ApiUrl");
-        public static string JobRockHubUrl => GetString("JobRock.Hub.Url");
+        public static string JobRockHubUrl => GetString("JobRock.Core.Url");
         public static string JobRockLeadApiAuthorization => GetString("JobRock.Lead.AuthorizationBearer");
         public static string CoreApiUrl => GetString("JobRock.Core.ApiUrl");
         public static string CoreApiAuthorization => GetString("JobRock.Core.AuthorizationBearer");
@@ -86,7 +86,7 @@ namespace Hub.Common.Settings {
         public static bool ElmahInfoLogEnabled => GetBool("ElmahInfoLogEnabled");
         public static bool _isCacheEnabled => GetBool("AppLocalCacheEnabled");
         public static int _defaultCacheHours => GetInt("DefaultAppLocalCacheHours");
-        public static string DefaultConnectionName => GetString("CoreDb");
+        public static string DefaultConnectionName => GetString("DefaultConnectionName");
         public static string _dbLogEnabled => GetString("DbLog.Enabled");
         public static string FileLogDirectory => GetString("FileLogDirectory");
         public static string TempLeadId => GetString("Temp.LeadId");

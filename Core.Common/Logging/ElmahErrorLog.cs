@@ -1,5 +1,5 @@
 ﻿using ElmahCore;
-using Hub.Common.Settings;
+using Core.Common.Settings;
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
