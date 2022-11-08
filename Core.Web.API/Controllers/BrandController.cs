@@ -16,7 +16,7 @@ namespace Core.Web.API.Controllers {
         }
 
         [HttpGet]
-        [Route("GetBrandlist")]
+        [Route("list")]
         [RequireAuthorization]
         public List<Brand> GetBrand() {
 
@@ -24,7 +24,7 @@ namespace Core.Web.API.Controllers {
         }
 
         [HttpGet]
-        [Route("GetBrandId")]
+        [Route("Id")]
         [RequireAuthorization]
         public List<Brand> GetBrandById(int id) {
 
