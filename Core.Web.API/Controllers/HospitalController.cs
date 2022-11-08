@@ -35,19 +35,12 @@ namespace Core.Web.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Route("GetHospitals")]
+        [Route("report")]
         [RequireAuthorization]
         public IActionResult Hospitals(HospitalRequest requestModel) {
             var response = _hospitalService.GetHospitals(requestModel);
             return JsonExt(response);
         }
 
-        [HttpGet]
-        [Route("api/Hospital/GetCitylistbyCountryId")]
-        [RequireAuthorization]
-        public List<City> GetCityByCountryid(int id)
-        {
-            return _CityService.GetCityByCountryid(id);
-        }
     }
 }

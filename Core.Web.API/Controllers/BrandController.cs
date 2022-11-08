@@ -22,5 +22,14 @@ namespace Core.Web.API.Controllers {
 
             return _BrandService.GetBrand();
         }
+
+        [HttpGet]
+        [Route("GetBrandId")]
+        [RequireAuthorization]
+        public List<Brand> GetBrandById(int id) {
+
+            return _BrandService.GetBrandById(id);
+        }
     }
 }
+

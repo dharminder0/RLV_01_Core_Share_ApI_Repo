@@ -8,5 +8,6 @@ using System.Threading.Tasks;
 namespace Core.Business.Services.Abstract {
     public interface IBrandService {
         List<Brand> GetBrand();
+        List<Brand> GetBrandById(int id);
     }
 }

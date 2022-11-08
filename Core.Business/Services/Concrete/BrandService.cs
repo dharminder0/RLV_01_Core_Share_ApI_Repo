@@ -1,12 +1,6 @@
 ﻿using Core.Business.Entites.DataModels;
 using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Abstract;
-using Core.Data.Repositories.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Business.Services.Concrete {
     public class BrandService : IBrandService {
@@ -19,5 +13,8 @@ namespace Core.Business.Services.Concrete {
 
             return _brandRepository.GetBrand().ToList();
         }
-    }
+        public List<Brand> GetBrandById(int id) {
+            return _brandRepository.GetBrandById(id).ToList();
+        }
 }
+    }
