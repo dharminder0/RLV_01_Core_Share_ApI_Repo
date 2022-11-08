@@ -2,6 +2,7 @@
 
 namespace Core.Business.Entites.DataModels
 {
+    [Alias(Name = "Users")]
     public  class Users
     {
         public Users() { }
@@ -24,7 +25,6 @@ namespace Core.Business.Entites.DataModels
         public int? UserType { get; set; }
         public bool IsVerified { get; set; }
         public bool IsActive { get; set; }
-
 
     }
 }
