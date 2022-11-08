@@ -1,4 +1,5 @@
 ﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.RequestModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Core.Business.Services.Abstract
     {
         List<Doctor> GetDoctors();
         List<Doctor> GetDoctorDetailsById(int id);
+        object GetDoctor(DoctorRequest doctorRequest);
 
 
     }

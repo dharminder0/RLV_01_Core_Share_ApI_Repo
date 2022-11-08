@@ -23,7 +23,7 @@ namespace Core.Data.Repositories.Concrete
         public object GetHospitals(HospitalRequest hospitalRequest)
         {
 
-                return _hospitalRepository.GetHospitals(hospitalRequest.CountryId).ToList(); 
+                return _hospitalRepository.GetHospitals(hospitalRequest).ToList(); 
             
         }
     }
