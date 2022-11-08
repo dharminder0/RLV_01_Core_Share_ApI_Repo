@@ -12,11 +12,17 @@ namespace Core.Data.Repositories.Concrete {
             return Query<Hospital>(sql);
         }
 
-        public IEnumerable<Hospital> GetHospitals(int countryId)
-        {
+        public IEnumerable<Hospital> GetHospitals(int countryId) {
             var sql = $@"SELECT TOP 10 * FROM Hospital WHERE CountryId = @countryId";
             return Query<Hospital>(sql, new { countryId });
+
+        }
+
+            public IEnumerable<Hospital> GetHospitalById(int id) {
+                var sql = $@"SELECT * FROM Hospitals WHERE Id=@id";
+                return Query<Hospital>(sql, new { id });
+            }
         }
     } 
-}
+
 
