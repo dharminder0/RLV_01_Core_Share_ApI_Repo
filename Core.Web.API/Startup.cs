@@ -133,6 +133,7 @@ namespace Core.Web.Api {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+    
             });
 
             services.AddControllers();

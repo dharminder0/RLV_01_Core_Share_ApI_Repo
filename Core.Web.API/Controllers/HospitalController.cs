@@ -35,7 +35,7 @@ namespace Core.Web.API.Controllers {
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Route("report")]
+        [Route("List")]
         [RequireAuthorization]
         public IActionResult Hospitals(HospitalRequest requestModel) {
             var response = _hospitalService.GetHospitals(requestModel);

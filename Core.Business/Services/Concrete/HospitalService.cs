@@ -18,16 +18,18 @@ namespace Core.Data.Repositories.Concrete
         {
 
             return _hospitalRepository.GetHospitals().ToList();
+        } 
+        
+        public object GetHospitals(HospitalRequest hospitalRequest)
+        {
+
+                return _hospitalRepository.GetHospitals(hospitalRequest).ToList(); 
+            
         }
-
-        public object GetHospitals(HospitalRequest hospitalRequest) {
-
-            return _hospitalRepository.GetHospitals(hospitalRequest.CountryId).ToList();
-
-        }   
+  
          public List<Hospital> GetHospitalsById(int id) {
            return _hospitalRepository.GetHospitalById(id).ToList();
-            }
+         }
 
         
     }
