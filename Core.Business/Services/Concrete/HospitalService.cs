@@ -6,7 +6,7 @@ using Core.Data.Repositories.Abstract;
 namespace Core.Data.Repositories.Concrete
 {
 
-    public class HospitalService : IHospitalService
+    public class HospitalService : IHospitalsService
     {
 
         private readonly IHospitalRepository _hospitalRepository;
@@ -23,9 +23,15 @@ namespace Core.Data.Repositories.Concrete
         public object GetHospitals(HospitalRequest hospitalRequest)
         {
 
-                return _hospitalRepository.GetHospitals(hospitalRequest.CountryId).ToList(); 
+                return _hospitalRepository.GetHospitals(hospitalRequest).ToList(); 
             
         }
+  
+         public List<Hospital> GetHospitalsById(int id) {
+           return _hospitalRepository.GetHospitalById(id).ToList();
+         }
+
+        
     }
 
 }

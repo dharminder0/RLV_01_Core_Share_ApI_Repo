@@ -52,7 +52,7 @@ namespace Core.Web.Api {
 
             services.AddSwaggerGen(c => {
                 c.CustomSchemaIds(type => type.ToString());
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Jobrock Hub API v1", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RLV Core API V1", Version = "v1" });
 
                 // Authorization header
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme {
@@ -133,6 +133,7 @@ namespace Core.Web.Api {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+    
             });
 
             services.AddControllers();
