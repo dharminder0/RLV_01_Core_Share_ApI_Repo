@@ -11,7 +11,6 @@ namespace Core.Data.Repositories.Concrete {
             var sql = $@"SELECT * FROM Hospital ";
             return Query<Hospital>(sql);
         }
-
         public IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest)
         {
             var sqlQuery = $@"SELECT TOP 10 * FROM Hospital ";
@@ -46,7 +45,10 @@ namespace Core.Data.Repositories.Concrete {
            });
         }
 
-           
+            public IEnumerable<Hospital> GetHospitalById(int id) {
+                var sql = $@"SELECT * FROM Hospitals WHERE Id=@id";
+                return Query<Hospital>(sql, new { id });
+            }
         }
     } 
 

@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 using static Slapper.AutoMapper;
 
 namespace Core.Business.Services.Abstract {
-    public interface IHospitalService {
+    public interface IHospitalsService {
         List<Hospital> GetHospitals();
         object GetHospitals(HospitalRequest hospitalRequest);
+        List<Hospital> GetHospitalsById(int id);
     }
 }

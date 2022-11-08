@@ -21,7 +21,8 @@ namespace Core.Web.API.Controllers
 
 
         [HttpGet]
-        [Route("GetCountrylist")]
+        [Route("list")]
+        [RequireAuthorization]
         public IActionResult GetCountries()
         {
             var response = _services.GetCountries();

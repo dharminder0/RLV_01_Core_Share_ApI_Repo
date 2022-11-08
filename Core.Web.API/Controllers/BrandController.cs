@@ -16,11 +16,20 @@ namespace Core.Web.API.Controllers {
         }
 
         [HttpGet]
-        [Route("GetBrandlist")]
+        [Route("list")]
         [RequireAuthorization]
         public List<Brand> GetBrand() {
 
             return _BrandService.GetBrand();
         }
+
+        [HttpGet]
+        [Route("Id")]
+        [RequireAuthorization]
+        public List<Brand> GetBrandById(int id) {
+
+            return _BrandService.GetBrandById(id);
+        }
     }
 }
+
