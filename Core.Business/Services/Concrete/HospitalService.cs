@@ -19,10 +19,12 @@ namespace Core.Data.Repositories.Concrete
 
             return _hospitalRepository.GetHospitals().ToList();
         } 
-        public List<Hospital> GetHospitals(HospitalRequest hospitalRequest)
+        
+        public object GetHospitals(HospitalRequest hospitalRequest)
         {
 
-            return _hospitalRepository.GetHospitals(hospitalRequest).ToList();
+                return _hospitalRepository.GetHospitals(hospitalRequest.CountryId).ToList(); 
+            
         }
     }
 

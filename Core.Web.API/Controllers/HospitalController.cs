@@ -1,24 +1,28 @@
 ﻿using Core.Business.Entites.DataModels;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
-using Core.Data.Repositories.Concrete;
 using Core.Web.Api.Filters;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Web.API.Controllers {
-
+namespace Core.Web.API.Controllers
+{
+    [Route("api/Hospital")]
     [ApiController]
     public class HospitalController : BaseApiController {
 
         private readonly IHospitalService _hospitalService;
-
-        public HospitalController(IHospitalService hospitalService) {
+        private readonly ICityService _CityService;
+        public HospitalController(IHospitalService hospitalService, ICityService CityService) {
             _hospitalService = hospitalService;
+            _CityService = CityService;
         }
 
+        /// <summary>
+        /// get list
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        [Route("api/Hospital/v1list")]
+        [Route("list")]
         [RequireAuthorization]
         public List<Hospital> Hospitals() {
 
@@ -27,15 +31,23 @@ namespace Core.Web.API.Controllers {
 
         /// <summary>
         /// Get Hospitals
-        /// <param name="obj"
+        /// <param name="requestModel"
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        [Route("api/Hospital/v1/list")]
+        [HttpPost]
+        [Route("GetHospitals")]
         [RequireAuthorization]
-        public List<Hospital> Hospitals(HospitalRequest hospitalRequest) {
+        public IActionResult Hospitals(HospitalRequest requestModel) {
+            var response = _hospitalService.GetHospitals(requestModel);
+            return JsonExt(response);
+        }
 
-            return _hospitalService.GetHospitals(hospitalRequest);
+        [HttpGet]
+        [Route("api/Hospital/GetCitylistbyCountryId")]
+        [RequireAuthorization]
+        public List<City> GetCityByCountryid(int id)
+        {
+            return _CityService.GetCityByCountryid(id);
         }
     }
 }
