@@ -24,20 +24,23 @@ namespace Core.Data.Repositories.Concrete
             return _hospitalRepository.GetHospitals(hospitalRequest.CountryId).ToList();
 
         }
-        //public void GetHospitalDetailsById(int id) {
-        //    //           //DoctorDetails doctorDetails = null;
-        //    //           var doctor = _hospitalRepository.GetDoctorById(id)
-        //    //;
-        //    //           if (doctor != null) {
-        //    //               var doctorDetails = _hospitalRepository.GetAllHospitalsDoctorsMedaiDetails(id);
-  
-         public List<Hospital> GetHospitalsById(int id) {
-           return _hospitalRepository.GetHospitalById(id).ToList();
-         }
+        public void GetHospitalDetailsById(int id) {
+            DoctorDetail doctorDetails = null;
+            var doctor = _hospitalRepository.GetDoctorById(id);
 
-        //    //           }
-        //}
-    }
+        }
 
+            if (doctor != null) {
+                var doctorDetails = _hospitalRepository.GetAllHospitalsDoctorsMedaiDetails(id);
+
+                public List<Hospital> GetHospitalsById(int id) {
+                    return _hospitalRepository.GetHospitalById(id).ToList();
+                }
+
+            }
 }
+     
+    
+
+
 

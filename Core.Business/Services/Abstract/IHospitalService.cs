@@ -11,6 +11,6 @@ namespace Core.Business.Services.Abstract {
     public interface IHospitalsService {
         List<Hospital> GetHospitals();
         object GetHospitals(HospitalRequest hospitalRequest);
-        //object GetGetHospitalsAllMediaDetails(int id);
+        object GetGetHospitalsAllMediaDetails(int id);
     }
 }

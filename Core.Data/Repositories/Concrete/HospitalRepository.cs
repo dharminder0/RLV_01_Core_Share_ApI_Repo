@@ -49,14 +49,9 @@ namespace Core.Data.Repositories.Concrete {
             var sql = $@"SELECT * FROM Hospitals WHERE Id=@id";
             return Query<Hospital>(sql, new { id });
         }
-        public void GetAllHospitalDetails(int id) {
-            //var sql Query = $@"SELECT * FROM Hospitals hs join MediaFile mf on
-            //hs.User Id= mf.EntityId Where Id = @Id
-            // return _hospitalrepository Query<Hospital>(sql,id);
 
-        }
-    }
-}
-            
         
- 
+        public void GetAllHospitalDetails(int id) {
+           var sqlQuery = $@"SELECT * FROM Hospitals hs join MediaFile mf on
+            hs. Id= 
+             return _hospitalrepository Query<Hospital>(sql,id);
