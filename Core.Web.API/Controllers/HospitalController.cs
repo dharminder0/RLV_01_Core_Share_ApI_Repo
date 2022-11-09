@@ -43,12 +43,14 @@ namespace Core.Web.API.Controllers {
             var response = _hospitalService.GetHospitals(requestModel);
             return JsonExt(response);
         }
+
+
         [HttpGet]
-        [Route("id")]
+        [Route("Id")]
         [RequireAuthorization]
-        public List<HospitalDetails> GetHospitalById(int id) {
-            return _hospitalService.GetDoctorDetailsById(id);
-            
+        public IActionResult GetHospitalById(int id) {
+            var response = _hospitalService.GetHospitalsById(id);
+            return JsonExt(response);
         }
     }
 }

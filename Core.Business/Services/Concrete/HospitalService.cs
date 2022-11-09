@@ -1,4 +1,5 @@
-﻿using Core.Business.Entites.DataModels;
+﻿using Core.Business.Entites;
+using Core.Business.Entites.DataModels;
 using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
@@ -22,21 +23,42 @@ namespace Core.Data.Repositories.Concrete
 
         public object GetHospitals(HospitalRequest hospitalRequest) {
 
-            return _hospitalRepository.GetHospitals().ToList();
+            return _hospitalRepository.GetHospitals(hospitalRequest).ToList();
 
         }
-        
-        public List<HospitalDetails> GetDoctorDetailsById(int id) {
-            List<HospitalDetails> details = null;
-            var hospitals = _hospitalRepository.GetHospitalById(id);
-            if (hospitals != null && hospitals.Any()) {
-                var hospitalDetails = _hospitalRepository.GetAllHospitalDetails(id);
-                if(hospitalDetails != null && hospitalDetails.Any()) {
-                     details = JsonConvert.DeserializeObject<List<HospitalDetails>>(hospitalDetails.ToString());
-                }
+
+        public object GetHospitalsById(int id) {
+            if (id > 0) {
+                var response = _hospitalRepository.GetHospitalById(id).ToList();
+                return response;
             }
-            return details;
+            else
+                return null;
+
         }
+
+        //public HospitalDetails HospitalDetails(int id) {
+        //    HospitalDetails HospitalDetails = new HospitalDetails();
+
+        //    var Hospital = _hospitalRepository.GetHospitals(id);
+        //    if (Hospital != null) {
+        //        HospitalDetails.Hospital = _hospitalRepository.GetAllHospitalMediaDetails(id);
+        //        var files = _mediaRepository.GetEntityMediaFile(Hospital.UserId, Entites.EntityType.User);
+        //        if (files != null && files.Any()) {
+        //            HospitalDetails.Images = new List<MediaFileDto>();
+        //            foreach (var item in files) {
+        //                HospitalDetails.Image = new List<MediaFileDto> {
+        //                new MediaFileDto {
+        //                FileName  = item.FileName,
+        //                FileUrl= item.BlobLink ,
+        //                FileType = Enum.GetName(typeof(MediaType),item.MediaTypeId)
+        //                }
+        //                };
+        //            }
+        //        }
+        //    }
+        //    return HospitalDetails;
+        //}
     }
 }
      

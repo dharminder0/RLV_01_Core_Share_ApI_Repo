@@ -1,4 +1,5 @@
 ﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
 using Core.Common.Caching;
 using Core.Common.Data;
@@ -48,10 +49,11 @@ namespace Core.Data.Repositories.Concrete {
         }
 
 
-        public IEnumerable<Hospital> GetAllHospitalDetails(int id) {
-            var sqlQuery = $@"SELECT  *FROM Hospital HS join MediaFile MF on HS.Id = MF.EntityTypeId where MF.MediaTypeId = @id";
-
-            return Query<Hospital>(sqlQuery, id);
+        public HospitalDetails GetAllHospitalMediaDetails(int id) {
+            var sqlQuery = $@"select dc.displayname,dc.designation,dc.id,dc.qualification,dc.experience,dc.details,dc.languageid,mm.Filename 
+               ,mm.mediadetails ,mm.updatedby,mm.updatedon  from doctor dc  join MediaFile mm   on
+                dc.userid = mm.EntityId  where dc.id = @id";
+            return QueryFirst<HospitalDetails>(sqlQuery, new { id });
         }
     }
 }
