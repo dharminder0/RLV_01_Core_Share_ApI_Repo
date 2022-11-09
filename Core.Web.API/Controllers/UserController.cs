@@ -1,47 +1,41 @@
 ﻿using Core.Web.Api.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using Core.Business.Services.Abstract;
+using Core.Business.Services.Concrete;
+using System.Net;
+using Core.Business.Entites.RequestModels;
 
 namespace Core.Web.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/User")]
     [ApiController]
     public class UserController : BaseApiController
     {
-        public UserController()
+        private readonly IUsersService _userService;
+        public UserController(IUsersService usersService)
         {
-
+            _userService = usersService;
         }
+
 
         /// <summary>
-        /// Validates the user encrypted token passed in header and returns detailed user info
+        /// used to authenticate user and returns user access token and route details
         /// </summary>
-        /// <param name="clientCode"></param>
+        /// <param name="credentials">object contains user name and password</param>
+        /// <remarks> 
+        /// </remarks>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
+        [Route("authenticateUserDetails")]
         [RequireAuthorization]
-        [Route("api/v1/account/get-user-info")]
-        public object ValidateJwtToken(string clientCode)
-        {
-            //var userToken = GetUserTokenFromHeader(_configuration);
-            //ThreadPool.QueueUserWorkItem(_cacheService.SetInitialCache, new object[] { clientCode, this.LanguageCode });
-            //var info = _userService.GetUserInfo(userToken, clientCode);
-            //// separate encrypted token to send as required from API
-            //var token = Request.Headers["token"];
-            //try
-            //{
-            //    var userClientsResponse = _accountsExternalService.GetUserClients(clientCode, token);
-            //    if (userClientsResponse != null && userClientsResponse.Data.Any())
-            //    {
-            //        info.UserClients = userClientsResponse.Data.Select(x => new { x.Id, x.ClientCode, x.CompanyName, x.LogoUrl });
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    info.UserClients = null;
-            //}
-            //return info;
-            return null;
+        public IActionResult AuthenticateUserDetails(AuthenticationDto credentials) {
+            var user = _userService.AuthorizeUserDetails(credentials.UserName, credentials.Password);
+
+            return JsonExt(user);
         }
+
     }
 }
