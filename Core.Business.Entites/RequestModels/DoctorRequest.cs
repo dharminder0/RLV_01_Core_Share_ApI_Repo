@@ -12,6 +12,6 @@ namespace Core.Business.Entites.RequestModels
         public int CountryId { get; set; }
         public List<int> CityList { get; set; }
         public List<int> HospitalList { get; set; }
-        public int LanguageId { get; set; }
+        public int LanguageId { get; set; } = 1;
     }
 }

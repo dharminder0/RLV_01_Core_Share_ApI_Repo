@@ -8,7 +8,7 @@ namespace Core.Business.Entites.DataModels
         public Doctor() { }
         [Key(AutoNumber = true)]
         public int Id { get; set; }
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
         public string DisplayName { get; set; }
         public string Designation { get; set; }
         public string Qualification { get; set; }
