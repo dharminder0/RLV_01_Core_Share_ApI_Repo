@@ -1,4 +1,5 @@
 ﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Concrete;
@@ -18,20 +19,13 @@ namespace Core.Web.API.Controllers {
                 
         }
       
-        //[HttpGet]
-        //[Route("List")]
-        //[RequireAuthorization]
-        //public List<Doctor> GetDoctors() {
-        //    return _doctorService.GetDoctors();
-        //}
-
-        // GET api/<DoctorController>/5
+        
         [HttpGet]
-        [Route("id")]
+        [Route("{id}")]
         [RequireAuthorization]
-        public List<Doctor> GetDoctorsById(int Id)
+        public DoctorDetails GetDoctorsById(int id)
         {
-           return _doctorService.GetDoctorDetailsById(Id);
+            return _doctorService.DoctorDetails(id);
         }
 
 
@@ -43,24 +37,6 @@ namespace Core.Web.API.Controllers {
             var response = _doctorService.GetDoctor(requestModel);
             return JsonExt(response);
         }
-
-        //// POST api/<DoctorController>
-        //[HttpPost]
-        ////public List<Doctor> AddDoctorsDeatils( Doctor  doctor)
-        ////{
-        ////}
-
-        //// PUT api/<DoctorController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<DoctorController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
 
 
     }
