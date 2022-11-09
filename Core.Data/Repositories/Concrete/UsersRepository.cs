@@ -19,6 +19,10 @@ namespace Core.Data.Repositories.Concrete {
             var sql = $@"SELECT TOP 10 * FROM Users WHERE Token = @accessToken";
             return Query<Users>(sql, new { accessToken });
         }
+        public IEnumerable<Users> GateUsersInfoById(int id) {
+            var sql = $@"SELECT TOP 10 * FROM Users WHERE id = @id";
+            return Query<Users>(sql, new { id });
+        }
 
     }
 }

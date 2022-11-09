@@ -1,4 +1,5 @@
-﻿using Core.Business.Entites.DataModels;
+﻿using Azure;
+using Core.Business.Entites.DataModels;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
 using Core.Business.Services.Concrete;
@@ -43,20 +44,12 @@ namespace Core.Web.API.Controllers {
         }
 
 
-       // [HttpGet]
-       // [Route("{Id}")]
-       // [RequireAuthorization]
-       //public List<Hospital> GetHospitalById(int id) {         
-       //  return _hospitalService.GetHospitalsById(id);
-       // }
-
-
         [HttpGet]
         [Route("Id")]
         [RequireAuthorization]
-        public List<Hospital> GetHospitalById(int id) {
-
-            return _hospitalService.GetHospitalsById(id);
+        public IActionResult GetHospitalById(int id) {
+            var response = _hospitalService.GetHospitalsById(id);
+            return JsonExt(response);
         }
     }
 }
