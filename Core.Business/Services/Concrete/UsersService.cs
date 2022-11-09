@@ -5,6 +5,7 @@ using Core.Data.Repositories.Abstract;
 using ElmahCore;
 using System.Security.Cryptography;
 using System.Text;
+using static Slapper.AutoMapper;
 
 namespace Core.Business.Services.Concrete {
     public class UsersService : IUsersService {
@@ -41,6 +42,21 @@ namespace Core.Business.Services.Concrete {
                 if (dbUser != null) {
                     var user = MapUserToUserDto(dbUser);
                     return user;
+                }
+                return null;
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public object UsersInfoById(int id) {
+            try {
+                if (id > 0) {
+                    var dbUser = _usersRepository.GateUsersInfoById(id).SingleOrDefault();
+                    if (dbUser != null) {
+                        var user = MapUserToUserDto(dbUser);
+                        return user;
+                    }
                 }
                 return null;
             } catch (Exception ex) {
