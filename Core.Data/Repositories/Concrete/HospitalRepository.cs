@@ -11,38 +11,35 @@ namespace Core.Data.Repositories.Concrete {
             var sql = $@"SELECT * FROM Hospital ";
             return Query<Hospital>(sql);
         }
-        public IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest)
-        {
+        public IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest) {
             var sqlQuery = $@"SELECT TOP 10 * FROM Hospital ";
 
-            
+
             sqlQuery += " where  countryId=@CountryId and languageid = @LanguageId ";
 
-        
-            if (!string.IsNullOrWhiteSpace(hospitalRequest.SearchText))
-            {
-               
+
+            if (!string.IsNullOrWhiteSpace(hospitalRequest.SearchText)) {
+
                 sqlQuery += $@"and title like '%{hospitalRequest.SearchText}%'  ";
             }
 
 
-            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any())
-            {
+            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any()) {
                 sqlQuery += " and cityId in @CityList ";
             }
 
 
-            if (hospitalRequest.HospitalList != null && hospitalRequest.HospitalList.Any())
-            {
+            if (hospitalRequest.HospitalList != null && hospitalRequest.HospitalList.Any()) {
                 sqlQuery += " and hospital.id in @HospitalList ";
             }
 
-            return Query<Hospital>(sqlQuery,new { hospitalRequest.CountryId,
+            return Query<Hospital>(sqlQuery, new {
+                hospitalRequest.CountryId,
                 hospitalRequest.SearchText,
                 hospitalRequest.CityList,
                 hospitalRequest.HospitalList,
                 hospitalRequest.LanguageId
-           });
+            });
         }
 
         public IEnumerable<Hospital> GetHospitalById(int id) {
@@ -50,8 +47,12 @@ namespace Core.Data.Repositories.Concrete {
             return Query<Hospital>(sql, new { id });
         }
 
-        
-        public void GetAllHospitalDetails(int id) {
-           var sqlQuery = $@"SELECT * FROM Hospitals hs join MediaFile mf on
-            hs. Id= 
-             return _hospitalrepository Query<Hospital>(sql,id);
+
+        public IEnumerable<Hospital> GetAllHospitalDetails(int id) {
+            var sqlQuery = $@"SELECT  *FROM Hospital HS join MediaFile MF on HS.Id = MF.EntityTypeId where MF.MediaTypeId = @id";
+
+            return Query<Hospital>(sqlQuery, id);
+        }
+    }
+}
+

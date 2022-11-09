@@ -1,4 +1,5 @@
 ﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,6 @@ namespace Core.Business.Services.Abstract {
     public interface IHospitalsService {
         List<Hospital> GetHospitals();
         object GetHospitals(HospitalRequest hospitalRequest);
-        object GetGetHospitalsAllMediaDetails(int id);
+        List<HospitalDetails> GetDoctorDetailsById(int id);
     }
 }

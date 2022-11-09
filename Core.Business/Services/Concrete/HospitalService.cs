@@ -1,4 +1,5 @@
 ﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Abstract;
@@ -21,23 +22,22 @@ namespace Core.Data.Repositories.Concrete
 
         public object GetHospitals(HospitalRequest hospitalRequest) {
 
-            return _hospitalRepository.GetHospitals(hospitalRequest.CountryId).ToList();
+            return _hospitalRepository.GetHospitals().ToList();
 
         }
-        public void GetHospitalDetailsById(int id) {
-            DoctorDetail doctorDetails = null;
-            var doctor = _hospitalRepository.GetDoctorById(id);
-
-        }
-
-            if (doctor != null) {
-                var doctorDetails = _hospitalRepository.GetAllHospitalsDoctorsMedaiDetails(id);
-
-                public List<Hospital> GetHospitalsById(int id) {
-                    return _hospitalRepository.GetHospitalById(id).ToList();
+        
+        public List<HospitalDetails> GetDoctorDetailsById(int id) {
+            List<HospitalDetails> details = null;
+            var hospitals = _hospitalRepository.GetHospitalById(id);
+            if (hospitals != null && hospitals.Any()) {
+                var hospitalDetails = _hospitalRepository.GetAllHospitalDetails(id);
+                if(hospitalDetails != null && hospitalDetails.Any()) {
+                     details = JsonConvert.DeserializeObject<List<HospitalDetails>>(hospitalDetails.ToString());
                 }
-
             }
+            return details;
+        }
+    }
 }
      
     

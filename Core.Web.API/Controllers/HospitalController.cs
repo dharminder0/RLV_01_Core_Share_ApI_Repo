@@ -1,4 +1,5 @@
 ﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
 using Core.Business.Services.Concrete;
@@ -42,22 +43,12 @@ namespace Core.Web.API.Controllers {
             var response = _hospitalService.GetHospitals(requestModel);
             return JsonExt(response);
         }
-
-
-        // [HttpGet]
-        // [Route("{Id}")]
-        // [RequireAuthorization]
-        //public List<Hospital> GetHospitalById(int id) {         
-        //  return _hospitalService.GetHospitalsById(id);
-        // }
-
-
         [HttpGet]
         [Route("id")]
         [RequireAuthorization]
-        public IActionResult GetHospitalsById(int id) {
-            //return _HospitalService.GetHospitalDetailsById(id)
-            return null;
+        public List<HospitalDetails> GetHospitalById(int id) {
+            return _hospitalService.GetDoctorDetailsById(id);
+            
         }
     }
 }
