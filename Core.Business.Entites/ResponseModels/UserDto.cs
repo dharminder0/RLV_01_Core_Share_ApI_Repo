@@ -43,5 +43,6 @@ namespace Core.Business.Entites.ResponseModels {
         public DateTime? CreatedOn { get; set; }
     }
 
+    
 
 }

@@ -9,7 +9,7 @@ namespace Core.Business.Entites.DataModels
         public int Id { get; set; }
         public string Title { get; set; }
         public string Details { get; set; }
-        public int? LanguageId { get; set; }
+        public int LanguageId { get; set; }
 
     }
 }

@@ -8,7 +8,7 @@ namespace Core.Business.Entites.DataModels
         public City() { }
         [Key(AutoNumber = true)]
         public int Id { get; set; }
-        public int? CountryId { get; set; }
+        public int CountryId { get; set; }
         public string CityName { get; set; }      
     }
 }
