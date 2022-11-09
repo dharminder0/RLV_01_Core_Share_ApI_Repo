@@ -2,6 +2,7 @@
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
 using Core.Business.Services.Concrete;
+using Core.Data.Repositories.Concrete;
 using Core.Web.Api.Filters;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,20 +44,20 @@ namespace Core.Web.API.Controllers {
         }
 
 
-       // [HttpGet]
-       // [Route("{Id}")]
-       // [RequireAuthorization]
-       //public List<Hospital> GetHospitalById(int id) {         
-       //  return _hospitalService.GetHospitalsById(id);
-       // }
+        // [HttpGet]
+        // [Route("{Id}")]
+        // [RequireAuthorization]
+        //public List<Hospital> GetHospitalById(int id) {         
+        //  return _hospitalService.GetHospitalsById(id);
+        // }
 
 
         [HttpGet]
-        [Route("Id")]
+        [Route("id")]
         [RequireAuthorization]
-        public List<Hospital> GetHospitalById(int id) {
-
-            return _hospitalService.GetHospitalsById(id);
+        public IActionResult GetHospitalsById(int id) {
+            //return _HospitalService.GetHospitalDetailsById(id)
+            return null;
         }
     }
 }

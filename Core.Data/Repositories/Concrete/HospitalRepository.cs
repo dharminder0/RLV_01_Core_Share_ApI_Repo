@@ -18,11 +18,18 @@ namespace Core.Data.Repositories.Concrete {
 
         }
 
-            public IEnumerable<Hospital> GetHospitalById(int id) {
-                var sql = $@"SELECT * FROM Hospitals WHERE Id=@id";
-                return Query<Hospital>(sql, new { id });
-            }
+        public IEnumerable<Hospital> GetHospitalById(int id) {
+            var sql = $@"SELECT * FROM Hospitals WHERE Id=@id";
+            return Query<Hospital>(sql, new { id });
         }
-    } 
+        public void GetAllHospitalDetails(int id) {
+            //var sql Query = $@"SELECT * FROM Hospitals hs join MediaFile mf on
+            //hs.User Id= mf.EntityId Where Id = @Id
+            // return _hospitalrepository Query<Hospital>(sql,id);
 
-
+        }
+    }
+}
+            
+        
+ 
