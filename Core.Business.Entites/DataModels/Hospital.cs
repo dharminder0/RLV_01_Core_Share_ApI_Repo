@@ -16,8 +16,8 @@ namespace Core.Business.Entites.DataModels
         public string Infrastructure { get; set; }
         public string Address { get; set; }
         public string BedCount { get; set; }
-        public int? LanguageId { get; set; }
-        public int? BrandId { get; set; }
-        public int? Rank { get; set; }     
+        public int LanguageId { get; set; }
+        public int BrandId { get; set; }
+        public int Rank { get; set; }     
     }
 }
