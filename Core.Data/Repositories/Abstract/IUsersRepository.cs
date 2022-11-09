@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Repositories.Abstract {
     public interface IUsersRepository {
-        IEnumerable<Users> GetUsersAuthentication(string userName);
+        IEnumerable<Users> GetUsersAuthenticatioByUserName(string userName);
         void UpdateUsersAuthentication(long id);
+        IEnumerable<Users> GateUsersAuthenticationByToken(string accessToken);
     }
 }
