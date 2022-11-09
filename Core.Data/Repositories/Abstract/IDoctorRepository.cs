@@ -1,4 +1,5 @@
 ﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.RequestModels;
 using Core.Common.Data;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,8 @@ namespace Core.Data.Repositories.Abstract
     {
         IEnumerable<Doctor> GetDoctors();
         IEnumerable<Doctor> GetDoctorById(int Userid);
+        IEnumerable<Doctor> GetDoctor(DoctorRequest doctorRequest);
+
+
     }
 }

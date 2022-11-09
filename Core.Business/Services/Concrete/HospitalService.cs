@@ -30,6 +30,10 @@ namespace Core.Data.Repositories.Concrete
         //    //;
         //    //           if (doctor != null) {
         //    //               var doctorDetails = _hospitalRepository.GetAllHospitalsDoctorsMedaiDetails(id);
+  
+         public List<Hospital> GetHospitalsById(int id) {
+           return _hospitalRepository.GetHospitalById(id).ToList();
+         }
 
         //    //           }
         //}

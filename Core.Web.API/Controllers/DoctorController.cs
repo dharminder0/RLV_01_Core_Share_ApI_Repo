@@ -1,5 +1,7 @@
 ﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
+using Core.Data.Repositories.Concrete;
 using Core.Web.Api.Filters;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,20 +18,30 @@ namespace Core.Web.API.Controllers {
                 
         }
       
-        [HttpGet]
-        [Route("GetDoctors")]
-        [RequireAuthorization]
-        public List<Doctor> GetDoctors() {
-            return _doctorService.GetDoctors();
-        }
+        //[HttpGet]
+        //[Route("List")]
+        //[RequireAuthorization]
+        //public List<Doctor> GetDoctors() {
+        //    return _doctorService.GetDoctors();
+        //}
 
         // GET api/<DoctorController>/5
         [HttpGet]
-        [Route("GetDoctorById")]
+        [Route("id")]
         [RequireAuthorization]
         public List<Doctor> GetDoctorsById(int Id)
         {
            return _doctorService.GetDoctorDetailsById(Id);
+        }
+
+
+        [HttpPost]
+        [Route("list")]
+        [RequireAuthorization]
+        public IActionResult Doctors(DoctorRequest requestModel)
+        {
+            var response = _doctorService.GetDoctor(requestModel);
+            return JsonExt(response);
         }
 
         //// POST api/<DoctorController>

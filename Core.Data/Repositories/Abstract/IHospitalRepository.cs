@@ -9,5 +9,7 @@ namespace Core.Data.Repositories.Abstract {
         //IEnumerable<Hospital> GetHospitalById(int id);
         //IEnumerable<Hospital> GetHospital (HospitalRequest hospitalRequest);
         void GetAllHospitalDetails(int Id);
+        IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest);
+        IEnumerable<Hospital> GetHospitalById(int id);
     }
 }
