@@ -1,11 +1,6 @@
 ﻿using Core.Business.Entites.DataModels;
 using Core.Common.Data;
 using Core.Data.Repositories.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Data.Repositories.Concrete {
     public class UsersRepository : DataRepository<Users>, IUsersRepository {
@@ -15,10 +10,10 @@ namespace Core.Data.Repositories.Concrete {
             return Query<Users>(sql, new { userName });
         }
 
-        //public bool GetUsersAuthentication(string userName, string password) {
-        //    var sql = $@"SELECT  * FROM Users WHERE UserName = @userName and Password = @password";
-        //    return Execute(sql, new { userName, password }) > 0;
-        //}
+        public void UpdateUsersAuthentication(long id) {
+            var sql = $@"update Users  set  LastLoginDate = GETDATE()  where Id = @id";
+            Execute(sql, new { id });
+        }
 
     }
 }

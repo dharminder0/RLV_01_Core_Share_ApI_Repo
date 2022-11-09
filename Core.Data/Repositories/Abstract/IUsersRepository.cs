@@ -8,5 +8,6 @@ using System.Threading.Tasks;
 namespace Core.Data.Repositories.Abstract {
     public interface IUsersRepository {
         IEnumerable<Users> GetUsersAuthentication(string userName);
+        void UpdateUsersAuthentication(long id);
     }
 }

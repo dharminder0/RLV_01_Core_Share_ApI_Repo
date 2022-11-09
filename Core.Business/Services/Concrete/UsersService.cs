@@ -14,18 +14,24 @@ namespace Core.Business.Services.Concrete {
         }
 
 
-        public UserDetails AuthorizeUserDetails(string userName, string password) {
+        public object AuthorizeUserDetails(string userName, string password) {
             var userDetails = new UserDetails();
             var userResult = AuthenticateUser(userName, password);
-            userDetails.DefaultReturnUrl = userResult.DefaultReturnUrl;
-            userDetails.Id = userResult.Id;
-            userDetails.AccessToken = userResult.AccessToken;
-            userDetails.Token = userResult.Token;
-            userDetails.ClientCode = userResult.ClientCode;
+            if (userResult.AuthenticationStatus == "Success") {
+                _usersRepository.UpdateUsersAuthentication(userResult.Id);
+                userDetails.Id = userResult.Id;
+                userDetails.FirstName = userResult.FirstName;
+                userDetails.LastName = userResult.LastName;
+                userDetails.UserName = userResult.UserName;
+                userDetails.Token = userResult.Token;
+                userDetails.Phone = userResult.PhoneNumber;
+                userDetails.AuthenticationStatus = userResult.AuthenticationStatus;
+                userDetails.CountryId = userResult.CountryId;
+                userDetails.CityId = userResult.CityId;
+                return userDetails;
+            }
 
-            userDetails.AuthenticationStatus = userResult.AuthenticationStatus;
-            userDetails.PasswordTraials = userResult.PasswordTraials;
-
+            userDetails.AuthenticationStatus = "false";
             return userDetails;
         }
 
@@ -257,6 +263,9 @@ namespace Core.Business.Services.Concrete {
             user.LastName = dbUser.LastName;
             user.UserName = dbUser.UserName;
             user.PhoneNumber = dbUser.Phone;
+            user.Token   = dbUser.Token;
+            user.CountryId   = dbUser.CountryId ?? 0;
+            user.CityId   = dbUser.CityId ?? 0;
             return user;
         }
 
