@@ -17,7 +17,7 @@ namespace Core.Web.API.Controllers {
         /// <summary>
         /// used to get Treatment details by countryCode .
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="countryCode"></param>
         /// <remarks>
         /// </remarks>
         [HttpGet]
