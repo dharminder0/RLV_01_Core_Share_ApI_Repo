@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using Core.Business.Entites.DataModels;
+﻿using Core.Business.Entites.DataModels;
 using Core.Business.Entites.ResponseModels;
 using Core.Common.Data;
 using Core.Data.Repositories.Abstract;
@@ -24,8 +23,12 @@ namespace Core.Data.Repositories.Concrete {
             var sql = $@"SELECT TOP 10 * FROM Users WHERE id = @id";
             return Query<Users>(sql, new { id });
         }
+        public Users GateUsersInfo(int id) {
+            var sql = $@"SELECT TOP 10 * FROM Users WHERE id = @id";
+            return QueryFirst<Users>(sql, new { id });
+        }
 
-        public bool InsertUser(RequstUsers ob) {
+        public bool InsertUser(RequestUsers ob) {
             var sql = @"IF NOT EXISTS(SELECT 1 from Users where UserName = @UserName)
 BEGIN
 INSERT INTO Users
@@ -59,7 +62,8 @@ ELSE
 BEGIN
 UPDATE Users SET FirstName = @FirstName,LastName = @LastName, UserName = @UserName
 Where Id = @Id and UserName = @UserName;
-END";
+END
+";
             return Execute(sql, ob) > 0;
         }
 

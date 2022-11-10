@@ -1,4 +1,5 @@
 ﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.Dto;
 using Core.Business.Entites.ResponseModels;
 
 namespace Core.Business.Services.Abstract {
@@ -7,6 +8,7 @@ namespace Core.Business.Services.Abstract {
         Object Userlogin(string userName, string password);
         UserDto GetUserInfoByToken(string accessToken);
         object UsersInfoById(int id);
-        bool CreateUser(RequstUsers ob);
+        bool CreateUser(RequestUsers ob);
+        UsersDetails UsersDetails(int id);
     }
 }

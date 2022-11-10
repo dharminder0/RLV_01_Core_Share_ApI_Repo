@@ -1,18 +1,21 @@
-﻿using Core.Business.Entites.DataModels;
+﻿using Core.Business.Entites;
+using Core.Business.Entites.DataModels;
+using Core.Business.Entites.Dto;
 using Core.Business.Entites.ResponseModels;
 using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Abstract;
-using ElmahCore;
+using Core.Data.Repositories.Concrete;
 using System.Security.Cryptography;
 using System.Text;
-using static Slapper.AutoMapper;
 
 namespace Core.Business.Services.Concrete {
     public class UsersService : IUsersService {
         private readonly IUsersRepository _usersRepository;
+        private readonly IMediaFileRepository _mediaFileRepository;
 
-        public UsersService(IUsersRepository usersRepository) {
+        public UsersService(IUsersRepository usersRepository, IMediaFileRepository mediaFileRepository) {
             _usersRepository = usersRepository;
+            _mediaFileRepository = mediaFileRepository;
         }
 
 
@@ -64,10 +67,10 @@ namespace Core.Business.Services.Concrete {
             }
         }
 
-        public bool CreateUser(RequstUsers ob) {
+        public bool CreateUser(RequestUsers ob) {
             try {
-               var response = _usersRepository.InsertUser(ob);
-                if(response == true) {
+                var response = _usersRepository.InsertUser(ob);
+                if (response == true) {
                     return true;
                 }
                 return false;
@@ -97,6 +100,32 @@ namespace Core.Business.Services.Concrete {
                 }
             }
             return user;
+        }
+
+
+        public UsersDetails UsersDetails(int id) {
+            var usersDetails = new UsersDetails();
+            var user = new UserDto();
+
+            var usersInfo = _usersRepository.GateUsersInfo(id);
+            if (usersInfo != null) {
+                //usersDetails.Users = usersInfo;
+                user = MapUserToUserDto(usersInfo);
+                var files = _mediaFileRepository.GetEntityMediaFile(usersInfo.Id, Entites.EntityType.User);
+                if (files != null && files.Any()) {
+                    usersDetails.Images = new List<MediaFileDto>();
+                    foreach (var item in files) {
+                        usersDetails.Images = new List<MediaFileDto> {
+                        new MediaFileDto {
+                        FileName  = item.FileName,
+                        FileUrl= item.BlobLink ,
+                        FileType = Enum.GetName(typeof(MediaType),item.MediaTypeId)
+                        }
+                        };
+                    }
+                }
+            }
+            return usersDetails;
         }
 
         private string HashPassword(string password, ref byte[] saltBytes) {
@@ -146,6 +175,7 @@ namespace Core.Business.Services.Concrete {
             user.CityId = dbUser.CityId ?? 0;
             return user;
         }
+
 
     }
 }

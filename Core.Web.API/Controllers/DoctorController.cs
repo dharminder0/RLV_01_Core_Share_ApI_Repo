@@ -1,8 +1,6 @@
-﻿using Core.Business.Entites.DataModels;
-using Core.Business.Entites.Dto;
+﻿using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
-using Core.Data.Repositories.Concrete;
 using Core.Web.Api.Filters;
 using Microsoft.AspNetCore.Mvc;
 

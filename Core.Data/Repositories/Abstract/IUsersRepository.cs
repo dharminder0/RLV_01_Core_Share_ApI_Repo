@@ -7,6 +7,7 @@ namespace Core.Data.Repositories.Abstract {
         void UpdateLastlogin(long id);
         IEnumerable<Users> GateUsersDetailsByToken(string accessToken);
         IEnumerable<Users> GateUsersInfoById(int id);
-        bool InsertUser(RequstUsers ob);
+        Users GateUsersInfo(int id);
+        bool InsertUser(RequestUsers ob);
     }
 }
