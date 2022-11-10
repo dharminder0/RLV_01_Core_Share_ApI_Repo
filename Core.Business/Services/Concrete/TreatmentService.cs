@@ -17,10 +17,10 @@ namespace Core.Business.Services.Concrete {
         }
 
 
-        public object TreatmentInfoById(int id) {
+        public object TreatmentInfoById(string countryCode) {
             try {
-                if (id > 0) {
-                    var dbUser = _treatmentRepository.GetTreatmentInfoById(id).ToList();
+                if (!string.IsNullOrWhiteSpace(countryCode)) {
+                    var dbUser = _treatmentRepository.GetTreatmentInfoById(countryCode).ToList();
                     if (dbUser != null) { 
                         return dbUser;
                     }

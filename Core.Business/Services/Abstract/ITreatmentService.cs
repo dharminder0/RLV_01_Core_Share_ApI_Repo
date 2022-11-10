@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace Core.Business.Services.Abstract {
     public interface ITreatmentService {
-        object TreatmentInfoById(int id);
+        object TreatmentInfoById(string countryCode);
     }
 }

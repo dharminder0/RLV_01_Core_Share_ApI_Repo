@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Repositories.Abstract {
     public interface ITreatmentRepository {
-        IEnumerable<Treatment> GetTreatmentInfoById(int id);
+        IEnumerable<Treatment> GetTreatmentInfoById(string countryCode);
     }
 }

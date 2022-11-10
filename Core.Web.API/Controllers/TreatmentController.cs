@@ -15,16 +15,16 @@ namespace Core.Web.API.Controllers {
         }
 
         /// <summary>
-        /// used to get Treatment details by countryId .
+        /// used to get Treatment details by countryCode .
         /// </summary>
         /// <param name="id"></param>
         /// <remarks>
         /// </remarks>
         [HttpGet]
-        [Route("infoById/{id}")]
+        [Route("{countryCode}/list")]
         [RequireAuthorization]
-        public IActionResult UsersInfoById(int id) {
-            var response = _treatmentService.TreatmentInfoById(id);
+        public IActionResult UsersInfoById(string countryCode) {
+            var response = _treatmentService.TreatmentInfoById(countryCode);
             return JsonExt(response);
         }
     }

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Repositories.Concrete {
     public class TreatmentRepository : DataRepository<Treatment>, ITreatmentRepository {
-        public IEnumerable<Treatment> GetTreatmentInfoById(int id) {
-            var sql = $@"select * from Treatment where LanguageId = @id";
-            return Query<Treatment>(sql, new { id });
+        public IEnumerable<Treatment> GetTreatmentInfoById(string countryCode) {
+            var sql = $@"select * from Treatment where LanguageId = @countryCode";
+            return Query<Treatment>(sql, new { countryCode });
         }
     }
 }
