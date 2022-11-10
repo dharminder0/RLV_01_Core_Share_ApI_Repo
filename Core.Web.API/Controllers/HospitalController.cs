@@ -1,8 +1,9 @@
-﻿using Azure;
-using Core.Business.Entites.DataModels;
+﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
 using Core.Business.Services.Concrete;
+using Core.Data.Repositories.Concrete;
 using Core.Web.Api.Filters;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +12,9 @@ namespace Core.Web.API.Controllers {
     [ApiController]
     public class HospitalController : BaseApiController {
 
-        private readonly IHospitalsService _hospitalService;
+        private readonly IHospitalService _hospitalService;
         private readonly ICityService _CityService;
-        public HospitalController(IHospitalsService hospitalService, ICityService CityService) {
+        public HospitalController(IHospitalService hospitalService, ICityService CityService) {
             _hospitalService = hospitalService;
             _CityService = CityService;
         }
@@ -27,7 +28,7 @@ namespace Core.Web.API.Controllers {
         [RequireAuthorization]
         public List<Hospital> Hospitals() {
 
-            return _hospitalService.GetHospitals();
+            return _hospitalService.GetHospital();
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace Core.Web.API.Controllers {
         [Route("List")]
         [RequireAuthorization]
         public IActionResult Hospitals(HospitalRequest requestModel) {
-            var response = _hospitalService.GetHospitals(requestModel);
+            var response = _hospitalService.GetHospital(requestModel);
             return JsonExt(response);
         }
 
@@ -47,9 +48,8 @@ namespace Core.Web.API.Controllers {
         [HttpGet]
         [Route("Id")]
         [RequireAuthorization]
-        public IActionResult GetHospitalById(int id) {
-            var response = _hospitalService.GetHospitalsById(id);
-            return JsonExt(response);
+        public HospitalDetails GetHospitalById(int id) {
+            return _hospitalService.HospitalDetails(id);
         }
     }
 }
