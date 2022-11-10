@@ -6,9 +6,8 @@ namespace Core.Business.Services.Abstract {
     public interface IUsersService {
         UserDto AuthenticateUser(string userName, string password);
         Object Userlogin(string userName, string password);
-        UserDto GetUserInfoByToken(string accessToken);
+        object GetUserInfoByToken(string accessToken);
         object UsersInfoById(int id);
         bool CreateUser(RequestUsers ob);
-        UsersDetails UsersDetails(int id);
     }
 }

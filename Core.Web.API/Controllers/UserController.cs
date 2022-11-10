@@ -74,18 +74,5 @@ namespace Core.Web.API.Controllers {
             var response = _usersService.CreateUser(ob);
             return JsonExt(response);
         }
-
-        /// <summary>
-        /// used to get user image by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [Obsolete]
-        [Route("{id}/image")]
-        [RequireAuthorization]
-        public UsersDetails GetUsersById(int id) {
-            return _usersService.UsersDetails(id);
-        }
     }
 }

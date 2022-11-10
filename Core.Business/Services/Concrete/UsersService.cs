@@ -39,12 +39,28 @@ namespace Core.Business.Services.Concrete {
             return userDetails;
         }
 
-        public UserDto GetUserInfoByToken(string accessToken) {
+        public object GetUserInfoByToken(string accessToken) {
+            var usersDetails = new UsersDetails();
             try {
-                var dbUser = _usersRepository.GateUsersDetailsByToken(accessToken).SingleOrDefault();
+                var dbUser = _usersRepository.GateUsersDetailsByToken(accessToken).FirstOrDefault();
                 if (dbUser != null) {
-                    var user = MapUserToUserDto(dbUser);
-                    return user;
+                    usersDetails.Users = MapUserToUserBasicDto(dbUser);
+                    var files = _mediaFileRepository.GetEntityMediaFile(dbUser.Id, Entites.EntityType.User);
+                    if (files != null && files.Any()) {
+                        usersDetails.Images = new List<MediaFileDto>();
+                        foreach (var item in files) {
+                            usersDetails.Images = new List<MediaFileDto>
+                            {
+                                new MediaFileDto
+                                {
+                                    FileName  = item.FileName,
+                                    FileUrl= item.BlobLink ,
+                                    FileType = Enum.GetName(typeof(MediaType),item.MediaTypeId)
+                                }
+                            };
+                        }
+                    }
+                    return usersDetails;
                 }
                 return null;
             } catch (Exception ex) {
@@ -53,12 +69,28 @@ namespace Core.Business.Services.Concrete {
         }
 
         public object UsersInfoById(int id) {
+            var usersDetails = new UsersDetails();
             try {
                 if (id > 0) {
                     var dbUser = _usersRepository.GateUsersInfoById(id).SingleOrDefault();
                     if (dbUser != null) {
-                        var user = MapUserToUserDto(dbUser);
-                        return user;
+                        usersDetails.Users = MapUserToUserBasicDto(dbUser);
+                        var files = _mediaFileRepository.GetEntityMediaFile(dbUser.Id, Entites.EntityType.User);
+                        if (files != null && files.Any()) {
+                            usersDetails.Images = new List<MediaFileDto>();
+                            foreach (var item in files) {
+                                usersDetails.Images = new List<MediaFileDto>
+                                {
+                                    new MediaFileDto
+                                    {
+                                     FileName  = item.FileName,
+                                     FileUrl= item.BlobLink ,
+                                     FileType = Enum.GetName(typeof(MediaType),item.MediaTypeId)
+                                    }
+                                };
+                            }
+                        }
+                        return usersDetails;
                     }
                 }
                 return null;
@@ -102,32 +134,6 @@ namespace Core.Business.Services.Concrete {
             return user;
         }
 
-
-        public UsersDetails UsersDetails(int id) {
-            var usersDetails = new UsersDetails();
-            var user = new UserDto();
-
-            var usersInfo = _usersRepository.GateUsersInfo(id);
-            if (usersInfo != null) {
-                //usersDetails.Users = usersInfo;
-                user = MapUserToUserDto(usersInfo);
-                var files = _mediaFileRepository.GetEntityMediaFile(usersInfo.Id, Entites.EntityType.User);
-                if (files != null && files.Any()) {
-                    usersDetails.Images = new List<MediaFileDto>();
-                    foreach (var item in files) {
-                        usersDetails.Images = new List<MediaFileDto> {
-                        new MediaFileDto {
-                        FileName  = item.FileName,
-                        FileUrl= item.BlobLink ,
-                        FileType = Enum.GetName(typeof(MediaType),item.MediaTypeId)
-                        }
-                        };
-                    }
-                }
-            }
-            return usersDetails;
-        }
-
         private string HashPassword(string password, ref byte[] saltBytes) {
             var passwordBytes = Encoding.UTF8.GetBytes(password);
             saltBytes = saltBytes ?? GetSalt();
@@ -165,6 +171,18 @@ namespace Core.Business.Services.Concrete {
 
         private UserDto MapUserToUserDto(Users dbUser) {
             UserDto user = new UserDto();
+            user.Id = dbUser.Id;
+            user.FirstName = dbUser.FirstName;
+            user.LastName = dbUser.LastName;
+            user.UserName = dbUser.UserName;
+            user.PhoneNumber = dbUser.Phone;
+            user.Token = dbUser.Token;
+            user.CountryId = dbUser.CountryId ?? 0;
+            user.CityId = dbUser.CityId ?? 0;
+            return user;
+        }
+        private UserBasicDto MapUserToUserBasicDto(Users dbUser) {
+            UserBasicDto user = new UserBasicDto();
             user.Id = dbUser.Id;
             user.FirstName = dbUser.FirstName;
             user.LastName = dbUser.LastName;

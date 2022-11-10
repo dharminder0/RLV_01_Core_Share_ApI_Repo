@@ -23,10 +23,6 @@ namespace Core.Data.Repositories.Concrete {
             var sql = $@"SELECT TOP 10 * FROM Users WHERE id = @id";
             return Query<Users>(sql, new { id });
         }
-        public Users GateUsersInfo(int id) {
-            var sql = $@"SELECT TOP 10 * FROM Users WHERE id = @id";
-            return QueryFirst<Users>(sql, new { id });
-        }
 
         public bool InsertUser(RequestUsers ob) {
             var sql = @"IF NOT EXISTS(SELECT 1 from Users where UserName = @UserName)
