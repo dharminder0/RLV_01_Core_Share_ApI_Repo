@@ -22,9 +22,9 @@ namespace Core.Business.Entites.DataModels
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public DateTime LastLoginDate { get; set; }
-        public int? UserType { get; set; }
-        public bool? IsVerified { get; set; }
-        public bool? IsActive { get; set; }
+        public int UserType { get; set; }
+        public bool IsVerified { get; set; }
+        public bool IsActive { get; set; }
 
     }
 }

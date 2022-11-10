@@ -1,5 +1,6 @@
 ﻿using Core.Business.Entites.DataModels;
 using Core.Business.Entites.RequestModels;
+using Core.Business.Entites.ResponseModels;
 using Core.Business.Services.Abstract;
 using Core.Web.Api.Filters;
 using Microsoft.AspNetCore.Mvc;
@@ -25,8 +26,8 @@ namespace Core.Web.API.Controllers {
         [HttpPost]
         [Route("login")]
         [RequireAuthorization]
-        public IActionResult AuthenticateUserDetails(AuthenticationDto credentials) {
-            var user = _usersService.AuthorizeUserDetails(credentials.UserName, credentials.Password);
+        public IActionResult Userlogin(AuthenticationDto credentials) {
+            var user = _usersService.Userlogin(credentials.UserName, credentials.Password);
             return JsonExt(user);
         }
 
@@ -41,7 +42,7 @@ namespace Core.Web.API.Controllers {
         [Route("info/{accessToken}")]
         [RequireAuthorization]      
         public IActionResult GetUserInfoByToken(string accessToken) {
-            var user = _usersService.GetUserByAccessToken(accessToken);
+            var user = _usersService.GetUserInfoByToken(accessToken);
             return JsonExt(user);
         }
 
@@ -59,5 +60,18 @@ namespace Core.Web.API.Controllers {
             return JsonExt(response);
         }
 
+        /// <summary>
+        /// create user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <remarks>
+        /// </remarks>
+        [HttpGet]
+        [Route("create")]
+        [RequireAuthorization]      
+        public IActionResult CreateUser(RequstUsers ob) {
+            var response = _usersService.CreateUser(ob);
+            return JsonExt(response);
+        }
     }
 }

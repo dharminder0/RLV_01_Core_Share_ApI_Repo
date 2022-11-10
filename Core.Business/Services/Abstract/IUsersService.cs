@@ -4,8 +4,9 @@ using Core.Business.Entites.ResponseModels;
 namespace Core.Business.Services.Abstract {
     public interface IUsersService {
         UserDto AuthenticateUser(string userName, string password);
-        Object AuthorizeUserDetails(string userName, string password);
-        UserDto GetUserByAccessToken(string accessToken);
+        Object Userlogin(string userName, string password);
+        UserDto GetUserInfoByToken(string accessToken);
         object UsersInfoById(int id);
+        bool CreateUser(RequstUsers ob);
     }
 }

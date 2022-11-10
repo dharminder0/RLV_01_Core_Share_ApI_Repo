@@ -16,11 +16,11 @@ namespace Core.Business.Services.Concrete {
         }
 
 
-        public object AuthorizeUserDetails(string userName, string password) {
+        public object Userlogin(string userName, string password) {
             var userDetails = new UserDetails();
             var userResult = AuthenticateUser(userName, password);
             if (userResult.AuthenticationStatus == "Success") {
-                _usersRepository.UpdateUsersAuthentication(userResult.Id);
+                _usersRepository.UpdateLastlogin(userResult.Id);
                 userDetails.Id = userResult.Id;
                 userDetails.FirstName = userResult.FirstName;
                 userDetails.LastName = userResult.LastName;
@@ -36,9 +36,9 @@ namespace Core.Business.Services.Concrete {
             return userDetails;
         }
 
-        public UserDto GetUserByAccessToken(string accessToken) {
+        public UserDto GetUserInfoByToken(string accessToken) {
             try {
-                var dbUser = _usersRepository.GateUsersAuthenticationByToken(accessToken).SingleOrDefault();
+                var dbUser = _usersRepository.GateUsersDetailsByToken(accessToken).SingleOrDefault();
                 if (dbUser != null) {
                     var user = MapUserToUserDto(dbUser);
                     return user;
@@ -59,6 +59,18 @@ namespace Core.Business.Services.Concrete {
                     }
                 }
                 return null;
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public bool CreateUser(RequstUsers ob) {
+            try {
+               var response = _usersRepository.InsertUser(ob);
+                if(response == true) {
+                    return true;
+                }
+                return false;
             } catch (Exception ex) {
                 throw new Exception(ex.Message);
             }

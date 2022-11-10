@@ -6,7 +6,7 @@ namespace Core.Business.Entites.DataModels {
         public HospitalSpecialityRef() { }
         [Key(AutoNumber = true)]
         public int Id { get; set; }
-        public int? HospitalId { get; set; }
-        public int? SpecialityId { get; set; }
+        public int HospitalId { get; set; }
+        public int SpecialityId { get; set; }
     }
 }
