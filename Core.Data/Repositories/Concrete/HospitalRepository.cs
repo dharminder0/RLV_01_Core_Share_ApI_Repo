@@ -43,9 +43,9 @@ namespace Core.Data.Repositories.Concrete {
             });
         }
 
-        public IEnumerable<Hospital> GetHospitalById(int id) {
-            var sql = $@"SELECT * FROM Hospitals WHERE Id=@id";
-            return Query<Hospital>(sql, new { id });
+        public Hospital GetHospitalById(int id) {
+            var sql = $@"SELECT * FROM Hospital WHERE Id = @id";
+            return QueryFirst<Hospital>(sql, new { id });
         }
 
 
