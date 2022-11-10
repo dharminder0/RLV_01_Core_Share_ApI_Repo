@@ -15,7 +15,7 @@ namespace Core.Data.Repositories.Abstract
        IEnumerable<Doctor> GetDoctors();
          Doctor GetDoctorById(int id);
         IEnumerable<Doctor> GetDoctor(DoctorRequest doctorRequest);
-        DoctorDetails GetAllDoctorsMediaDetails( int id);
+   
        
 
 

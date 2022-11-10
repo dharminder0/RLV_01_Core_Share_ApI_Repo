@@ -34,19 +34,34 @@ namespace Core.Data.Repositories.Concrete
 
             if (doctorRequest.HospitalList != null && doctorRequest.HospitalList.Any())
             {
+                
                 sqlQuery += " JOin [DoctorHospitalRef] DHF on DHF.DoctorUserid = d.userId ";
             }
+            if (doctorRequest.CountryCode != null && doctorRequest.CountryCode.Any())
+            {
+                sqlQuery += " JOin [Country] C on C.Id = U.CountryId ";
 
-            sqlQuery += " where usertype =3  and countryId=@CountryId and languageid = @LanguageId ";
+            }
+            if (doctorRequest.CityList != null && doctorRequest.CityList.Any())
+            {
+                sqlQuery += " JOin [City] Ct on Ct.CountryId = U.CountryId ";
+
+            }
+
+
+
+            sqlQuery += " where usertype =3  and  languageid = @LanguageId ";
 
             if (!string.IsNullOrWhiteSpace(doctorRequest.SearchText))
             {
                 sqlQuery += $@"and DisplayName like '%{doctorRequest.SearchText}%'  ";
             }
           
+          
             if (doctorRequest.CityList != null && doctorRequest.CityList.Any())
             {
-                sqlQuery += " and cityId in @CityList ";
+                sqlQuery += " and CityName in @CityList ";
+
             }
             
             if (doctorRequest.HospitalList != null && doctorRequest.HospitalList.Any())
@@ -54,14 +69,17 @@ namespace Core.Data.Repositories.Concrete
                 sqlQuery += " and DHF.HospitalId in @HospitalList ";
             }
 
+            if (doctorRequest.CountryCode != null)
+            {
+                sqlQuery += " and C.code = @CountryCode";
+
+            }
+           
+
+
             return Query<Doctor>(sqlQuery, doctorRequest);
         }
-        public DoctorDetails GetAllDoctorsMediaDetails(int id)
-        {
-            var sqlQuery = $@"select dc.displayname,dc.designation,dc.id,dc.qualification,dc.experience,dc.details,dc.languageid,mm.Filename ,mm.mediadetails ,mm.updatedby,mm.updatedon  from doctor dc  join MediaFile mm   on
-                dc.userid = mm.EntityId  where dc.id = @id";
-            return QueryFirst<DoctorDetails>(sqlQuery,new { id });
-        }
+  
 
 
     }

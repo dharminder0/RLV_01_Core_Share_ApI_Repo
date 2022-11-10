@@ -14,18 +14,35 @@ namespace Core.Data.Repositories.Concrete {
         public IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest) {
             var sqlQuery = $@"SELECT TOP 10 * FROM Hospital ";
 
+            if (hospitalRequest.CountryCode != null && hospitalRequest.CountryCode.Any( ))
+            {
+                sqlQuery += " JOin [Country] C on C.Id = Hospital.CountryId ";
 
-            sqlQuery += " where  countryId=@CountryId and languageid = @LanguageId ";
+            }
+            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any())
+            {
+                sqlQuery += " JOin [City] Ct on Ct.CountryId = U.CountryId ";
+                
+            }
+            sqlQuery += " where  languageid = @LanguageId ";
+
 
 
             if (!string.IsNullOrWhiteSpace(hospitalRequest.SearchText)) {
 
-                sqlQuery += $@"and title like '%{hospitalRequest.SearchText}%'  ";
+                sqlQuery += $@"and Title like '%{hospitalRequest.SearchText}%'  ";
+            }
+
+            if (hospitalRequest.CountryCode != null)
+            {
+                sqlQuery += " and C.code = @CountryCode";
+
             }
 
 
+
             if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any()) {
-                sqlQuery += " and cityId in @CityList ";
+                sqlQuery += "and CityName in @CityList ";
             }
 
 
@@ -34,7 +51,7 @@ namespace Core.Data.Repositories.Concrete {
             }
 
             return Query<Hospital>(sqlQuery, new {
-                hospitalRequest.CountryId,
+                hospitalRequest.CountryCode,
                 hospitalRequest.SearchText,
                 hospitalRequest.CityList,
                 hospitalRequest.HospitalList,

@@ -7,5 +7,8 @@ namespace Core.Data.Repositories.Abstract
     {
         IEnumerable<City> GetCity();
         IEnumerable<City> GetCityByCountryid( int id);
+        IEnumerable<City> GetCityByCountryCode(string countrycode);
+        
     }
 }
+ 

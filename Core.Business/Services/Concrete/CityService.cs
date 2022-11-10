@@ -27,5 +27,11 @@ namespace Core.Business.Services.Concrete
         {
             return _cityRepository.GetCityByCountryid(id).ToList(); 
         }
+
+
+        public List<City> getCityByCountryCode(string countrycode)
+        {
+            return _cityRepository.GetCityByCountryCode(countrycode).ToList();
+        }
     }
 }
