@@ -1,6 +1,7 @@
 ﻿using Core.Business.Entites.DataModels;
 using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
+using Core.Business.Entites.ResponseModels;
 using Core.Business.Services.Abstract;
 using Core.Business.Services.Concrete;
 using Core.Data.Repositories.Concrete;
@@ -14,6 +15,7 @@ namespace Core.Web.API.Controllers {
 
         private readonly IHospitalService _hospitalService;
         private readonly ICityService _CityService;
+
         public HospitalController(IHospitalService hospitalService, ICityService CityService) {
             _hospitalService = hospitalService;
             _CityService = CityService;
@@ -50,6 +52,15 @@ namespace Core.Web.API.Controllers {
         [RequireAuthorization]
         public HospitalDetails GetHospitalById(int id) {
             return _hospitalService.HospitalDetails(id);
+        }
+
+        [HttpPost]
+        [Route("create")]
+        [RequireAuthorization]
+        public IActionResult CreateHospital(RequestHospital requestHospital) {
+            var response = _hospitalService.CreateHospital(requestHospital);
+            return JsonExt(response);
+
         }
     }
 }

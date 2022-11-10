@@ -2,8 +2,10 @@
 using Core.Business.Entites.DataModels;
 using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
+using Core.Business.Entites.ResponseModels;
 using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Abstract;
+using Core.Data.Repositories.Concrete;
 
 
 namespace Core.Business.Services.Concrete {
@@ -48,8 +50,18 @@ namespace Core.Business.Services.Concrete {
                 }
             }
             return hospitalDetails;
+        }
 
-
+        public bool CreateHospital(RequestHospital requestHospital) {
+            try {
+                var response = _hospitalRepository.InsertUser(requestHospital);
+                if (response == true) {
+                    return true;
+                }
+                return false;
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

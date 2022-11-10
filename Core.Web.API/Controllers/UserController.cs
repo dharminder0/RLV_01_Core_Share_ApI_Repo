@@ -66,7 +66,7 @@ namespace Core.Web.API.Controllers {
         /// <param name="id"></param>
         /// <remarks>
         /// </remarks>
-        [HttpGet]
+        [HttpPost]
         [Route("create")]
         [RequireAuthorization]      
         public IActionResult CreateUser(RequstUsers ob) {
