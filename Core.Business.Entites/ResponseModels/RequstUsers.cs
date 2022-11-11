@@ -1,3 +1,4 @@
+
 ﻿namespace Core.Business.Entites.ResponseModels {
     public class RequestUser {
         //public int Id { get; set; }

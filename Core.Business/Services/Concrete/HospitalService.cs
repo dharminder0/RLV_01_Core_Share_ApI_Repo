@@ -2,8 +2,10 @@
 using Core.Business.Entites.DataModels;
 using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
+using Core.Business.Entites.ResponseModels;
 using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Abstract;
+using Core.Data.Repositories.Concrete;
 
 
 namespace Core.Business.Services.Concrete {
@@ -14,11 +16,7 @@ namespace Core.Business.Services.Concrete {
         public HospitalService(IHospitalRepository hospitalRepository, IMediaFileRepository mediaFileRepository) {
             _hospitalRepository = hospitalRepository;
             _mediaRepository = mediaFileRepository;
-        }
-        public List<Hospital> GetHospital() {
-
-            return _hospitalRepository.GetHospitals().ToList();
-        }
+        }        
 
         public object GetHospital(HospitalRequest hospitalRequest) {
 
@@ -48,11 +46,27 @@ namespace Core.Business.Services.Concrete {
                 }
             }
             return hospitalDetails;
-
-
         }
+
+        public bool CreateHospital(RequestHospital requestHospital) {
+            try {
+                var response = _hospitalRepository.InsertUser(requestHospital);
+                if (response == true) {
+                    return true;
+                }
+                return false;
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        //public List<Hospital> GetHospital() {
+
+            //return _hospitalRepository.GetHospitals().ToList();
     }
+
 }
+
 
 
 

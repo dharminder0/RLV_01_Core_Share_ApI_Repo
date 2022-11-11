@@ -9,8 +9,9 @@ namespace Core.Business.Services.Concrete {
     public class DoctorService : IDoctorService {
         private readonly IDoctorRepository _doctorRepository;
         private readonly IMediaFileRepository _mediaRepository;
-        public DoctorService(IDoctorRepository doctorRepository, IMediaFileRepository mediaRepository) {
-            _doctorRepository = doctorRepository;
+        public DoctorService(IDoctorRepository doctorRepository, IMediaFileRepository mediaRepository)
+        {
+            _doctorRepository = doctorRepository; 
             _mediaRepository = mediaRepository;
         }
 
@@ -39,8 +40,6 @@ namespace Core.Business.Services.Concrete {
                 }
             }
             return doctorDetails;
-
-
         }
         public object GetDoctor(DoctorRequest doctorRequest) {
             if (doctorRequest == null && string.IsNullOrWhiteSpace(doctorRequest.CountryCode)) {
