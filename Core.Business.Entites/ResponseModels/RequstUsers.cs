@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Business.Entites.ResponseModels {
-    public class RequestUsers {
+﻿namespace Core.Business.Entites.ResponseModels {
+    public class RequestUser {
         //public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

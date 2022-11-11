@@ -11,18 +11,16 @@ namespace Core.Web.API.Controllers {
     [ApiController]
     public class DoctorController : BaseApiController {
         private readonly IDoctorService _doctorService;
-        public DoctorController(IDoctorService doctorService)
-        {
+        public DoctorController(IDoctorService doctorService) {
             _doctorService = doctorService;
-                
+
         }
-      
-        
+
+
         [HttpGet]
         [Route("{id}")]
         [RequireAuthorization]
-        public DoctorDetails GetDoctorsById(int id)
-        {
+        public DoctorDetails GetDoctorsById(int id) {
             return _doctorService.DoctorDetails(id);
         }
 
@@ -30,8 +28,7 @@ namespace Core.Web.API.Controllers {
         [HttpPost]
         [Route("list")]
         [RequireAuthorization]
-        public IActionResult Doctors(DoctorRequest requestModel)
-        {
+        public IActionResult Doctors(DoctorRequest requestModel) {
             var response = _doctorService.GetDoctor(requestModel);
             return JsonExt(response);
         }

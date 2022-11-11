@@ -1,9 +1,5 @@
-﻿using Core.Common;
-using Core.Common.Settings;
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using Core.Common.Settings;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Web.Api.Filters {
     public class AuthenticationMiddleware {
@@ -23,19 +19,16 @@ namespace Core.Web.Api.Filters {
             var elmah = GlobalSettings.ElmahMvcRoute;
             if (string.IsNullOrWhiteSpace(userName) && string.IsNullOrWhiteSpace(password)) {
                 await _next.Invoke(context);
-            }
-            else if (!context.Request.Path.StartsWithSegments("/" + elmah, StringComparison.OrdinalIgnoreCase)) {
+            } else if (!context.Request.Path.StartsWithSegments("/" + elmah, StringComparison.OrdinalIgnoreCase)) {
                 await _next.Invoke(context);
-            }
-            else {
+            } else {
                 var authHeader = string.Empty;
 
                 // see if the user already basic authorized
                 var cookie = context.Request.Cookies[CookieName];
                 if (cookie != null && !string.IsNullOrWhiteSpace(cookie)) {
                     authHeader = cookie;
-                }
-                else {
+                } else {
                     // See if they've supplied credentials
                     authHeader = context.Request.Headers["Authorization"];
                 }

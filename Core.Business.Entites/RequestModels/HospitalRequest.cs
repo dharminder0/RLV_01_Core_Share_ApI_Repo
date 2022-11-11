@@ -1,7 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Core.Business.Entites.RequestModels
-{
+﻿namespace Core.Business.Entites.RequestModels {
     public class HospitalRequest {
         //[AllowNull]
         public string SearchText { get; set; } = "";

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RLV.Security.Lib {
     public abstract class OperationResult {
@@ -25,8 +20,7 @@ namespace RLV.Security.Lib {
                 asymmetricKeyPairGenerationResult.PublicKeyXml = rsaProvider.ToXmlString(false);
                 asymmetricKeyPairGenerationResult.PublicPrivateKeyPairXml = rsaProvider.ToXmlString(true);
                 asymmetricKeyPairGenerationResult.Success = true;
-            }
-            catch (CryptographicException cex) {
+            } catch (CryptographicException cex) {
                 string NL = Environment.NewLine;
                 StringBuilder validKeySizeBuilder = new StringBuilder();
                 KeySizes[] validKeySizes = rsaProvider.LegalKeySizes;
@@ -38,8 +32,7 @@ namespace RLV.Security.Lib {
                 }
                 asymmetricKeyPairGenerationResult.ExceptionMessage =
                     $"Cryptographic exception when generating a key-pair of size {keySizeBits}. Exception: {cex.Message}{NL}Make sure you provide a valid key size. Here are the valid key size boundaries:{NL}{validKeySizeBuilder.ToString()}";
-            }
-            catch (Exception otherEx) {
+            } catch (Exception otherEx) {
                 asymmetricKeyPairGenerationResult.ExceptionMessage =
                     $"Other exception caught while generating the key pair: {otherEx.Message}";
             }
@@ -56,8 +49,7 @@ namespace RLV.Security.Lib {
                 asymmetricEncryptionResult.EncryptedAsBase64 = encryptedAsBase64;
                 asymmetricEncryptionResult.EncryptedAsBytes = encryptedAsBytes;
                 asymmetricEncryptionResult.Success = true;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 asymmetricEncryptionResult.ExceptionMessage =
                     $"Exception caught while encrypting the message: {ex.Message}";
             }
@@ -72,8 +64,7 @@ namespace RLV.Security.Lib {
                 byte[] decryptBytes = rsaProvider.Decrypt(cipherBytes, true);
                 asymmetricDecryptionResult.DecryptedMessage = Encoding.UTF8.GetString(decryptBytes);
                 asymmetricDecryptionResult.Success = true;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 asymmetricDecryptionResult.ExceptionMessage =
                     $"Exception caught while decrypting the cipher: {ex.Message}";
             }
@@ -130,8 +121,7 @@ namespace RLV.Security.Lib {
                     }
                     outStr = Convert.ToBase64String(msEncrypt.ToArray());
                 }
-            }
-            finally {
+            } finally {
                 // Clear the RijndaelManaged object.
                 if (aesAlg != null)
                     aesAlg.Clear();
@@ -185,8 +175,7 @@ namespace RLV.Security.Lib {
                             plaintext = srDecrypt.ReadToEnd();
                     }
                 }
-            }
-            finally {
+            } finally {
                 // Clear the RijndaelManaged object.
                 if (aesAlg != null)
                     aesAlg.Clear();

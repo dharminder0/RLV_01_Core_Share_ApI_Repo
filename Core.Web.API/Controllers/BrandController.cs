@@ -1,14 +1,13 @@
 ﻿using Core.Business.Entites.DataModels;
 using Core.Business.Services.Abstract;
 using Core.Web.Api.Filters;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.API.Controllers {
     [Route("api/Brand")]
     [ApiController]
     public class BrandController : BaseApiController {
-        
+
         private readonly IBrandService _BrandService;
 
         public BrandController(IBrandService brandService) {
@@ -24,7 +23,7 @@ namespace Core.Web.API.Controllers {
         }
 
         [HttpGet]
-        [Route("Id")]
+        [Route("id")]
         [RequireAuthorization]
         public List<Brand> GetBrandById(int id) {
 

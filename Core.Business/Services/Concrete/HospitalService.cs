@@ -33,7 +33,7 @@ namespace Core.Business.Services.Concrete {
             if (hospital != null) {
                 hospitalDetails.Hospital = _hospitalRepository.GetHospitalById(id);
                 var files = _mediaRepository.GetEntityMediaFile(hospital.Id, Entites.EntityType.Hospital);
- 
+
                 if (files != null && files.Any()) {
                     hospitalDetails.Images = new List<MediaFileDto>();
                     foreach (var item in files) {
