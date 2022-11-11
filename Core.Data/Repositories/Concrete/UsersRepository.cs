@@ -30,8 +30,8 @@ namespace Core.Data.Repositories.Concrete {
             var sql = @"IF NOT EXISTS(SELECT 1 from Users where UserName = @UserName)
 BEGIN
 INSERT INTO Users
-           (Id
-            ,FirstName
+           (
+            FirstName
            ,LastName
            ,UserName
            ,Email
@@ -43,8 +43,8 @@ INSERT INTO Users
            ,Address2
            ,UserType)
      VALUES
-           (@Id
-            ,@FirstName
+           (
+            @FirstName
            ,@LastName
            ,@UserName
            ,@Email
@@ -58,8 +58,8 @@ INSERT INTO Users
 END
 ELSE
 BEGIN
-UPDATE Users SET FirstName = @FirstName,LastName = @LastName, UserName = @UserName
-Where Id = @Id and UserName = @UserName;
+UPDATE Users SET FirstName = @FirstName,LastName = @LastName
+Where  UserName = @UserName;
 END
 ";
             return Execute(sql, new {
