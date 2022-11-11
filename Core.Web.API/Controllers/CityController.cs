@@ -37,5 +37,13 @@ namespace Core.Web.API.Controllers
         {
             return _CityService.GetCity();
         }
+
+        [HttpGet]
+        [Route("listbyCountryCode")]
+        [RequireAuthorization]
+        public List<City> getCityByCountryCode(string countryCode)
+        {
+            return _CityService.getCityByCountryCode(countryCode);
+        }
     }
 }

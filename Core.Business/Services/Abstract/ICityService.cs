@@ -12,6 +12,7 @@ namespace Core.Business.Services.Abstract
     {
         List<City> GetCity();
         List<City> GetCityByCountryid(int id);
+        List<City> getCityByCountryCode(string countrycode);
 
     }
 }
