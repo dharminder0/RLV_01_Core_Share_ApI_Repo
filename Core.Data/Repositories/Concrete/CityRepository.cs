@@ -21,6 +21,14 @@ namespace Core.Data.Repositories.Concrete
             var sql= $@"SELECT * FROM  City where CountryId=@id";
             return Query<City>(sql, new { id});
         }
+        public IEnumerable<City> GetCityByCountryCode(string countrycode)
+        {
+            var sql = $@"select CT.Id,CT.CountryId,CT.CityName from CITY CT join COUNTRY C on CT.countryid=C.id  where C.Code=@countrycode ";
+            return Query<City>(sql, new { countrycode });
+        }
+
+
+
 
     }
 }

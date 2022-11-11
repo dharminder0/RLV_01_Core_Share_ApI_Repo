@@ -11,6 +11,8 @@ namespace Core.Data.Repositories.Abstract
     public interface ICountryRepository : IDataRepository<Country>
     {
         public IEnumerable<Country> GetAllCountry();
+     
+
         
     }
 }
