@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Business.Entites.ResponseModels {
-    public class RequestUsers {
-        //public int Id { get; set; }
+    public class RequstUsers {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; set; }

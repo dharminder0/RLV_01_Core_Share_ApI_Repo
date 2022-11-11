@@ -12,7 +12,7 @@ namespace Core.Business.Services.Concrete {
         private readonly IMediaFileRepository _mediaRepository;
         public DoctorService(IDoctorRepository doctorRepository, IMediaFileRepository mediaRepository)
         {
-            _doctorRepository = doctorRepository;
+            _doctorRepository = doctorRepository; 
             _mediaRepository = mediaRepository;
         }
        
