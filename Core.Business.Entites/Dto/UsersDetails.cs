@@ -1,5 +1,4 @@
-﻿using Core.Business.Entites.DataModels;
-using Core.Business.Entites.ResponseModels;
+﻿using Core.Business.Entites.ResponseModels;
 
 namespace Core.Business.Entites.Dto {
     public class UsersDetails {

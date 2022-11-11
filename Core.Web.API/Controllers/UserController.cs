@@ -1,19 +1,15 @@
-﻿using Core.Business.Entites.Dto;
-using Core.Business.Entites.RequestModels;
+﻿using Core.Business.Entites.RequestModels;
 using Core.Business.Entites.ResponseModels;
 using Core.Business.Services.Abstract;
-using Core.Business.Services.Concrete;
 using Core.Web.Api.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.API.Controllers {
     [Route("api/User")]
     [ApiController]
-    public class UserController : BaseApiController
-    {
+    public class UserController : BaseApiController {
         private readonly IUsersService _usersService;
-        public UserController(IUsersService usersService)
-        {
+        public UserController(IUsersService usersService) {
             _usersService = usersService;
         }
 
@@ -41,7 +37,7 @@ namespace Core.Web.API.Controllers {
         /// </remarks>
         [HttpGet]
         [Route("info/{accessToken}")]
-        [RequireAuthorization]      
+        [RequireAuthorization]
         public IActionResult GetUserInfoByToken(string accessToken) {
             var user = _usersService.GetUserInfoByToken(accessToken);
             return JsonExt(user);
@@ -55,23 +51,23 @@ namespace Core.Web.API.Controllers {
         /// </remarks>
         [HttpGet]
         [Route("infoById/{id}")]
-        [RequireAuthorization]      
+        [RequireAuthorization]
         public IActionResult UsersInfoById(int id) {
             var response = _usersService.UsersInfoById(id);
             return JsonExt(response);
         }
 
         /// <summary>
-        /// create user
+        /// ada update user
         /// </summary>
-        /// <param name="ob"></param>
+        /// <param name="obj"></param>
         /// <remarks>
         /// </remarks>
         [HttpPost]
-        [Route("create")]
-        [RequireAuthorization]      
-        public IActionResult CreateUser(RequestUsers ob) {
-            var response = _usersService.CreateUser(ob);
+        [Route("add")]
+        [RequireAuthorization]
+        public IActionResult AddUpdateUser(RequestUser obj) {
+            var response = _usersService.AddUpdateUser(obj);
             return JsonExt(response);
         }
     }

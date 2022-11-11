@@ -1,18 +1,10 @@
 ﻿using Core.Business.Entites.DataModels;
 using Core.Common.Data;
 using Core.Data.Repositories.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Core.Data.Repositories.Concrete
-{
-    public class CountryRepository:DataRepository<Country>,ICountryRepository
-    {
-        public IEnumerable<Country> GetAllCountry()
-        {
+namespace Core.Data.Repositories.Concrete {
+    public class CountryRepository : DataRepository<Country>, ICountryRepository {
+        public IEnumerable<Country> GetAllCountry() {
             var sql = $@"SELECT * FROM Country  ";
             return Query<Country>(sql);
         }

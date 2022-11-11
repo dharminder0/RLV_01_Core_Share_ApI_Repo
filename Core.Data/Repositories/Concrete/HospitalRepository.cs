@@ -2,10 +2,8 @@
 using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Entites.ResponseModels;
-using Core.Common.Caching;
 using Core.Common.Data;
 using Core.Data.Repositories.Abstract;
-using Microsoft.Azure.Amqp.Framing;
 
 namespace Core.Data.Repositories.Concrete {
 
@@ -14,15 +12,13 @@ namespace Core.Data.Repositories.Concrete {
         public IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest) {
             var sqlQuery = $@"SELECT TOP 10 * FROM Hospital ";
 
-            if (hospitalRequest.CountryCode != null && hospitalRequest.CountryCode.Any( ))
-            {
+            if (hospitalRequest.CountryCode != null && hospitalRequest.CountryCode.Any()) {
                 sqlQuery += " JOin [Country] C on C.Id = Hospital.CountryId ";
 
             }
-            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any())
-            {
+            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any()) {
                 sqlQuery += " JOin [City] Ct on Ct.CountryId = C.id ";
-                
+
             }
             sqlQuery += " where  languageid = @LanguageId ";
 
@@ -35,7 +31,6 @@ namespace Core.Data.Repositories.Concrete {
 
 
 
-
             if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any())
             {
                 sqlQuery += "and cityid in @CityList ";
@@ -45,8 +40,7 @@ namespace Core.Data.Repositories.Concrete {
             if (hospitalRequest.HospitalList != null && hospitalRequest.HospitalList.Any()) {
                 sqlQuery += " and hospital.id in @HospitalList ";
             }
-            if (hospitalRequest.CountryCode != null)
-            {
+            if (hospitalRequest.CountryCode != null) {
                 sqlQuery += " and C.code = @CountryCode";
 
             }

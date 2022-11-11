@@ -16,7 +16,7 @@ namespace RLV.Security.Lib {
 
             var claimsIdentity = new ClaimsIdentity(new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),                
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
             }, "Custom");
 
             //var securityTokenDescriptor = new SecurityTokenDescriptor() {
@@ -28,8 +28,7 @@ namespace RLV.Security.Lib {
             //};
 
 
-            var securityTokenDescriptor = new Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor()
-            {
+            var securityTokenDescriptor = new Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor() {
                 Subject = claimsIdentity,
                 Audience = audience,
                 Issuer = issuer,
@@ -67,8 +66,7 @@ namespace RLV.Security.Lib {
             try {
 
                 tokenHandler.ValidateToken(authToken, tokenValidationParameters, out validatedToken);
-            }
-            catch (Exception) {
+            } catch (Exception) {
                 return null;
 
             }
@@ -127,8 +125,7 @@ namespace RLV.Security.Lib {
                     }
                     outStr = Convert.ToBase64String(msEncrypt.ToArray());
                 }
-            }
-            finally {
+            } finally {
                 // Clear the RijndaelManaged object.
                 if (aesAlg != null)
                     aesAlg.Clear();
@@ -182,8 +179,7 @@ namespace RLV.Security.Lib {
                             plaintext = srDecrypt.ReadToEnd();
                     }
                 }
-            }
-            finally {
+            } finally {
                 // Clear the RijndaelManaged object.
                 if (aesAlg != null)
                     aesAlg.Clear();

@@ -66,8 +66,7 @@ namespace Core.Common.Queue {
                         throw;
                     }
                 }
-            }
-            else {
+            } else {
                 var batches = messages.Partition(maxBatchSize);
                 foreach (var batch in batches) {
                     using (ServiceBusMessageBatch messageBatch = await _sender.CreateMessageBatchAsync()) {

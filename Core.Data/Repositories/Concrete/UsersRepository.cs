@@ -1,9 +1,7 @@
-﻿using Core.Business.Entites;
-using Core.Business.Entites.DataModels;
+﻿using Core.Business.Entites.DataModels;
 using Core.Business.Entites.ResponseModels;
 using Core.Common.Data;
 using Core.Data.Repositories.Abstract;
-using Microsoft.Azure.Amqp.Framing;
 
 namespace Core.Data.Repositories.Concrete {
     public class UsersRepository : DataRepository<Users>, IUsersRepository {
@@ -26,7 +24,7 @@ namespace Core.Data.Repositories.Concrete {
             return Query<Users>(sql, new { id });
         }
 
-        public bool InsertUser(RequestUsers ob) {
+        public bool InsertUser(RequestUser ob) {
             var sql = @"IF NOT EXISTS(SELECT 1 from Users where UserName = @UserName)
 BEGIN
 INSERT INTO Users
@@ -58,12 +56,12 @@ INSERT INTO Users
 END
 ELSE
 BEGIN
-UPDATE Users SET FirstName = @FirstName,LastName = @LastName
+UPDATE Users SET FirstName = @FirstName,LastName = @LastName,Phone = @Phone,Address1 = @Address1, Address2 = @Address2 
 Where  UserName = @UserName;
 END
 ";
             return Execute(sql, new {
-             FirstName = ob.FirstName
+                FirstName = ob.FirstName
            , LastName = ob.LastName
            , UserName = ob.UserName
            , Email = ob.Email

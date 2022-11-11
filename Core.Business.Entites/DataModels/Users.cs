@@ -1,10 +1,8 @@
 ﻿using Core.Common.Data;
 
-namespace Core.Business.Entites.DataModels
-{
+namespace Core.Business.Entites.DataModels {
     [Alias(Name = "Users")]
-    public  class Users
-    {
+    public class Users {
         public Users() { }
         [Key(AutoNumber = true)]
         public int Id { get; set; }
@@ -16,7 +14,7 @@ namespace Core.Business.Entites.DataModels
         public string Token { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public int? CountryId  { get; set; }
+        public int? CountryId { get; set; }
         public int? CityId { get; set; }
         public string PostalCode { get; set; }
         public string Address1 { get; set; }

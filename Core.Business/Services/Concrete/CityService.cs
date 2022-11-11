@@ -1,36 +1,25 @@
 ﻿using Core.Business.Entites.DataModels;
 using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Core.Business.Services.Concrete
-{
-    public class CityService : ICityService
-    {
+namespace Core.Business.Services.Concrete {
+    public class CityService : ICityService {
         private readonly ICityRepository _cityRepository;
-        public CityService(ICityRepository cityRepository)
-        {
+        public CityService(ICityRepository cityRepository) {
             _cityRepository = cityRepository;
         }
 
-        public List<City> GetCity()
-        {
+        public List<City> GetCity() {
             return _cityRepository.GetCity().ToList();
         }
 
 
-        public List<City> GetCityByCountryid(int id)
-        {
-            return _cityRepository.GetCityByCountryid(id).ToList(); 
+        public List<City> GetCityByCountryid(int id) {
+            return _cityRepository.GetCityByCountryid(id).ToList();
         }
 
 
-        public List<City> getCityByCountryCode(string countrycode)
-        {
+        public List<City> getCityByCountryCode(string countrycode) {
             return _cityRepository.GetCityByCountryCode(countrycode).ToList();
         }
     }

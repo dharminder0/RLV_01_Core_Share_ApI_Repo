@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Core.Business.Entites {
 
-namespace Core.Business.Entites
-{
-
-    public enum MediaType
-    {
+    public enum MediaType {
         Logo = 1,
         Image = 2,
         Video = 3,
         Pdf = 4,
     }
 
-    public enum EntityType
-    {
+    public enum EntityType {
         User = 1,
         Brand = 2,
         Doctor = 3,
@@ -25,8 +16,7 @@ namespace Core.Business.Entites
         Treatment = 6,
     }
 
-    public enum UserType
-    {
+    public enum UserType {
         Superadmin = 1,
         Admin = 2,
         Doctor = 3,

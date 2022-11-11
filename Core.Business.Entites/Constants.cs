@@ -4,7 +4,7 @@
         public const string EnabledBackgroundServices = "EnabledBackgroundServices";
     }
     public class BackgroundServiceNames {
-      
+
         public const string ContactActionQueueProcessorService = "ContactActionQueueProcessorService";
 
     }
