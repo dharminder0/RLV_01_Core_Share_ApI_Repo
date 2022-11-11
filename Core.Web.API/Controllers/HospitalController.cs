@@ -27,7 +27,7 @@ namespace Core.Web.API.Controllers {
         /// <param name="requestHospital"></param>  
         /// <returns></returns>
         [HttpPost]
-        [Route("create")]
+        [Route("AddHospital")]
         [RequireAuthorization]
         public IActionResult CreateHospital(RequestHospital requestHospital) {
             var response = _hospitalService.CreateHospital(requestHospital);
