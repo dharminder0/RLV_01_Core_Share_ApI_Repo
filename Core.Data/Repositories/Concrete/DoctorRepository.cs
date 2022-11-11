@@ -34,8 +34,6 @@ namespace Core.Data.Repositories.Concrete {
 
             }
 
-
-
             sqlQuery += " where usertype =3  and  languageid = @LanguageId ";
 
             if (!string.IsNullOrWhiteSpace(doctorRequest.SearchText)) {
