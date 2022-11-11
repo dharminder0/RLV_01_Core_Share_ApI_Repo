@@ -58,18 +58,5 @@ namespace Core.Web.API.Controllers {
             return _hospitalService.HospitalDetails(id);
         }
 
-
-        /// <summary>
-        /// Get Hospitals list
-        /// </summary>
-        /// <returns></returns>
-        //[HttpGet]
-        //[Route("list")]
-        //[RequireAuthorization]
-        //public List<Hospital> Hospitals() {
-
-            //return _hospitalService.GetHospital();
-        
-
     }
 }
