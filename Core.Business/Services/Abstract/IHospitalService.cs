@@ -9,6 +9,7 @@ namespace Core.Business.Services.Abstract {
         object GetHospital(HospitalRequest hospitalRequest);
         HospitalDetails HospitalDetails(int id);
         bool CreateHospital(RequestHospital requestHospital);
+        
         //List<Hospital> GetHospital();
 
     }
