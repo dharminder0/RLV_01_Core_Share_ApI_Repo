@@ -63,7 +63,6 @@ Where  UserName = @UserName;
 END
 ";
             return Execute(sql, new {
-               // Id = ob.Id,
              FirstName = ob.FirstName
            , LastName = ob.LastName
            , UserName = ob.UserName
