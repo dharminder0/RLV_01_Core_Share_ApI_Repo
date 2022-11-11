@@ -1,18 +1,21 @@
-﻿using Core.Business.Entites.DataModels;
+﻿using Core.Business.Entites;
+using Core.Business.Entites.DataModels;
+using Core.Business.Entites.Dto;
 using Core.Business.Entites.ResponseModels;
 using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Abstract;
-using ElmahCore;
+using Core.Data.Repositories.Concrete;
 using System.Security.Cryptography;
 using System.Text;
-using static Slapper.AutoMapper;
 
 namespace Core.Business.Services.Concrete {
     public class UsersService : IUsersService {
         private readonly IUsersRepository _usersRepository;
+        private readonly IMediaFileRepository _mediaFileRepository;
 
-        public UsersService(IUsersRepository usersRepository) {
+        public UsersService(IUsersRepository usersRepository, IMediaFileRepository mediaFileRepository) {
             _usersRepository = usersRepository;
+            _mediaFileRepository = mediaFileRepository;
         }
 
 
@@ -36,12 +39,28 @@ namespace Core.Business.Services.Concrete {
             return userDetails;
         }
 
-        public UserDto GetUserInfoByToken(string accessToken) {
+        public object GetUserInfoByToken(string accessToken) {
+            var usersDetails = new UsersDetails();
             try {
-                var dbUser = _usersRepository.GateUsersDetailsByToken(accessToken).SingleOrDefault();
+                var dbUser = _usersRepository.GateUsersDetailsByToken(accessToken).FirstOrDefault();
                 if (dbUser != null) {
-                    var user = MapUserToUserDto(dbUser);
-                    return user;
+                    usersDetails.Users = MapUserToUserBasicDto(dbUser);
+                    var files = _mediaFileRepository.GetEntityMediaFile(dbUser.Id, Entites.EntityType.User);
+                    if (files != null && files.Any()) {
+                        usersDetails.Images = new List<MediaFileDto>();
+                        foreach (var item in files) {
+                            usersDetails.Images = new List<MediaFileDto>
+                            {
+                                new MediaFileDto
+                                {
+                                    FileName  = item.FileName,
+                                    FileUrl= item.BlobLink ,
+                                    FileType = Enum.GetName(typeof(MediaType),item.MediaTypeId)
+                                }
+                            };
+                        }
+                    }
+                    return usersDetails;
                 }
                 return null;
             } catch (Exception ex) {
@@ -50,12 +69,28 @@ namespace Core.Business.Services.Concrete {
         }
 
         public object UsersInfoById(int id) {
+            var usersDetails = new UsersDetails();
             try {
                 if (id > 0) {
                     var dbUser = _usersRepository.GateUsersInfoById(id).SingleOrDefault();
                     if (dbUser != null) {
-                        var user = MapUserToUserDto(dbUser);
-                        return user;
+                        usersDetails.Users = MapUserToUserBasicDto(dbUser);
+                        var files = _mediaFileRepository.GetEntityMediaFile(dbUser.Id, Entites.EntityType.User);
+                        if (files != null && files.Any()) {
+                            usersDetails.Images = new List<MediaFileDto>();
+                            foreach (var item in files) {
+                                usersDetails.Images = new List<MediaFileDto>
+                                {
+                                    new MediaFileDto
+                                    {
+                                     FileName  = item.FileName,
+                                     FileUrl= item.BlobLink ,
+                                     FileType = Enum.GetName(typeof(MediaType),item.MediaTypeId)
+                                    }
+                                };
+                            }
+                        }
+                        return usersDetails;
                     }
                 }
                 return null;
@@ -64,10 +99,10 @@ namespace Core.Business.Services.Concrete {
             }
         }
 
-        public bool CreateUser(RequstUsers ob) {
+        public bool CreateUser(RequestUsers ob) {
             try {
-               var response = _usersRepository.InsertUser(ob);
-                if(response == true) {
+                var response = _usersRepository.InsertUser(ob);
+                if (response == true) {
                     return true;
                 }
                 return false;
@@ -146,6 +181,19 @@ namespace Core.Business.Services.Concrete {
             user.CityId = dbUser.CityId ?? 0;
             return user;
         }
+        private UserBasicDto MapUserToUserBasicDto(Users dbUser) {
+            UserBasicDto user = new UserBasicDto();
+            user.Id = dbUser.Id;
+            user.FirstName = dbUser.FirstName;
+            user.LastName = dbUser.LastName;
+            user.UserName = dbUser.UserName;
+            user.PhoneNumber = dbUser.Phone;
+            user.Token = dbUser.Token;
+            user.CountryId = dbUser.CountryId ?? 0;
+            user.CityId = dbUser.CityId ?? 0;
+            return user;
+        }
+
 
     }
 }

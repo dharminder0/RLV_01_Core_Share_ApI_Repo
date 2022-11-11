@@ -4,16 +4,8 @@ using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Abstract;
-using Core.Data.Repositories.Concrete;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Core.Business.Services.Concrete
-{
+namespace Core.Business.Services.Concrete {
     public class DoctorService : IDoctorService
     {
         private readonly IDoctorRepository _doctorRepository;

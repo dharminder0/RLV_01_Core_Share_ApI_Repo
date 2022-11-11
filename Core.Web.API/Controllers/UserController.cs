@@ -1,7 +1,8 @@
-﻿using Core.Business.Entites.DataModels;
+﻿using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Entites.ResponseModels;
 using Core.Business.Services.Abstract;
+using Core.Business.Services.Concrete;
 using Core.Web.Api.Filters;
 using Microsoft.AspNetCore.Mvc;
 
@@ -63,13 +64,13 @@ namespace Core.Web.API.Controllers {
         /// <summary>
         /// create user
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="ob"></param>
         /// <remarks>
         /// </remarks>
         [HttpPost]
         [Route("create")]
         [RequireAuthorization]      
-        public IActionResult CreateUser(RequstUsers ob) {
+        public IActionResult CreateUser(RequestUsers ob) {
             var response = _usersService.CreateUser(ob);
             return JsonExt(response);
         }
