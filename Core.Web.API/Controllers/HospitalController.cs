@@ -22,7 +22,21 @@ namespace Core.Web.API.Controllers {
         }
 
         /// <summary>
-        /// get list
+        /// Insert/update for Hospital  
+        /// </summary>
+        /// <param name="requestHospital"></param>  
+        /// <returns></returns>
+        [HttpPost]
+        [Route("create")]
+        [RequireAuthorization]
+        public IActionResult CreateHospital(RequestHospital requestHospital) {
+            var response = _hospitalService.CreateHospital(requestHospital);
+            return JsonExt(response);
+        }
+
+
+        /// <summary>
+        /// Get Hospitals list
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -34,8 +48,8 @@ namespace Core.Web.API.Controllers {
         }
 
         /// <summary>
-        /// Get Hospitals
-        /// <param name="requestModel"
+        /// Get Hospital by details 
+        /// <param name="requestModel"></param>       
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -47,20 +61,17 @@ namespace Core.Web.API.Controllers {
         }
 
 
+        /// <summary>
+        /// Get Hospitals by Id
+        /// <param name="id"></param> 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("Id")]
         [RequireAuthorization]
         public HospitalDetails GetHospitalById(int id) {
             return _hospitalService.HospitalDetails(id);
         }
-
-        [HttpPost]
-        [Route("create")]
-        [RequireAuthorization]
-        public IActionResult CreateHospital(RequestHospital requestHospital) {
-            var response = _hospitalService.CreateHospital(requestHospital);
-            return JsonExt(response);
-
-        }
+               
     }
 }
