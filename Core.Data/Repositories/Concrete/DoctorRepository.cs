@@ -1,17 +1,9 @@
 ﻿using Core.Business.Entites.DataModels;
 using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
-using Core.Common.Contracts;
+using Core.Business.Entites.ResponseModels;
 using Core.Common.Data;
 using Core.Data.Repositories.Abstract;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using static Slapper.AutoMapper;
 
 namespace Core.Data.Repositories.Concrete
 {
@@ -44,9 +36,6 @@ namespace Core.Data.Repositories.Concrete
             }
           
 
-
-
-
             sqlQuery += " where usertype =3  and  languageid = @LanguageId  ";
          
 
@@ -77,7 +66,63 @@ namespace Core.Data.Repositories.Concrete
 
             return Query<Doctor>(sqlQuery, doctorRequest);
         }
-  
+        public DoctorDetails GetAllDoctorsMediaDetails(int id)
+        {
+            var sqlQuery = $@"select dc.displayname,dc.designation,dc.id,dc.qualification,dc.experience,dc.details,dc.languageid,mm.Filename ,mm.mediadetails ,mm.updatedby,mm.updatedon  from doctor dc  join MediaFile mm   on
+                dc.userid = mm.EntityId  where dc.id = @id";
+            return QueryFirst<DoctorDetails>(sqlQuery,new { id });
+        }
+        public bool InsertDoctor(RequestDoctor requestDoctor) {
+            var sql = @"IF NOT EXISTS(SELECT 1 from Doctor where UserId = @UserId )
+BEGIN
+INSERT INTO Doctor	 
+		   (
+            UserId
+           ,DisplayName
+           ,Designation
+           ,Qualification
+           ,Experience
+           ,Details
+           ,AdditionalDetails
+           ,LanguageId
+           ,Rank
+           ,YearExperience
+           ,Range)
+     VALUES          
+          (
+            @UserId
+           ,@DisplayName
+           ,@Designation
+           ,@Qualification
+           ,@Experience
+           ,@Details
+           ,@AdditionalDetails
+           ,@LanguageId
+           ,@Rank
+           ,@YearExperience
+           ,@Range)
+       
+           
+END
+ELSE
+BEGIN
+UPDATE Doctor SET DisplayName = @DisplayName, Designation = @Designation, Qualification = @Qualification, Experience = @Experience, Details = @Details, AdditionalDetails= @AdditionalDetails, LanguageId = @LanguageId, Rank = @Rank, YearExperience = @YearExperience ,Range =@Range
+Where UserId = @UserId;
+END";
+            return Execute(sql, new {
+                UserId = requestDoctor.UserId
+           , DisplayName = requestDoctor.DisplayName
+           , Designation = requestDoctor.Designation
+           , Qualification = requestDoctor.Qualification
+           , Experience = requestDoctor.Experience
+           , Details = requestDoctor.Details
+           , AdditionalDetails = requestDoctor.AdditionalDetails
+           , LanguageId = requestDoctor.LanguageId
+           , Rank = requestDoctor.Rank
+           ,YearExperience = requestDoctor.YearExperience
+           ,Range = requestDoctor.Range
+            }) > 0;
+        }
 
 
     }
