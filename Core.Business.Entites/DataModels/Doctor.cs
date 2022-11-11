@@ -17,5 +17,7 @@ namespace Core.Business.Entites.DataModels
         public string AdditionalDetails { get; set; }
         public int LanguageId { get; set; }
         public int Rank { get; set; }
+        public int YearExperience { get; set; } 
+        public int Range { get; set; }
     }
 }
