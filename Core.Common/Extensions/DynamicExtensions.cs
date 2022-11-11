@@ -35,9 +35,7 @@ namespace Core.Common.Extensions {
                 if (exObjpair.CheckDictionarykeyExistStringObject(item)) {
                     // message = message.Replace(item, Convert.ToString(exObjpair[item]));
                     message = Regex.Replace(message, item, Convert.ToString(exObjpair[item]), RegexOptions.IgnoreCase);
-                }
-
-                else if (staticobjects != null && staticobjects.CheckDictionarykeyExistStringObject(item)) {
+                } else if (staticobjects != null && staticobjects.CheckDictionarykeyExistStringObject(item)) {
                     //message = message.Replace(item, Convert.ToString(staticobjects[item]));
                     message = Regex.Replace(message, item, Convert.ToString(staticobjects[item]), RegexOptions.IgnoreCase);
                 }

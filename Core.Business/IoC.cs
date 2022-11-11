@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using System;
 
 namespace Core.Business {
     public class IoC {

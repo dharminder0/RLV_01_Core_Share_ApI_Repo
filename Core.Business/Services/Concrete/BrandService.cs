@@ -7,7 +7,8 @@ namespace Core.Business.Services.Concrete {
 
         private readonly IBrandRepository _brandRepository;
         public BrandService(IBrandRepository brandRepository) {
-            _brandRepository = brandRepository; }
+            _brandRepository = brandRepository;
+        }
 
         public List<Brand> GetBrand() {
 
@@ -16,5 +17,5 @@ namespace Core.Business.Services.Concrete {
         public List<Brand> GetBrandById(int id) {
             return _brandRepository.GetBrandById(id).ToList();
         }
-}
     }
+}

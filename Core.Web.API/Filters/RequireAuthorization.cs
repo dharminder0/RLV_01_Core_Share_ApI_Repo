@@ -2,9 +2,6 @@
 using Core.Common.Settings;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Core.Web.Api.Filters {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
@@ -45,8 +42,7 @@ namespace Core.Web.Api.Filters {
             // if public call return forbidden 403 instead of unauthorized
             if (!string.IsNullOrWhiteSpace(BearerKey)) {
                 context.Result = new ForbidResult();
-            }
-            else {
+            } else {
                 // if not valid bearer don't return Unauthorized (401)
                 context.Result = new UnauthorizedResult();
             }

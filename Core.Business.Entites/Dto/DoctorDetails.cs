@@ -1,15 +1,7 @@
 ﻿using Core.Business.Entites.DataModels;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Core.Business.Entites.Dto
-{
-    public class DoctorDetails
-    {
+namespace Core.Business.Entites.Dto {
+    public class DoctorDetails {
         public Doctor Doctor { get; set; }
         public List<MediaFileDto> Images { get; set; }
         //public string Displayname { get; set; }

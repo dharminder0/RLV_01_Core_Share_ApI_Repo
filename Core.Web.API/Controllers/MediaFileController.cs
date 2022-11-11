@@ -1,7 +1,6 @@
 ﻿using Core.Business.Entites.DataModels;
 using Core.Business.Services.Abstract;
 using Core.Web.Api.Filters;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.API.Controllers {
@@ -26,5 +25,5 @@ namespace Core.Web.API.Controllers {
         }
     }
 }
-    
+
 

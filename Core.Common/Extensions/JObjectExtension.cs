@@ -36,8 +36,7 @@ namespace Core.Common.Extensions {
         public static JObject AddORUpdateJObjectkey(this JObject source, string key, string value) {
             if (!CheckJObjectkeyExist(source, key)) {
                 source.Add(key, value);
-            }
-            else {
+            } else {
                 source[key] = value;
             }
             return source;

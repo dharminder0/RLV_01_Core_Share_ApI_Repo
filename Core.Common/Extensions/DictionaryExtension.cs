@@ -59,8 +59,7 @@ namespace Core.Common.Extensions {
                 if (dictionaryList.Any(v => v.Key.EqualsCI(key))) {
                     var keyname = dictionaryList.Where(v => v.Key.EqualsCI(key)).Select(v => v.Key).First();
                     dictionaryList[keyname] = value;
-                }
-                else {
+                } else {
                     dictionaryList.Add(key, value);
                 }
             }
@@ -72,8 +71,7 @@ namespace Core.Common.Extensions {
                 if (dictionaryList.Any(v => v.Key.EqualsCI(key))) {
                     var keyname = dictionaryList.Where(v => v.Key.EqualsCI(key)).Select(v => v.Key).First();
                     dictionaryList[keyname] = value == null ? null : Convert.ToString(value);
-                }
-                else {
+                } else {
                     dictionaryList.Add(key, value == null ? null : Convert.ToString(value));
                 }
             }
@@ -85,8 +83,7 @@ namespace Core.Common.Extensions {
                 if (dictionaryList.Any(v => v.Key.EqualsCI(key))) {
                     var keyname = dictionaryList.Where(v => v.Key.EqualsCI(key)).Select(v => v.Key).First();
                     dictionaryList[keyname] = value;
-                }
-                else {
+                } else {
                     dictionaryList.Add(key, value);
                 }
             }

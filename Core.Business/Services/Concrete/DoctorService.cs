@@ -46,7 +46,11 @@ namespace Core.Business.Services.Concrete {
         }
         public object GetDoctor(DoctorRequest doctorRequest) {
 
+            if (doctorRequest == null && string.IsNullOrWhiteSpace(doctorRequest.CountryCode)) {
+                return null;
+            }
             return _doctorRepository.GetDoctor(doctorRequest).ToList();
+
 
         }
         public bool CreateDoctor(RequestDoctor requestDoctor) {

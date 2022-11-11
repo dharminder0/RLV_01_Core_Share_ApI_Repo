@@ -3,8 +3,6 @@ using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Entites.ResponseModels;
 using Core.Business.Services.Abstract;
-using Core.Business.Services.Concrete;
-using Core.Data.Repositories.Concrete;
 using Core.Web.Api.Filters;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,7 +38,7 @@ namespace Core.Web.API.Controllers {
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Route("List")]
+        [Route("list")]
         [RequireAuthorization]
         public IActionResult Hospitals(HospitalRequest requestModel) {
             var response = _hospitalService.GetHospital(requestModel);
@@ -54,7 +52,7 @@ namespace Core.Web.API.Controllers {
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("Id")]
+        [Route("id")]
         [RequireAuthorization]
         public HospitalDetails GetHospitalById(int id) {
             return _hospitalService.HospitalDetails(id);
