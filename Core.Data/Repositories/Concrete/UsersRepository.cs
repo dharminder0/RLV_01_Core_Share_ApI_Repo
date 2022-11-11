@@ -1,8 +1,9 @@
-﻿using Azure.Core;
+﻿using Core.Business.Entites;
 using Core.Business.Entites.DataModels;
 using Core.Business.Entites.ResponseModels;
 using Core.Common.Data;
 using Core.Data.Repositories.Abstract;
+using Microsoft.Azure.Amqp.Framing;
 
 namespace Core.Data.Repositories.Concrete {
     public class UsersRepository : DataRepository<Users>, IUsersRepository {
@@ -25,14 +26,14 @@ namespace Core.Data.Repositories.Concrete {
             return Query<Users>(sql, new { id });
         }
 
-        public bool InsertUser(RequstUsers ob) {
+        public bool InsertUser(RequestUsers ob) {
             var sql = @"IF NOT EXISTS(SELECT 1 from Users where UserName = @UserName)
 BEGIN
 INSERT INTO Users
-           (FirstName
+           (
+            FirstName
            ,LastName
            ,UserName
-           ,Token
            ,Email
            ,Phone
            ,CountryId
@@ -42,10 +43,10 @@ INSERT INTO Users
            ,Address2
            ,UserType)
      VALUES
-           (@FirstName
+           (
+            @FirstName
            ,@LastName
            ,@UserName
-           ,@Token
            ,@Email
            ,@Phone
            ,@CountryId
@@ -57,10 +58,23 @@ INSERT INTO Users
 END
 ELSE
 BEGIN
-UPDATE Users SET FirstName = @FirstName,LastName = @LastName, UserName = @UserName
-Where Id = @Id and UserName = @UserName;
-END";
-            return Execute(sql, ob) > 0;
+UPDATE Users SET FirstName = @FirstName,LastName = @LastName
+Where  UserName = @UserName;
+END
+";
+            return Execute(sql, new {
+             FirstName = ob.FirstName
+           , LastName = ob.LastName
+           , UserName = ob.UserName
+           , Email = ob.Email
+           , Phone = ob.Phone
+           , CountryId = ob.CountryId
+           , CityId = ob.CityId
+           , PostalCode = ob.PostalCode
+           , Address1 = ob.Address1
+           , Address2 = ob.Address2
+           , UserType = ob.UserType
+            }) > 0;
         }
 
     }
