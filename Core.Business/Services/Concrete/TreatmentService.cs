@@ -1,13 +1,5 @@
-﻿using Core.Business.Entites.DataModels;
-using Core.Business.Services.Abstract;
+﻿using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Abstract;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Business.Services.Concrete {
     public class TreatmentService : ITreatmentService {
@@ -21,7 +13,7 @@ namespace Core.Business.Services.Concrete {
             try {
                 if (!string.IsNullOrWhiteSpace(countryCode)) {
                     var dbUser = _treatmentRepository.GetTreatmentInfoById(countryCode).ToList();
-                    if (dbUser != null) { 
+                    if (dbUser != null) {
                         return dbUser;
                     }
                 }

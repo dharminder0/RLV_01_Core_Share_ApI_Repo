@@ -4,7 +4,6 @@ using Core.Business.Entites.Dto;
 using Core.Business.Entites.ResponseModels;
 using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Abstract;
-using Core.Data.Repositories.Concrete;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -99,9 +98,9 @@ namespace Core.Business.Services.Concrete {
             }
         }
 
-        public bool CreateUser(RequestUsers ob) {
+        public bool AddUpdateUser(RequestUser obj) {
             try {
-                var response = _usersRepository.InsertUser(ob);
+                var response = _usersRepository.InsertUser(obj);
                 if (response == true) {
                     return true;
                 }

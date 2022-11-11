@@ -1,9 +1,7 @@
-﻿using Core.Common;
-using RLV.Security.Lib;
+﻿using Core.Common.Settings;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Serialization;
-using System;
-using Core.Common.Settings;
+using RLV.Security.Lib;
 
 namespace Core.Web.API.Controllers {
     public abstract class BaseApiController : ControllerBase {

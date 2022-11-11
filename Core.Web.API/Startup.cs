@@ -1,15 +1,14 @@
 ﻿using Autofac;
 using Core.Business;
 using Core.Common.Configuration;
+using Core.Common.Settings;
+using Core.Web.Api.Filters;
 using ElmahCore;
 using ElmahCore.Mvc;
-using Core.Common.Settings;
 using Microsoft.OpenApi.Models;
+using NetCore.AutoRegisterDi;
 using Newtonsoft.Json;
 using System.Reflection;
-using Core.Web.Api.Filters;
-using Core.Business.Entites;
-using NetCore.AutoRegisterDi;
 
 namespace Core.Web.Api {
     public class Startup {
@@ -122,8 +121,7 @@ namespace Core.Web.Api {
                             //if (!string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["AllowedOrigins"]) && CoreConfigurationManager.AppSettings["AllowedOrigins"] != "*")
                             if (!string.IsNullOrWhiteSpace(GlobalSettings.AllowedOrigins) && GlobalSettings.AllowedOrigins != "*") {
                                 builder.WithOrigins(GlobalSettings.AllowedOrigins.Split(','));
-                            }
-                            else {
+                            } else {
                                 builder.AllowAnyOrigin();
                             }
                         });
@@ -133,7 +131,7 @@ namespace Core.Web.Api {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-    
+
             });
 
             services.AddControllers();

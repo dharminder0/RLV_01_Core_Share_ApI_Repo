@@ -6,8 +6,8 @@ namespace Core.Business.Entites.DataModels {
         public UserBrandRef() { }
         [Key(AutoNumber = true)]
         public int Id { get; set; }
-        public int UserId { get; set; }    
-        public int BrandId { get; set; }    
+        public int UserId { get; set; }
+        public int BrandId { get; set; }
         public bool IsActive { get; set; }
 
     }

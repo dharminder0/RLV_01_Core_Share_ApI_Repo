@@ -1,10 +1,8 @@
 ﻿using Core.Common.Data;
 
-namespace Core.Business.Entites.DataModels
-{
+namespace Core.Business.Entites.DataModels {
     [Alias(Name = "DoctorSpecialityRef")]
-    public class DoctorSpecialityRef
-    {
+    public class DoctorSpecialityRef {
         public DoctorSpecialityRef() { }
         [Key(AutoNumber = true)]
         public int Id { get; set; }

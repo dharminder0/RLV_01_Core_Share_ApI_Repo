@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Business.Entites.ResponseModels {
+﻿namespace Core.Business.Entites.ResponseModels {
     public class UserDto {
         public long Id { get; set; }
         public string FirstName { get; set; }
@@ -13,14 +7,14 @@ namespace Core.Business.Entites.ResponseModels {
         public string Token { get; set; }
         public string PhoneNumber { get; set; }
         public int CountryId { get; set; }
-        public int CityId { get; set; }               
+        public int CityId { get; set; }
         public string AuthenticationStatus { get; set; }
-          
+
     }
 
 
     public class UserDetails {
-        public long Id { get; set; }    
+        public long Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; set; }
@@ -43,6 +37,6 @@ namespace Core.Business.Entites.ResponseModels {
         public int CityId { get; set; }
     }
 
-    
+
 
 }

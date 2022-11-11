@@ -1,9 +1,7 @@
 ﻿using Core.Common.Data;
-namespace Core.Business.Entites.DataModels
-{
+namespace Core.Business.Entites.DataModels {
     [Alias(Name = "Speciality")]
-    public class Speciality
-    {
+    public class Speciality {
         public Speciality() { }
         [Key(AutoNumber = true)]
         public int Id { get; set; }

@@ -1,8 +1,8 @@
 ﻿using Core.Common.Configuration;
+using Core.Common.Settings;
 using Dapper;
 using DapperExtensions;
 using DapperExtensions.Predicate;
-using Core.Common.Settings;
 using SqlKata;
 using SqlKata.Compilers;
 using SqlKata.Execution;
@@ -91,8 +91,7 @@ SELECT *
 FROM {0}
 WHERE {1} = '{2}'
 ", GetAliasName(), GetKeyProperty().Name, GetKeyProperty().GetValue(entity));
-            }
-            else {
+            } else {
                 sql.AppendFormat(@"); 
 SET @EntityId = SCOPE_IDENTITY();
 SELECT *
@@ -478,8 +477,7 @@ SELECT *
 FROM {0}
 WHERE {1} = '{2}'
 ", GetAliasName(), GetKeyProperty().Name, GetKeyProperty().GetValue(entity));
-            }
-            else {
+            } else {
                 sql.AppendFormat(@"); 
 SET @EntityId = SCOPE_IDENTITY();
 SELECT *
@@ -660,8 +658,7 @@ SET ", GetAliasName());
                     if (notMappedAttr != null) {
                         notMapped = true;
                         break;
-                    }
-                    else {
+                    } else {
                         KeyAttribute key = attr as KeyAttribute;
                         if (key != null) {
                             isKey = true;

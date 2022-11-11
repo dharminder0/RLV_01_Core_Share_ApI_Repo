@@ -1,7 +1,5 @@
-﻿using Core.Business.Entites.DataModels;
-using Core.Business.Services.Abstract;
+﻿using Core.Business.Services.Abstract;
 using Core.Web.Api.Filters;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.API.Controllers {
@@ -10,7 +8,7 @@ namespace Core.Web.API.Controllers {
     public class TreatmentController : BaseApiController {
         private readonly ITreatmentService _treatmentService;
         public TreatmentController(ITreatmentService treatmentService) {
-            _treatmentService = treatmentService;   
+            _treatmentService = treatmentService;
 
         }
 

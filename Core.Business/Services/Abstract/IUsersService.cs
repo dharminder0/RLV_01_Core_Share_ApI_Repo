@@ -1,6 +1,4 @@
-﻿using Core.Business.Entites.DataModels;
-using Core.Business.Entites.Dto;
-using Core.Business.Entites.ResponseModels;
+﻿using Core.Business.Entites.ResponseModels;
 
 namespace Core.Business.Services.Abstract {
     public interface IUsersService {
@@ -8,6 +6,6 @@ namespace Core.Business.Services.Abstract {
         Object Userlogin(string userName, string password);
         object GetUserInfoByToken(string accessToken);
         object UsersInfoById(int id);
-        bool CreateUser(RequestUsers ob);
+        bool AddUpdateUser(RequestUser ob);
     }
 }
