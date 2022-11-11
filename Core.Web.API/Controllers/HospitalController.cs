@@ -34,19 +34,6 @@ namespace Core.Web.API.Controllers {
             return JsonExt(response);
         }
 
-
-        /// <summary>
-        /// Get Hospitals list
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("list")]
-        [RequireAuthorization]
-        public List<Hospital> Hospitals() {
-
-            return _hospitalService.GetHospital();
-        }
-
         /// <summary>
         /// Get Hospital by details 
         /// <param name="requestModel"></param>       
@@ -72,6 +59,19 @@ namespace Core.Web.API.Controllers {
         public HospitalDetails GetHospitalById(int id) {
             return _hospitalService.HospitalDetails(id);
         }
-               
+
+
+        /// <summary>
+        /// Get Hospitals list
+        /// </summary>
+        /// <returns></returns>
+        //[HttpGet]
+        //[Route("list")]
+        //[RequireAuthorization]
+        //public List<Hospital> Hospitals() {
+
+            //return _hospitalService.GetHospital();
+        
+
     }
 }

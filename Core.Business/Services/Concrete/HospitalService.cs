@@ -16,11 +16,7 @@ namespace Core.Business.Services.Concrete {
         public HospitalService(IHospitalRepository hospitalRepository, IMediaFileRepository mediaFileRepository) {
             _hospitalRepository = hospitalRepository;
             _mediaRepository = mediaFileRepository;
-        }
-        public List<Hospital> GetHospital() {
-
-            return _hospitalRepository.GetHospitals().ToList();
-        }
+        }        
 
         public object GetHospital(HospitalRequest hospitalRequest) {
 
@@ -63,8 +59,14 @@ namespace Core.Business.Services.Concrete {
                 throw new Exception(ex.Message);
             }
         }
+
+        //public List<Hospital> GetHospital() {
+
+            //return _hospitalRepository.GetHospitals().ToList();
     }
+
 }
+
 
 
 

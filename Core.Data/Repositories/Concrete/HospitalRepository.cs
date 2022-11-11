@@ -10,10 +10,7 @@ using Microsoft.Azure.Amqp.Framing;
 namespace Core.Data.Repositories.Concrete {
 
     public class HospitalRepository : DataRepository<Hospital>, IHospitalRepository {
-        public IEnumerable<Hospital> GetHospitals() {
-            var sql = $@"SELECT * FROM Hospital ";
-            return Query<Hospital>(sql);
-        }
+        
         public IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest) {
             var sqlQuery = $@"SELECT TOP 10 * FROM Hospital ";
 
@@ -106,6 +103,11 @@ END";
                 Rank = requestHospital.Rank
                      }) > 0;
         }
+
+         // public IEnumerable<Hospital> GetHospitals() {
+         //   var sql = $@"SELECT * FROM Hospital ";
+         //  return Query<Hospital>(sql);
     }
 }
+
 
