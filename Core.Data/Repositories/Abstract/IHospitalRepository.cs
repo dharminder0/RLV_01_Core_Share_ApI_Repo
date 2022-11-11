@@ -1,11 +1,17 @@
 ﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
+using Core.Business.Entites.ResponseModels;
 using Core.Common.Data;
 
 namespace Core.Data.Repositories.Abstract {
     public interface IHospitalRepository : IDataRepository<Hospital> {
-        IEnumerable<Hospital> GetHospitals();
         IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest);
-        IEnumerable<Hospital> GetHospitalById(int id);
+        Hospital GetHospitalById(int id);
+        HospitalDetails GetAllHospitalMediaDetails(int id);
+        bool InsertUser(RequestHospital requestHospital);
+        
+      //IEnumerable<Hospital> GetHospitals();
+
     }
 }

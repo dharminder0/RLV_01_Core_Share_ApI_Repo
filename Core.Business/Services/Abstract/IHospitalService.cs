@@ -1,16 +1,15 @@
 ﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.Dto;
 using Core.Business.Entites.RequestModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Slapper.AutoMapper;
+using Core.Business.Entites.ResponseModels;
 
 namespace Core.Business.Services.Abstract {
-    public interface IHospitalsService {
-        List<Hospital> GetHospitals();
-        object GetHospitals(HospitalRequest hospitalRequest);
-        object GetHospitalsById(int id);
+    public interface IHospitalService {
+        
+        object GetHospital(HospitalRequest hospitalRequest);
+        HospitalDetails HospitalDetails(int id);
+        bool CreateHospital(RequestHospital requestHospital);
+        //List<Hospital> GetHospital();
+
     }
 }

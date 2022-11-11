@@ -37,10 +37,10 @@ namespace Core.Business.Entites.ResponseModels {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; set; }
-        public string Phone { get; set; }
-        public string Mail { get; set; }
-        public string ClientCode { get; set; }
-        public DateTime? CreatedOn { get; set; }
+        public string Token { get; set; }
+        public string PhoneNumber { get; set; }
+        public int CountryId { get; set; }
+        public int CityId { get; set; }
     }
 
     
