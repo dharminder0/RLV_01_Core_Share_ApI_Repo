@@ -15,6 +15,8 @@ namespace Core.Business.Entites.DataModels {
         public int  BedCount { get; set; }
         public int LanguageId { get; set; }
         public int BrandId { get; set; }
-        public int Rank { get; set; }
+        public int Rank { get; set; }  
+        public DateTime Establisheddate { get; set; }
+
     }
 }

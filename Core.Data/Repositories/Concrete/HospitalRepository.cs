@@ -31,9 +31,9 @@ namespace Core.Data.Repositories.Concrete {
 
 
 
-
-            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any()) {
-                sqlQuery += "and CityName in @CityList ";
+            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any())
+            {
+                sqlQuery += "and cityid in @CityList ";
             }
 
 
