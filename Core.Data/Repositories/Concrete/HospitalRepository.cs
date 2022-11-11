@@ -10,10 +10,13 @@ namespace Core.Data.Repositories.Concrete {
     public class HospitalRepository : DataRepository<Hospital>, IHospitalRepository {
         
         public IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest) {
-            var sqlQuery = $@"SELECT TOP 10 * FROM Hospital ";
+            //var sqlQuery = $@"SELECT TOP 10 * FROM Hospital ";
+            var sqlQuery = $@"SELECT distinct h.Id,h.AdditionalDetails,h.Address,h.BedCount,h.BrandId,h.CountryId,h.Title,h.Rank,h.LanguageId,h.Infrastructure,h.EstablishedDate,h.Details,h.CityId,h.BedCount
+FROM Hospital h ";
+
 
             if (hospitalRequest.CountryCode != null && hospitalRequest.CountryCode.Any()) {
-                sqlQuery += " JOin [Country] C on C.Id = Hospital.CountryId ";
+                sqlQuery += " JOin [Country] C on C.Id = h.CountryId ";
 
             }
             if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any()) {
@@ -38,7 +41,7 @@ namespace Core.Data.Repositories.Concrete {
 
 
             if (hospitalRequest.HospitalList != null && hospitalRequest.HospitalList.Any()) {
-                sqlQuery += " and hospital.id in @HospitalList ";
+                sqlQuery += " and h.id in @HospitalList ";
             }
             if (hospitalRequest.CountryCode != null) {
                 sqlQuery += " and C.code = @CountryCode";
