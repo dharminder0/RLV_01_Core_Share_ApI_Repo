@@ -21,7 +21,7 @@ namespace Core.Data.Repositories.Concrete {
             }
             if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any())
             {
-                sqlQuery += " JOin [City] Ct on Ct.CountryId = U.CountryId ";
+                sqlQuery += " JOin [City] Ct on Ct.CountryId = C.id ";
                 
             }
             sqlQuery += " where  languageid = @LanguageId ";
@@ -33,12 +33,7 @@ namespace Core.Data.Repositories.Concrete {
                 sqlQuery += $@"and Title like '%{hospitalRequest.SearchText}%'  ";
             }
 
-            if (hospitalRequest.CountryCode != null)
-            {
-                sqlQuery += " and C.code = @CountryCode";
-
-            }
-
+           
 
 
             if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any()) {
@@ -49,6 +44,12 @@ namespace Core.Data.Repositories.Concrete {
             if (hospitalRequest.HospitalList != null && hospitalRequest.HospitalList.Any()) {
                 sqlQuery += " and hospital.id in @HospitalList ";
             }
+            if (hospitalRequest.CountryCode != null)
+            {
+                sqlQuery += " and C.code = @CountryCode";
+
+            }
+
 
             return Query<Hospital>(sqlQuery, new {
                 hospitalRequest.CountryCode,
