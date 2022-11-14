@@ -43,7 +43,6 @@ INSERT INTO Users
              ,PostalCode
              ,Address1
              ,Address2
-             ,LastLoginDate
              ,UserType
              ,IsVerified
              ,IsActive
@@ -62,7 +61,6 @@ INSERT INTO Users
             ,@PostalCode
             ,@Address1
             ,@Address2
-            ,@LastLoginDate
             ,@UserType
             ,@IsVerified
             ,@IsActive
@@ -81,7 +79,6 @@ UPDATE Users SET   FirstName = @FirstName
              ,PostalCode = @PostalCode
              ,Address1 = @Address1
              ,Address2 = @Address2
-             ,LastLoginDate = @LastLoginDate 
              ,UserType = @UserType
              ,IsVerified = @IsVerified
              ,IsActive = @IsActive
@@ -101,7 +98,6 @@ END
                 PostalCode = ob.PostalCode,
                 Address1 = ob.Address1,
                 Address2 = ob.Address2,
-                LastLoginDate = ob.LastLoginDate,
                 UserType = ob.UserType,
                 IsVerified = ob.IsVerified,
                 IsActive = ob.IsActive
