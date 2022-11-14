@@ -70,7 +70,7 @@ FROM Hospital h ";
                 dc.userid = mm.EntityId  where dc.id = @id";
             return QueryFirst<HospitalDetails>(sqlQuery, new { id });
         }
-        public bool InsertUser(RequestHospital requestHospital) {
+        public bool InsertHospital(RequestHospital requestHospital) {
             var sql = @"IF NOT EXISTS(SELECT 1 from Hospital where Title = @Title And CountryId = @CountryId And CityId = @CityId)
 BEGIN
 INSERT INTO Hospital	 
