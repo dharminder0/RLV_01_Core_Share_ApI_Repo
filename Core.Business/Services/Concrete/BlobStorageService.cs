@@ -1,4 +1,6 @@
-﻿using Core.Common.Settings;
+﻿using Core.Business.Entites.ResponseModels;
+using Core.Business.Entites.Utils;
+using Core.Common.Settings;
 using Microsoft.WindowsAzure.Storage;
 
 namespace Core.Business.Services.Concrete {
@@ -52,13 +54,13 @@ namespace Core.Business.Services.Concrete {
             return blockBlob.Uri.AbsoluteUri;
         }
 
-        public FileUploadResponseModel UploadFileToBlob(string fileName, byte[] fileData) {
-            FileUploadResponseModel response = null;
+        public FileUpload UploadFileToBlob(string fileName, byte[] fileData) {
+            FileUpload response = null;
             var fileIdentifier = GetUniqueFileName(fileName);
 
             string uri = UploadFileToAzureBlob(fileIdentifier, fileData);
             if (!string.IsNullOrWhiteSpace(uri)) {
-                response = new FileUploadResponseModel();
+                response = new FileUpload();
                 response.FileName = fileName;
                 response.FileIdentifier = fileIdentifier;
                 response.FileLink = uri;
@@ -66,5 +68,14 @@ namespace Core.Business.Services.Concrete {
             return response;
         }
 
+
+        private string GetUniqueFileName(string fileName) {
+            var rand = new Random();
+            var firstGuid = Guid.NewGuid().ToString().Split('-')[rand.Next(0, 4)];
+            var secondGuid = Guid.NewGuid().ToString().Split('-')[rand.Next(0, 4)];
+            fileName = fileName.GenerateSlug();
+            fileName = Path.GetFileNameWithoutExtension(fileName) + Path.GetExtension(fileName);
+            return $"{firstGuid}-{secondGuid}-{fileName}";
+        }
     }
 }

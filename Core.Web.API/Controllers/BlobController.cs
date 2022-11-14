@@ -1,7 +1,7 @@
-﻿using Core.Business.Entites.Utils;
+﻿using Core.Business.Entites.ResponseModels;
+using Core.Business.Entites.Utils;
 using Core.Business.Services.Concrete;
 using Core.Web.Api.Filters;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -17,7 +17,6 @@ namespace Core.Web.API.Controllers {
         public BlobController() { }
 
 
-
         #region Blob Storage
 
         /// <summary>
@@ -27,17 +26,17 @@ namespace Core.Web.API.Controllers {
         [HttpPost]
         [Route("Blob/UploadFile")]
         [RequireAuthorization]
-        public IActionResult UploadFile() {
+        public async Task<IActionResult> UploadFile() {
             try {
 
-                FileUploadResponseModel response = null;
-                var formCollection =  Request.ReadFormAsync();
+                FileUpload response = null;
+                var formCollection = await Request.ReadFormAsync();
                 var fileList = formCollection.Files;
 
                 if (fileList != null) {
                     foreach (var item in fileList) {
                         using (var memoryStream = new MemoryStream()) {
-                             item.CopyToAsync(memoryStream);
+                            await item.CopyToAsync(memoryStream);
                             var fileBytes = memoryStream.ToArray();
 
                             if (fileBytes != null) {
@@ -54,7 +53,7 @@ namespace Core.Web.API.Controllers {
                     var json = JObject.FromObject(response, serializer);
                     return JsonExt(new { data = json, message = "Upload success" });
                 } else {
-                    return JsonExt(new { data = (FileUploadResponseModel)null, message = "Upload failed" });
+                    return JsonExt(new { data = (FileUpload)null, message = "Upload failed" });
                 }
             } catch (Exception ex) {
                 // return BadRequest();
