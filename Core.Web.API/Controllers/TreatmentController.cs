@@ -1,4 +1,7 @@
-﻿using Core.Business.Services.Abstract;
+﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.RequestModels;
+using Core.Business.Services.Abstract;
+using Core.Business.Services.Concrete;
 using Core.Web.Api.Filters;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +27,15 @@ namespace Core.Web.API.Controllers {
         public IActionResult UsersInfoById(string countryCode) {
             var response = _treatmentService.TreatmentInfoById(countryCode);
             return JsonExt(response);
+        }
+
+        [HttpPost]
+        [Route("listbySpecialityId")]
+        [RequireAuthorization]
+        public IActionResult TreatmentInfoBySpecialityId(TreatmentRequest treatmentRequest) {
+            var response = _treatmentService.TreatmentInfoBySpecialityId(treatmentRequest);
+            return JsonExt(response);
+
         }
     }
 }

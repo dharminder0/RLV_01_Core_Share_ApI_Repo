@@ -8,5 +8,9 @@ namespace Core.Data.Repositories.Concrete {
             var sql = $@"select * from Treatment where LanguageId = @countryCode";
             return Query<Treatment>(sql, new { countryCode });
         }
+        public IEnumerable<Treatment> TreatmentInfoBySpecialityId(int specialityId) {
+            var sql = $@"select * from Treatment where SpecialityId = @SpecialityId";
+            return Query<Treatment>(sql, new { specialityId });
+        }
     }
 }
