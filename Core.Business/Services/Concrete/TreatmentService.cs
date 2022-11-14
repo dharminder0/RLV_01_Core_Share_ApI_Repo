@@ -24,34 +24,35 @@ namespace Core.Business.Services.Concrete {
             } catch (Exception ex) {
                 throw new Exception(ex.Message);
             }
-
-
-
         }
 
 
         public List<Treatment> TreatmentInfoBySpecialityId(TreatmentRequest treatmentRequest) {
-            List<Treatment> treatmentObj =  new List<Treatment>();
+            List<Treatment> treatmentObj = new List<Treatment>();
             try {
-                if (treatmentRequest != null && treatmentRequest.SpecialityId.Any())   {
-                    foreach(var item in treatmentRequest.SpecialityId) {
-                        Treatment treatment = new Treatment();
-                        var res  = _treatmentRepository.TreatmentInfoBySpecialityId(item).ToList();
-                        if(res != null && res.Any()) {
+                if (treatmentRequest != null && treatmentRequest.SpecialityId.Any() && treatmentRequest.SpecialityId.Count == 0) {
+                    foreach (var item in treatmentRequest.SpecialityId) {
+                        // Treatment treatment = new Treatment();
+                        var res = _treatmentRepository.TreatmentInfoBySpecialityId(item).ToList();
+                        if (res != null && res.Any()) {
                             treatmentObj.AddRange(res);
                         }
                     }
-                        return treatmentObj;
+                    return treatmentObj;
                 }
-                return null;
+
+                var response = _treatmentRepository.TreatmentInfo();
+
+                if (response != null && response.Any()) {
+                    treatmentObj.AddRange(response);
+                }
+                return treatmentObj;
+
             } catch (Exception ex) {
                 throw new Exception(ex.Message);
             }
         }
-
-
-       
     }
 }
 
-    
+
