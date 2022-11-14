@@ -30,9 +30,9 @@ namespace Core.Web.API.Controllers {
         }
 
         [HttpPost]
-        [Route("{SpecialityId}/list")]
+        [Route("listbySpecialityId")]
         [RequireAuthorization]
-        public IActionResult Treatment(TreatmentRequest treatmentRequest) {
+        public IActionResult TreatmentInfoBySpecialityId(TreatmentRequest treatmentRequest) {
             var response = _treatmentService.TreatmentInfoBySpecialityId(treatmentRequest);
             return JsonExt(response);
 

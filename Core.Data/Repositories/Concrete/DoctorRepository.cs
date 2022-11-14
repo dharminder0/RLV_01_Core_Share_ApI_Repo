@@ -34,6 +34,11 @@ namespace Core.Data.Repositories.Concrete
                 sqlQuery += " JOin [Country] C on C.Id = U.CountryId ";
 
             }
+            if(doctorRequest.specialityId !=null )
+            {
+                sqlQuery += " join [DoctorSpecialityRef] DS  on DS.DoctorUserId=d.Userid";
+
+            }
           
 
             sqlQuery += " where usertype =3  and  languageid = @LanguageId  ";
@@ -51,17 +56,34 @@ namespace Core.Data.Repositories.Concrete
                 sqlQuery += " and DHF.HospitalId in @HospitalList ";
             }
 
-            if (doctorRequest.CityList != null && doctorRequest.CityList.Any())
+            if (doctorRequest.specialityId != null && doctorRequest.specialityId.Any())
             {
-                sqlQuery += " and U.CityId in @CityList ";
+                sqlQuery += " and Ds.SpecialityId in @SpecialityId ";
             }
+
+            if (doctorRequest.YearExperience != null && doctorRequest.YearExperience.Any())
+            {
+                sqlQuery += " and d.YearExperience in @YearExperience ";
+            }
+
+            if (doctorRequest.TreatmentIds != null && doctorRequest.TreatmentIds.Any())
+            {
+                sqlQuery += " and Ds.TreatmentId in @TreatmentIds ";
+            }
+
+
 
             if (doctorRequest.CountryCode != null)
             {
                 sqlQuery += " and C.code = @CountryCode";
 
             }
-           
+            {
+                sqlQuery += $@" ORDER BY Userid DESC
+                 OFFSET(@PageSize * (@PageIndex - 1)) ROWS FETCH NEXT @PageSize ROWS ONLY; ";
+            }
+        
+
 
 
             return Query<Doctor>(sqlQuery, doctorRequest);
