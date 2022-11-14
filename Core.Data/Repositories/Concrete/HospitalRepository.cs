@@ -4,59 +4,118 @@ using Core.Business.Entites.RequestModels;
 using Core.Business.Entites.ResponseModels;
 using Core.Common.Data;
 using Core.Data.Repositories.Abstract;
+using Microsoft.Azure.Amqp.Transaction;
+using System.Collections.Generic;
 
 namespace Core.Data.Repositories.Concrete {
 
     public class HospitalRepository : DataRepository<Hospital>, IHospitalRepository {
-        
-        public IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest) {
+
+        public IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest)
+        {
+
             //var sqlQuery = $@"SELECT TOP 10 * FROM Hospital ";
+            //var sqlQuery = $@" DECLARE @MinValue AS int ";
+
             var sqlQuery = $@"SELECT distinct h.Id,h.AdditionalDetails,h.Address,h.BedCount,h.BrandId,h.CountryId,h.Title,h.Rank,h.LanguageId,h.Infrastructure,h.EstablishedDate,h.Details,h.CityId,h.BedCount
-FROM Hospital h ";
+        FROM Hospital h ";
 
 
-            if (hospitalRequest.CountryCode != null && hospitalRequest.CountryCode.Any()) {
+            if (hospitalRequest.CountryCode != null && hospitalRequest.CountryCode.Any())
+            {
                 sqlQuery += " JOin [Country] C on C.Id = h.CountryId ";
 
             }
-            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any()) {
+            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any())
+            {
                 sqlQuery += " JOin [City] Ct on Ct.CountryId = C.id ";
 
             }
+            if (hospitalRequest.specialityId != null && hospitalRequest.specialityId.Any())
+            {
+                sqlQuery += " JOin [HospitalSpecialityRef] hs on hs.HospitalId = h.id ";
+               
+
+            }
             sqlQuery += " where  languageid = @LanguageId ";
+          
 
 
 
-            if (!string.IsNullOrWhiteSpace(hospitalRequest.SearchText)) {
+            if (!string.IsNullOrWhiteSpace(hospitalRequest.SearchText))
+            {
 
                 sqlQuery += $@"and Title like '%{hospitalRequest.SearchText}%'  ";
             }
-
 
 
             if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any())
             {
                 sqlQuery += "and cityid in @CityList ";
             }
+            if (hospitalRequest.specialityId != null)
+            {
+                sqlQuery += "and hs.specialityId in @specialityId";
+            }
+
+            if (hospitalRequest.EstablishedYear != null && hospitalRequest.EstablishedYear.Any())
+            {
+ 
+
+                sqlQuery += " and  hs.EstablishedYear  In @EstablishedYear";
+            }
 
 
-            if (hospitalRequest.HospitalList != null && hospitalRequest.HospitalList.Any()) {
+            if (hospitalRequest.HospitalList != null && hospitalRequest.HospitalList.Any())
+            {
                 sqlQuery += " and h.id in @HospitalList ";
             }
-            if (hospitalRequest.CountryCode != null) {
+
+            if(hospitalRequest.BedCount !=null)
+            {
+                sqlQuery += "and h.BedCount in @Bedcount";
+            }
+
+            if (hospitalRequest.CountryCode != null)
+            {
                 sqlQuery += " and C.code = @CountryCode";
 
             }
 
+            {
+                sqlQuery += $@" ORDER BY Id DESC
+                 OFFSET(@PageSize * (@PageIndex - 1)) ROWS FETCH NEXT @PageSize ROWS ONLY; ";
+            }
 
-            return Query<Hospital>(sqlQuery, new {
+
+            return Query<Hospital>(sqlQuery, new
+            {
                 hospitalRequest.CountryCode,
                 hospitalRequest.SearchText,
                 hospitalRequest.CityList,
                 hospitalRequest.HospitalList,
-                hospitalRequest.LanguageId
-            });
+                hospitalRequest.LanguageId,
+                hospitalRequest.EstablishedYear,
+                hospitalRequest.PageIndex,
+                hospitalRequest.PageSize,
+                hospitalRequest.BedCount,
+                hospitalRequest.specialityId
+
+                
+         
+        
+             
+
+
+
+
+
+
+            }) ; ;
         }
+
+
+
 
         public Hospital GetHospitalById(int id) {
             var sql = $@"SELECT * FROM Hospital WHERE Id = @id";
