@@ -50,7 +50,7 @@ namespace Core.Business.Services.Concrete {
 
         public bool CreateHospital(RequestHospital requestHospital) {
             try {
-                var response = _hospitalRepository.InsertUser(requestHospital);
+                var response = _hospitalRepository.InsertHospital(requestHospital);
                 if (response == true) {
                     return true;
                 }
