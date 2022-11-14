@@ -30,7 +30,7 @@ namespace Core.Business.Services.Concrete {
         public List<Treatment> TreatmentInfoBySpecialityId(TreatmentRequest treatmentRequest) {
             List<Treatment> treatmentObj = new List<Treatment>();
             try {
-                if (treatmentRequest != null && treatmentRequest.SpecialityId.Any() && treatmentRequest.SpecialityId.Count == 0) {
+                if (treatmentRequest != null && treatmentRequest.SpecialityId.Any() && treatmentRequest.SpecialityId.Count != 0) {
                     foreach (var item in treatmentRequest.SpecialityId) {
                         // Treatment treatment = new Treatment();
                         var res = _treatmentRepository.TreatmentInfoBySpecialityId(item).ToList();
