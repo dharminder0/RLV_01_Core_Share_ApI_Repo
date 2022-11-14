@@ -1,5 +1,8 @@
-﻿using Core.Business.Services.Abstract;
+﻿using Core.Business.Entites.DataModels;
+using Core.Business.Entites.RequestModels;
+using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Abstract;
+using System.Collections.Generic;
 
 namespace Core.Business.Services.Concrete {
     public class TreatmentService : ITreatmentService {
@@ -21,7 +24,34 @@ namespace Core.Business.Services.Concrete {
             } catch (Exception ex) {
                 throw new Exception(ex.Message);
             }
+
+
+
         }
 
+
+        public List<Treatment> TreatmentInfoBySpecialityId(TreatmentRequest treatmentRequest) {
+            List<Treatment> treatmentObj =  new List<Treatment>();
+            try {
+                if (treatmentRequest != null && treatmentRequest.SpecialityId.Any())   {
+                    foreach(var item in treatmentRequest.SpecialityId) {
+                        Treatment treatment = new Treatment();
+                        var res  = _treatmentRepository.TreatmentInfoBySpecialityId(item).ToList();
+                        if(res != null && res.Any()) {
+                            treatmentObj.AddRange(res);
+                        }
+                    }
+                        return treatmentObj;
+                }
+                return null;
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+       
     }
 }
+
+    
