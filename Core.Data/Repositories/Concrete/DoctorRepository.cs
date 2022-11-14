@@ -66,6 +66,11 @@ namespace Core.Data.Repositories.Concrete
                 sqlQuery += " and d.YearExperience in @YearExperience ";
             }
 
+            if (doctorRequest.TreatmentIds != null && doctorRequest.TreatmentIds.Any())
+            {
+                sqlQuery += " and Ds.TreatmentId in @TreatmentIds ";
+            }
+
 
 
             if (doctorRequest.CountryCode != null)
@@ -73,6 +78,12 @@ namespace Core.Data.Repositories.Concrete
                 sqlQuery += " and C.code = @CountryCode";
 
             }
+            {
+                sqlQuery += $@" ORDER BY Userid DESC
+                 OFFSET(@PageSize * (@PageIndex - 1)) ROWS FETCH NEXT @PageSize ROWS ONLY; ";
+            }
+        
+
 
 
             return Query<Doctor>(sqlQuery, doctorRequest);
