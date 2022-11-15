@@ -18,7 +18,7 @@ namespace Core.Business.Services.Concrete {
             _mediaRepository = mediaFileRepository;
         }        
 
-        public object GetHospital(HospitalRequest hospitalRequest) {
+        public List<Hospital> GetHospital(HospitalRequest hospitalRequest) {
              
             return _hospitalRepository.GetHospitals(hospitalRequest).ToList();
            

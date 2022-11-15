@@ -17,8 +17,8 @@ namespace Core.Data.Repositories.Concrete {
             //var sqlQuery = $@"SELECT TOP 10 * FROM Hospital ";
             //var sqlQuery = $@" DECLARE @MinValue AS int ";
 
-            var sqlQuery = $@"SELECT distinct h.Id,h.AdditionalDetails,h.Address,h.BedCount,h.BrandId,h.CountryId,h.Title,h.Rank,h.LanguageId,h.Infrastructure,h.EstablishedDate,h.Details,h.CityId,h.BedCount
-        FROM Hospital h ";
+            var sqlQuery = $@"SELECT distinct h.Id,h.AdditionalDetails,h.Address,h.BedCount,h.BrandId,h.CountryId,h.Title,h.Rank,h.LanguageId,
+                h.Infrastructure,h.EstablishedDate,h.Details,h.CityId,h.BedCount FROM Hospital h ";
 
 
             if (hospitalRequest.CountryCode != null && hospitalRequest.CountryCode.Any())
@@ -26,15 +26,17 @@ namespace Core.Data.Repositories.Concrete {
                 sqlQuery += " JOin [Country] C on C.Id = h.CountryId ";
 
             }
-            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any())
-            {
-                sqlQuery += " JOin [City] Ct on Ct.CountryId = C.id ";
-
-            }
-            if (hospitalRequest.specialityId != null && hospitalRequest.specialityId.Any())
+          
+            if (hospitalRequest.SpecialityId != null && hospitalRequest.SpecialityId.Any())
             {
                 sqlQuery += " JOin [HospitalSpecialityRef] hs on hs.HospitalId = h.id ";
                
+
+            }
+            if (hospitalRequest.TreatmentIds != null && hospitalRequest.TreatmentIds.Any())
+            {
+                sqlQuery += " JOin [HospitalTreatmentRef] ht on ht.HospitalId = h.id ";
+
 
             }
             sqlQuery += " where  languageid = @LanguageId ";
@@ -53,16 +55,29 @@ namespace Core.Data.Repositories.Concrete {
             {
                 sqlQuery += "and cityid in @CityList ";
             }
-            if (hospitalRequest.specialityId != null)
+
+            if (hospitalRequest.SpecialityId != null)
             {
-                sqlQuery += "and hs.specialityId in @specialityId";
+                sqlQuery += "and hs.SpecialityId in @SpecialityId";
+            }
+
+            if (hospitalRequest.TreatmentIds != null)
+            {
+                sqlQuery += "and ht.TreatmentId in @TreatmentIds";
             }
 
             if (hospitalRequest.EstablishedYear != null && hospitalRequest.EstablishedYear.Any())
             {
- 
-
-                sqlQuery += " and  hs.EstablishedYear  In @EstablishedYear";
+                int minRange = 0; int maxRange = 0; 
+                if (hospitalRequest.EstablishedYear.Count > 1)
+                {
+                    minRange = hospitalRequest.EstablishedYear[0];
+                    maxRange = hospitalRequest.EstablishedYear[1];
+                }
+                if (minRange >0 && maxRange >0)
+                    {
+                    sqlQuery += $@" and  h.EstablishedYear between {minRange} and {maxRange} ";
+                }
             }
 
 
@@ -99,12 +114,13 @@ namespace Core.Data.Repositories.Concrete {
                 hospitalRequest.PageIndex,
                 hospitalRequest.PageSize,
                 hospitalRequest.BedCount,
-                hospitalRequest.specialityId
+                hospitalRequest.SpecialityId,
+                hospitalRequest.TreatmentIds
 
-                
-         
-        
-             
+
+
+
+
 
 
 
