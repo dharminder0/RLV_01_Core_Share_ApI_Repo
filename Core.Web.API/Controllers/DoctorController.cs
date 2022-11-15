@@ -53,7 +53,6 @@ namespace Core.Web.API.Controllers {
         public IActionResult CreateDoctorSpeciality(RequestDoctorSpeciality requestDoctorSpeciality) {
             var response = _doctorService.AddDoctorSpeciality(requestDoctorSpeciality);
             return JsonExt(response);
-
         }
     }
 }
