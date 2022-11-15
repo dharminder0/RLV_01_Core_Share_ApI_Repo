@@ -10,6 +10,7 @@ namespace Core.Data.Repositories.Abstract {
         Hospital GetHospitalById(int id);
         HospitalDetails GetAllHospitalMediaDetails(int id);
         bool InsertHospital(RequestHospital requestHospital);
+        bool InsertHospitalTreatmentRef(RequestHospitalTreatment requestHospitalTreatment);
 
     }
 }

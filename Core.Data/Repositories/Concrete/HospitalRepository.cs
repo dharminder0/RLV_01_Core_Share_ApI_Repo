@@ -8,7 +8,7 @@ using Core.Data.Repositories.Abstract;
 namespace Core.Data.Repositories.Concrete {
 
     public class HospitalRepository : DataRepository<Hospital>, IHospitalRepository {
-        
+
         public IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest) {
             //var sqlQuery = $@"SELECT TOP 10 * FROM Hospital ";
             var sqlQuery = $@"SELECT distinct h.Id,h.AdditionalDetails,h.Address,h.BedCount,h.BrandId,h.CountryId,h.Title,h.Rank,h.LanguageId,h.Infrastructure,h.EstablishedDate,h.Details,h.CityId,h.BedCount
@@ -34,8 +34,7 @@ FROM Hospital h ";
 
 
 
-            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any())
-            {
+            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any()) {
                 sqlQuery += "and cityid in @CityList ";
             }
 
@@ -117,12 +116,36 @@ END";
                 LanguageId = requestHospital.LanguageId,
                 BrandId = requestHospital.BrandId,
                 Rank = requestHospital.Rank
-                     }) > 0;
+            }) > 0;
         }
+        public bool InsertHospitalTreatmentRef(RequestHospitalTreatment requestHospitalTreatment) {
+            var sql = @"IF NOT EXISTS(SELECT 1 from HospitalTreatmentRef where  HospitalId = @HospitalId And TreatmentId = @TreatmentId)
+BEGIN
+INSERT INTO HospitalTreatmentRef	 
+		   (HospitalId,
+			TreatmentId)
+     VALUES          
+          (@HospitalId
+           ,@TreatmentId)
+       
+           
+END
+ELSE
+BEGIN
+UPDATE HospitalTreatmentRef SET 
+Where HospitalId = @HospitalId and TreatmentId = @TreatmentId;
+END";
 
-         // public IEnumerable<Hospital> GetHospitals() {
-         //   var sql = $@"SELECT * FROM Hospital ";
-         //  return Query<Hospital>(sql);
+            return Execute(sql, new {
+                HospitalId = requestHospitalTreatment.HospitalId,
+                TreatmentId = requestHospitalTreatment.TreatmentId,
+               
+            }) > 0;
+
+            // public IEnumerable<Hospital> GetHospitals() {
+            //   var sql = $@"SELECT * FROM Hospital ";
+            //  return Query<Hospital>(sql);
+        }
     }
 }
 

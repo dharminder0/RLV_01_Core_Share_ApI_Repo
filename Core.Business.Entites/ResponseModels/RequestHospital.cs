@@ -12,5 +12,11 @@
         public int BrandId { get; set; }
         public int Rank { get; set; }
     }
+   
+    public class RequestHospitalTreatment {
+        public int HospitalId { get; set; }
+        public int TreatmentId { get; set; }
+
+    }
 }
 

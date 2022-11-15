@@ -6,17 +6,19 @@ using Core.Business.Entites.ResponseModels;
 using Core.Business.Services.Abstract;
 using Core.Data.Repositories.Abstract;
 using Core.Data.Repositories.Concrete;
-
+using System.Linq.Expressions;
 
 namespace Core.Business.Services.Concrete {
     public class HospitalService : IHospitalService {
 
         private readonly IHospitalRepository _hospitalRepository;
         private readonly IMediaFileRepository _mediaRepository;
+
         public HospitalService(IHospitalRepository hospitalRepository, IMediaFileRepository mediaFileRepository) {
             _hospitalRepository = hospitalRepository;
             _mediaRepository = mediaFileRepository;
-        }        
+
+        }
 
         public object GetHospital(HospitalRequest hospitalRequest) {
 
@@ -60,12 +62,29 @@ namespace Core.Business.Services.Concrete {
             }
         }
 
-        //public List<Hospital> GetHospital() {
 
-            //return _hospitalRepository.GetHospitals().ToList();
+
+        public bool AddHospitalTreatment(RequestHospitalTreatment requestHospitalTreatment) {
+            try {
+                var response = _hospitalRepository.InsertHospitalTreatmentRef(requestHospitalTreatment);
+                if (response == true) {
+                    return true;
+                }
+                return false;
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
     }
+} 
 
-}
+
+
+
+
+
+
+
 
 
 
