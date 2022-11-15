@@ -41,6 +41,7 @@ namespace Core.Web.API.Controllers {
             var response = _doctorService.CreateDoctor(requestDoctor);
             return JsonExt(response);
 
+
         }
     }
 }
