@@ -11,6 +11,11 @@ namespace Core.Data.Repositories.Concrete {
         public IEnumerable<Treatment> TreatmentInfoBySpecialityId(int specialityId) {
             var sql = $@"select * from Treatment where SpecialityId = @SpecialityId";
             return Query<Treatment>(sql, new { specialityId });
+        } 
+        
+        public IEnumerable<Treatment> TreatmentInfo() {
+            var sql = $@"select Top 50 * from Treatment ";
+            return Query<Treatment>(sql);
         }
     }
 }
