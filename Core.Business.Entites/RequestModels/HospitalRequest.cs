@@ -10,7 +10,7 @@
         public int LanguageId { get; set; } = 1;
         public List<int>? EstablishedYear { get; set; }
         public List<int>? BedCount { get; set; }
-        public List<int>? specialityId { get; set; }
+        public List<int>? SpecialityId { get; set; }
         public List<int>? TreatmentIds { get; set; }
         public int PageIndex { get; set; } = 1;
         public int PageSize { get; set; } = 10;

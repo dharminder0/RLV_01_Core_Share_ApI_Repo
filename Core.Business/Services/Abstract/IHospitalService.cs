@@ -6,7 +6,7 @@ using Core.Business.Entites.ResponseModels;
 namespace Core.Business.Services.Abstract {
     public interface IHospitalService {
         
-        object GetHospital(HospitalRequest hospitalRequest);
+        List<Hospital> GetHospital(HospitalRequest hospitalRequest);
         HospitalDetails HospitalDetails(int id);
         bool CreateHospital(RequestHospital requestHospital);
         
