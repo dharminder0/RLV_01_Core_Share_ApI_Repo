@@ -198,32 +198,15 @@ END";
             }) > 0;
         }
         public bool InsertHospitalTreatmentRef(RequestHospitalTreatment requestHospitalTreatment) {
-            var sql = @"IF NOT EXISTS(SELECT 1 from HospitalTreatmentRef where  HospitalId = @HospitalId And TreatmentId = @TreatmentId)
-BEGIN
-INSERT INTO HospitalTreatmentRef	 
-		   (HospitalId,
-			TreatmentId)
-     VALUES          
-          (@HospitalId
-           ,@TreatmentId)
-       
-           
-END
-ELSE
-BEGIN
-UPDATE HospitalTreatmentRef SET 
-Where HospitalId = @HospitalId and TreatmentId = @TreatmentId;
-END";
+            var sql = @"IF NOT EXISTS(SELECT 1 from HospitalTreatmentRef where HospitalId = @HospitalId And TreatmentId = @TreatmentId )
+
+INSERT INTO HospitalTreatmentRef(HospitalId,TreatmentId)
+     VALUES(@HospitalId,@TreatmentId)";
 
             return Execute(sql, new {
                 HospitalId = requestHospitalTreatment.HospitalId,
-                TreatmentId = requestHospitalTreatment.TreatmentId,
-               
+                TreatmentId = requestHospitalTreatment.TreatmentId             
             }) > 0;
-
-            // public IEnumerable<Hospital> GetHospitals() {
-            //   var sql = $@"SELECT * FROM Hospital ";
-            //  return Query<Hospital>(sql);
         }
     }
 }

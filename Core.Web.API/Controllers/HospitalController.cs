@@ -64,7 +64,7 @@ namespace Core.Web.API.Controllers {
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Route("AddHospital")]
+        [Route("AddHospitalTreatment")]
         [RequireAuthorization]
         public IActionResult CreateHospitalTreatment(RequestHospitalTreatment requestHospitalTreatment) {
             var response = _hospitalService.AddHospitalTreatment(requestHospitalTreatment);
