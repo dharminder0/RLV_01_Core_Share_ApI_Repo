@@ -1,4 +1,4 @@
-﻿using Hub.Common.Settings;
+﻿using Core.Common.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +6,8 @@ using System.Linq;
 namespace Core.Common.Caching {
     public static class AppLocalCache {
         private static Dictionary<string, CacheObject> _cache = new Dictionary<string, Caching.CacheObject>();
-        //private static bool _isCacheEnabled = ConfigurationManager.AppSettings["AppLocalCacheEnabled"]?.ToBool() ?? false;
-        //private static int _defaultCacheHours = ConfigurationManager.AppSettings["DefaultAppLocalCacheHours"]?.ToInt() ?? 5;
+        //private static bool _isCacheEnabled = CoreConfigurationManager.AppSettings["AppLocalCacheEnabled"]?.ToBool() ?? false;
+        //private static int _defaultCacheHours = CoreConfigurationManager.AppSettings["DefaultAppLocalCacheHours"]?.ToInt() ?? 5;
         private static bool _isCacheEnabled = GlobalSettings._isCacheEnabled;
         private static int _defaultCacheHours = GlobalSettings._defaultCacheHours;
 

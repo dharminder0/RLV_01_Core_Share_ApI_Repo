@@ -11,7 +11,7 @@ namespace Core.Common.Queue {
     public class AzureClientQueue {
         private static Dictionary<string, SenderQueue> _senders = new Dictionary<string, SenderQueue>();
 
-        public static ServiceBusClient ServiceBusClient => new ServiceBusClient(ConfigurationManager.AppSettings["AzureBusConnection"]);
+        public static ServiceBusClient ServiceBusClient => new ServiceBusClient(CoreConfigurationManager.AppSettings["AzureBusConnection"]);
 
         public static SenderQueue GetOrCreateQueueSender(string queueName) {
             lock (_senders) {
@@ -66,8 +66,7 @@ namespace Core.Common.Queue {
                         throw;
                     }
                 }
-            }
-            else {
+            } else {
                 var batches = messages.Partition(maxBatchSize);
                 foreach (var batch in batches) {
                     using (ServiceBusMessageBatch messageBatch = await _sender.CreateMessageBatchAsync()) {

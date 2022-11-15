@@ -89,8 +89,7 @@ namespace Core.Common.Extensions {
             if (ContactType.EqualsCI("lead") || ContactType.EqualsCI("application")) //LeadType.lead
             {
                 return string.Format("{0}{1}", Id, contactid);
-            }
-            else {
+            } else {
                 contactid = string.Format("{0}EC-{1}", Id, contactid);
                 return contactid;
             }

@@ -75,8 +75,7 @@ namespace Core.Common.Extensions {
                 if (filteredProps != null && filteredProps.Any()) {
                     if (filteredProps.Contains(prop.Name))
                         dynObj.Add(prop.Name, prop.GetValue(obj));
-                }
-                else
+                } else
                     dynObj.Add(prop.Name, prop.GetValue(obj));
             }
             return dynObj;

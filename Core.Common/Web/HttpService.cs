@@ -38,8 +38,7 @@ namespace Core.Common.Web {
                 } catch {
                     return data;
                 }
-            }
-            else {
+            } else {
                 if (response.Content != null) {
                     var result = response.Content.ReadAsStringAsync().Result;
                     throw new Exception(result);
@@ -60,8 +59,7 @@ namespace Core.Common.Web {
                 } catch {
                     return data;
                 }
-            }
-            else {
+            } else {
                 if (response.Content != null) {
                     var result = response.Content.ReadAsStringAsync().Result;
                     throw new Exception(result);
@@ -77,8 +75,7 @@ namespace Core.Common.Web {
             if (response.IsSuccessStatusCode && response.Content != null) {
                 var data = response.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject<T>(data, _jsonSerializerSettings);
-            }
-            else {
+            } else {
                 if (response.Content != null) {
                     var result = response.Content.ReadAsStringAsync().Result;
                     throw new Exception(result);
@@ -112,8 +109,7 @@ namespace Core.Common.Web {
             if (response.IsSuccessStatusCode && response.Content != null) {
                 var data = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<T>(data, _jsonSerializerSettings);
-            }
-            else {
+            } else {
                 if (response.Content != null) {
                     var result = await response.Content.ReadAsStringAsync();
                     throw new Exception(result);
@@ -132,8 +128,7 @@ namespace Core.Common.Web {
             if (response.IsSuccessStatusCode && response.Content != null) {
                 var data = response.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject(data, _jsonSerializerSettings);
-            }
-            else {
+            } else {
                 if (response.Content != null) {
                     var result = response.Content.ReadAsStringAsync().Result;
                     throw new Exception(result);
@@ -155,8 +150,7 @@ namespace Core.Common.Web {
             if (response.IsSuccessStatusCode && response.Content != null) {
                 var data = response.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject<T>(data, _jsonSerializerSettings);
-            }
-            else {
+            } else {
                 if (response.Content != null) {
                     var result = response.Content.ReadAsStringAsync().Result;
                     throw new Exception(result);
@@ -199,8 +193,7 @@ namespace Core.Common.Web {
             if (response.Result.IsSuccessStatusCode && response.Result.Content != null) {
                 var data = response.Result.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject<T>(data, _jsonSerializerSettings);
-            }
-            else {
+            } else {
                 if (response.Result.Content != null) {
                     var result = response.Result.Content.ReadAsStringAsync().Result;
                     throw new Exception(result);
@@ -242,8 +235,7 @@ namespace Core.Common.Web {
             if (response.IsSuccessStatusCode && response.Content != null) {
                 var data = response.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject<T>(data, _jsonSerializerSettings);
-            }
-            else {
+            } else {
                 if (response.Content != null) {
                     var result = response.Content.ReadAsStringAsync().Result;
                     throw new Exception(result);
@@ -264,8 +256,7 @@ namespace Core.Common.Web {
             if (response.IsSuccessStatusCode && response.Content != null) {
                 var data = response.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject(data, _jsonSerializerSettings);
-            }
-            else {
+            } else {
                 if (response.Content != null) {
                     var result = response.Content.ReadAsStringAsync().Result;
                     throw new Exception(result);
@@ -302,8 +293,7 @@ namespace Core.Common.Web {
             if (response.IsSuccessStatusCode && response.Content != null) {
                 var data = response.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject<T>(data);
-            }
-            else {
+            } else {
                 if (response.Content != null) {
                     var result = response.Content.ReadAsStringAsync().Result;
                     throw new Exception(result);
@@ -319,8 +309,7 @@ namespace Core.Common.Web {
             if (response.IsSuccessStatusCode && response.Content != null) {
                 var data = response.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject(data);
-            }
-            else {
+            } else {
                 if (response.Content != null) {
                     var result = response.Content.ReadAsStringAsync().Result;
                     throw new Exception(result);
@@ -336,8 +325,7 @@ namespace Core.Common.Web {
             if (response.IsSuccessStatusCode && response.Content != null) {
                 var data = response.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject<T>(data);
-            }
-            else {
+            } else {
                 if (response.Content != null) {
                     var result = response.Content.ReadAsStringAsync().Result;
                     throw new Exception(result);
@@ -368,8 +356,7 @@ namespace Core.Common.Web {
             if (response.IsSuccessStatusCode && response.Content != null) {
                 var data = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<T>(data);
-            }
-            else {
+            } else {
                 if (response.Content != null) {
                     var result = await response.Content.ReadAsStringAsync();
                     throw new Exception(result);
@@ -412,12 +399,12 @@ namespace Core.Common.Web {
         //    if (proxyEnabled)
         //    {
         //        // Proxy Server Info
-        //        var proxyHost = ConfigurationManager.AppSettings["ProxyHost"];
+        //        var proxyHost = CoreConfigurationManager.AppSettings["ProxyHost"];
         //        var proxyPort = !string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["ProxyPort"])
         //            ? int.Parse(ConfigurationManager.AppSettings["ProxyPort"])
         //            : 8080;
-        //        var proxyUserName = ConfigurationManager.AppSettings["ProxyUserName"];
-        //        var proxyPassword = ConfigurationManager.AppSettings["ProxyPassword"];
+        //        var proxyUserName = CoreConfigurationManager.AppSettings["ProxyUserName"];
+        //        var proxyPassword = CoreConfigurationManager.AppSettings["ProxyPassword"];
 
         //        var proxyServer = new WebProxy(proxyHost, proxyPort);
         //        proxyServer.Credentials = new NetworkCredential { UserName = proxyUserName, Password = proxyPassword };
@@ -434,7 +421,7 @@ namespace Core.Common.Web {
 
         //    }
 
-        //var bearerKey = !string.IsNullOrWhiteSpace(apiUrl) ? ConfigurationManager.AppSettings["ProductionApiBearer"] : ConfigurationManager.AppSettings["ApiBearer"];
+        //var bearerKey = !string.IsNullOrWhiteSpace(apiUrl) ? CoreConfigurationManager.AppSettings["ProductionApiBearer"] : CoreConfigurationManager.AppSettings["ApiBearer"];
         //client.DefaultRequestHeaders.Add("Authorization", bearerKey);
         //if (HttpContext.Current != null)
         //{

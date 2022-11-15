@@ -1,4 +1,4 @@
-﻿namespace Hub.Common.Utils {
+﻿namespace Core.Common.Utils {
     public class ValueTweaker {
 
 
