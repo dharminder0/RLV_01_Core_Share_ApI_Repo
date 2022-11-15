@@ -1,7 +1,9 @@
 ﻿using Core.Business.Entites.DataModels;
 using Core.Business.Entites.RequestModels;
 using Core.Business.Services.Abstract;
+using Core.Common.Extensions;
 using Core.Data.Repositories.Abstract;
+using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 
 namespace Core.Business.Services.Concrete {
@@ -15,9 +17,13 @@ namespace Core.Business.Services.Concrete {
         public object TreatmentInfoById(string countryCode) {
             try {
                 if (!string.IsNullOrWhiteSpace(countryCode)) {
-                    var dbUser = _treatmentRepository.GetTreatmentInfoById(countryCode).ToList();
-                    if (dbUser != null) {
-                        return dbUser;
+                    if (countryCode.ContainsCI("IN")) {
+                        countryCode = "1";
+
+                        var dbUser = _treatmentRepository.GetTreatmentInfoById(countryCode).ToList();
+                        if (dbUser != null) {
+                            return dbUser;
+                        }
                     }
                 }
                 return null;
@@ -30,9 +36,17 @@ namespace Core.Business.Services.Concrete {
         public List<Treatment> TreatmentInfoBySpecialityId(TreatmentRequest treatmentRequest) {
             List<Treatment> treatmentObj = new List<Treatment>();
             try {
-                if (treatmentRequest != null && treatmentRequest.SpecialityId.Any() && treatmentRequest.SpecialityId.Count != 0) {
+                if (treatmentRequest.SpecialityId.Contains(0)) {
+                    var response = _treatmentRepository.TreatmentInfo();
+
+                    if (response != null && response.Any()) {
+                        treatmentObj.AddRange(response);
+                    }
+                    return treatmentObj;
+                }
+
+                if (treatmentRequest != null && treatmentRequest.SpecialityId.Any()) {
                     foreach (var item in treatmentRequest.SpecialityId) {
-                        // Treatment treatment = new Treatment();
                         var res = _treatmentRepository.TreatmentInfoBySpecialityId(item).ToList();
                         if (res != null && res.Any()) {
                             treatmentObj.AddRange(res);
@@ -41,10 +55,11 @@ namespace Core.Business.Services.Concrete {
                     return treatmentObj;
                 }
 
-                var response = _treatmentRepository.TreatmentInfo();
 
-                if (response != null && response.Any()) {
-                    treatmentObj.AddRange(response);
+                var result = _treatmentRepository.TreatmentInfo();
+
+                if (result != null && result.Any()) {
+                    treatmentObj.AddRange(result);
                 }
                 return treatmentObj;
 
