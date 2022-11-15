@@ -23,7 +23,7 @@
         Patient = 4,
     }
     
-    public enum BolbType {
+    public enum BlobType {
         Doctor = 1,
         Hospital = 2,
         Image= 3,
