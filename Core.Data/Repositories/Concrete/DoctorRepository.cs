@@ -154,7 +154,40 @@ END";
            ,Range = requestDoctor.Range
             }) > 0;
         }
+        public bool InsertDoctorSpecialityRef(RequestDoctorSpeciality requestDoctorSpeciality) {
+            var sql = @"IF NOT EXISTS (SELECT * from DoctorSpecialityRef where DoctorUserId = @DoctorUserId)
+BEGIN
+INSERT INTO DoctorSpecialityRef	 
+		   (SpecialityId,
+			DoctorUserId,
+			Details,
+			Symbol,
+			TreatmentAmount,
+			TreatmentId)
+     VALUES          
+          (@SpecialityId
+           ,@DoctorUserId
+           ,@Details
+           ,@Symbol
+           ,@TreatmentAmount
+           ,@TreatmentId)
+       
+           
+END
+ELSE
+BEGIN
+UPDATE DoctorSpecialityRef SET SpecialityId = @SpecialityId,Details = @Details,symbol = @Symbol,TreatmentAmount = @TreatmentAmount,TreatmentId= @TreatmentId
+Where DoctorUserId = @DoctorUserId
+END"; 
+            return Execute(sql, new {
+                SpecialityId = requestDoctorSpeciality.SpecialityId,
+                DoctorUserId = requestDoctorSpeciality.DoctorUserId,
+                Details = requestDoctorSpeciality.Details,
+                Symbol = requestDoctorSpeciality.Symbol,
+                TreatmentAmount = requestDoctorSpeciality.TreatmentAmount,
+                TreatmentId = requestDoctorSpeciality.TreatmentId,
+            }) > 0;
 
-
+        }
     }
 }

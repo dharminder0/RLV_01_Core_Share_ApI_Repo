@@ -40,6 +40,19 @@ namespace Core.Web.API.Controllers {
         public IActionResult CreateDoctor(RequestDoctor requestDoctor) {
             var response = _doctorService.CreateDoctor(requestDoctor);
             return JsonExt(response);
+       }
+
+        /// <summary>
+        /// Add Doctor speciality ID
+        /// <param name="id"></param> 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("addDoctorSpecialityRef")]
+        [RequireAuthorization]
+        public IActionResult CreateDoctorSpeciality(RequestDoctorSpeciality requestDoctorSpeciality) {
+            var response = _doctorService.AddDoctorSpeciality(requestDoctorSpeciality);
+            return JsonExt(response);
 
         }
     }

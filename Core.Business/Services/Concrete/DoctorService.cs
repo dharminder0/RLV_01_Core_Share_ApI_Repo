@@ -64,5 +64,18 @@ namespace Core.Business.Services.Concrete {
                 throw new Exception(ex.Message);
             }
         }
+            public bool AddDoctorSpeciality(RequestDoctorSpeciality requestDoctorSpeciality) {
+                try {
+                    var response = _doctorRepository.InsertDoctorSpecialityRef(requestDoctorSpeciality);
+                    if (response == true) {
+                        return true;
+                    }
+                    return false;
+                } catch (Exception ex) {
+                    throw new Exception(ex.Message);
+                }
+           
+            }
     }
 }
+

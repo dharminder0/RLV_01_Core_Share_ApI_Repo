@@ -10,6 +10,7 @@ namespace Core.Business.Services.Abstract {
         object GetDoctor(DoctorRequest doctorRequest);
         DoctorDetails DoctorDetails(int id);
         bool CreateDoctor(RequestDoctor requestDoctor);
+        bool AddDoctorSpeciality(RequestDoctorSpeciality requestDoctorSpeciality);
 
 
     }

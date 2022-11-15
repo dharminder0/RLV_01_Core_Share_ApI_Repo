@@ -11,6 +11,7 @@ namespace Core.Data.Repositories.Abstract {
         IEnumerable<Doctor> GetDoctor(DoctorRequest doctorRequest);
         DoctorDetails GetAllDoctorsMediaDetails( int id);
         bool InsertDoctor(RequestDoctor requestDoctor);
+        public bool InsertDoctorSpecialityRef(RequestDoctorSpeciality requestDoctorSpeciality);
 
     }
 }

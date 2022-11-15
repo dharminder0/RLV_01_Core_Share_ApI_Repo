@@ -59,7 +59,7 @@ namespace Core.Web.API.Controllers {
         }
 
         /// <summary>
-        /// Add Hospitals Treatment
+        /// Add Hospital Treatment
         /// <param name="id"></param> 
         /// </summary>
         /// <returns></returns>

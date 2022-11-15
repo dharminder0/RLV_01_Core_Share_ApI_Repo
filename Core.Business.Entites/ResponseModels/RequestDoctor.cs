@@ -14,4 +14,15 @@
         
 
     }
+    public class RequestDoctorSpeciality {
+        public int SpecialityId { get; set; }
+        public string DoctorUserId { get; set; }
+        public string Details { get; set; }
+        public string Symbol { get; set; }
+        public string TreatmentAmount { get; set; }
+        public string TreatmentId { get; set; }
+
+
+    }
+
 }
