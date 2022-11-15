@@ -63,7 +63,16 @@ namespace Core.Data.Repositories.Concrete
 
             if (doctorRequest.YearExperience != null && doctorRequest.YearExperience.Any())
             {
-                sqlQuery += " and d.YearExperience in @YearExperience ";
+                int minRange = 0; int maxRange = 0;
+                if (doctorRequest.YearExperience.Count > 1)
+                {
+                    minRange = doctorRequest.YearExperience[0];
+                    maxRange = doctorRequest.YearExperience[1];
+                }
+                if (minRange > 0 && maxRange > 0)
+                {
+                    sqlQuery += $@" and  d.YearExperience between {minRange} and {maxRange} ";
+                }
             }
 
             if (doctorRequest.TreatmentIds != null && doctorRequest.TreatmentIds.Any())

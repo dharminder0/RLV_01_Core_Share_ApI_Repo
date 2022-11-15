@@ -4,58 +4,139 @@ using Core.Business.Entites.RequestModels;
 using Core.Business.Entites.ResponseModels;
 using Core.Common.Data;
 using Core.Data.Repositories.Abstract;
+using Microsoft.Azure.Amqp.Transaction;
+using System.Collections.Generic;
 
 namespace Core.Data.Repositories.Concrete {
 
     public class HospitalRepository : DataRepository<Hospital>, IHospitalRepository {
 
-        public IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest) {
-            //var sqlQuery = $@"SELECT TOP 10 * FROM Hospital ";
-            var sqlQuery = $@"SELECT distinct h.Id,h.AdditionalDetails,h.Address,h.BedCount,h.BrandId,h.CountryId,h.Title,h.Rank,h.LanguageId,h.Infrastructure,h.EstablishedDate,h.Details,h.CityId,h.BedCount
-FROM Hospital h ";
+
+        public IEnumerable<Hospital> GetHospitals(HospitalRequest hospitalRequest)
+        {
+            var sqlQuery = $@"SELECT distinct h.Id,h.AdditionalDetails,h.Address,h.BedCount,h.BrandId,h.CountryId,h.Title,h.Rank,h.LanguageId,
+                h.Infrastructure,h.EstablishedDate,h.Details,h.CityId,h.BedCount FROM Hospital h ";
 
 
-            if (hospitalRequest.CountryCode != null && hospitalRequest.CountryCode.Any()) {
+            if (hospitalRequest.CountryCode != null && hospitalRequest.CountryCode.Any())
+            {
                 sqlQuery += " JOin [Country] C on C.Id = h.CountryId ";
 
             }
-            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any()) {
-                sqlQuery += " JOin [City] Ct on Ct.CountryId = C.id ";
+          
+            if (hospitalRequest.SpecialityId != null && hospitalRequest.SpecialityId.Any())
+            {
+                sqlQuery += " JOin [HospitalSpecialityRef] hs on hs.HospitalId = h.id ";
+               
+
+            }
+            if (hospitalRequest.TreatmentIds != null && hospitalRequest.TreatmentIds.Any())
+            {
+                sqlQuery += " JOin [HospitalTreatmentRef] ht on ht.HospitalId = h.id ";
+
 
             }
             sqlQuery += " where  languageid = @LanguageId ";
+          
 
 
 
-            if (!string.IsNullOrWhiteSpace(hospitalRequest.SearchText)) {
+            if (!string.IsNullOrWhiteSpace(hospitalRequest.SearchText))
+            {
 
                 sqlQuery += $@"and Title like '%{hospitalRequest.SearchText}%'  ";
             }
 
-
-
-            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any()) {
+            if (hospitalRequest.CityList != null && hospitalRequest.CityList.Any())
+            {
                 sqlQuery += "and cityid in @CityList ";
             }
 
+            if (hospitalRequest.SpecialityId != null)
+            {
+                sqlQuery += "and hs.SpecialityId in @SpecialityId";
+            }
 
-            if (hospitalRequest.HospitalList != null && hospitalRequest.HospitalList.Any()) {
+            if (hospitalRequest.TreatmentIds != null)
+            {
+                sqlQuery += "and ht.TreatmentId in @TreatmentIds";
+            }
+
+            if (hospitalRequest.EstablishedYear != null && hospitalRequest.EstablishedYear.Any())
+            {
+                int minRange = 0; int maxRange = 0; 
+                if (hospitalRequest.EstablishedYear.Count > 1)
+                {
+                    minRange = hospitalRequest.EstablishedYear[0];
+                    maxRange = hospitalRequest.EstablishedYear[1];
+                }
+                if (minRange >0 && maxRange >0)
+                    {
+                    sqlQuery += $@" and  h.EstablishedYear between {minRange} and {maxRange} ";
+                }
+            }
+
+
+            if (hospitalRequest.HospitalList != null && hospitalRequest.HospitalList.Any())
+            {
                 sqlQuery += " and h.id in @HospitalList ";
             }
-            if (hospitalRequest.CountryCode != null) {
+
+            if(hospitalRequest.BedCount !=null)
+            {
+                int minRange = 0; int maxRange = 0;
+                if (hospitalRequest.BedCount.Count > 1)
+                {
+                    minRange = hospitalRequest.BedCount[0];
+                    maxRange = hospitalRequest.BedCount[1];
+                }
+                if (minRange > 0 && maxRange > 0)
+                {
+                    sqlQuery += $@" and  h.BedCount between {minRange} and {maxRange} ";
+                }
+            }
+
+            if (hospitalRequest.CountryCode != null)
+            {
                 sqlQuery += " and C.code = @CountryCode";
 
             }
 
+            {
+                sqlQuery += $@" ORDER BY Id DESC
+                 OFFSET(@PageSize * (@PageIndex - 1)) ROWS FETCH NEXT @PageSize ROWS ONLY; ";
+            }
 
-            return Query<Hospital>(sqlQuery, new {
+
+            return Query<Hospital>(sqlQuery, new
+            {
                 hospitalRequest.CountryCode,
                 hospitalRequest.SearchText,
                 hospitalRequest.CityList,
                 hospitalRequest.HospitalList,
-                hospitalRequest.LanguageId
-            });
+                hospitalRequest.LanguageId,
+                hospitalRequest.EstablishedYear,
+                hospitalRequest.PageIndex,
+                hospitalRequest.PageSize,
+                hospitalRequest.BedCount,
+                hospitalRequest.SpecialityId,
+                hospitalRequest.TreatmentIds
+
+
+
+
+
+
+
+
+
+
+
+            }) ; ;
         }
+
+
+
 
         public Hospital GetHospitalById(int id) {
             var sql = $@"SELECT * FROM Hospital WHERE Id = @id";

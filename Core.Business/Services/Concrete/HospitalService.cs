@@ -20,10 +20,10 @@ namespace Core.Business.Services.Concrete {
 
         }
 
-        public object GetHospital(HospitalRequest hospitalRequest) {
-
+        public List<Hospital> GetHospital(HospitalRequest hospitalRequest) {
+             
             return _hospitalRepository.GetHospitals(hospitalRequest).ToList();
-
+           
         }
 
         public HospitalDetails HospitalDetails(int id) {
