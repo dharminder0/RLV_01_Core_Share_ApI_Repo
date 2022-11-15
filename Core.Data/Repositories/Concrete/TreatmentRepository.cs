@@ -14,7 +14,7 @@ namespace Core.Data.Repositories.Concrete {
         } 
         
         public IEnumerable<Treatment> TreatmentInfo() {
-            var sql = $@"select Top 50 * from Treatment ";
+            var sql = $@"select  * from Treatment ";
             return Query<Treatment>(sql);
         }
     }

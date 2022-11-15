@@ -22,4 +22,13 @@
         Doctor = 3,
         Patient = 4,
     }
+    
+    public enum BlobType {
+        Doctor = 1,
+        Hospital = 2,
+        Image= 3,
+        Logo = 4,
+        Prescription = 5,
+        User = 6,
+    }
 }
