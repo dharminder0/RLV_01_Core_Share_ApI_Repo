@@ -88,7 +88,16 @@ namespace Core.Data.Repositories.Concrete {
 
             if(hospitalRequest.BedCount !=null)
             {
-                sqlQuery += "and h.BedCount in @Bedcount";
+                int minRange = 0; int maxRange = 0;
+                if (hospitalRequest.BedCount.Count > 1)
+                {
+                    minRange = hospitalRequest.BedCount[0];
+                    maxRange = hospitalRequest.BedCount[1];
+                }
+                if (minRange > 0 && maxRange > 0)
+                {
+                    sqlQuery += $@" and  h.BedCount between {minRange} and {maxRange} ";
+                }
             }
 
             if (hospitalRequest.CountryCode != null)
