@@ -56,12 +56,12 @@ namespace Core.Data.Repositories.Concrete {
                 sqlQuery += "and cityid in @CityList ";
             }
 
-            if (hospitalRequest.SpecialityId != null)
+            if (hospitalRequest.SpecialityId != null && hospitalRequest.SpecialityId.Any())
             {
-                sqlQuery += "and hs.SpecialityId in @SpecialityId";
+                sqlQuery += "and  hs.SpecialityId in @SpecialityId  ";
             }
 
-            if (hospitalRequest.TreatmentIds != null)
+            if (hospitalRequest.TreatmentIds != null && hospitalRequest.TreatmentIds.Any())
             {
                 sqlQuery += "and ht.TreatmentId in @TreatmentIds";
             }
@@ -86,7 +86,7 @@ namespace Core.Data.Repositories.Concrete {
                 sqlQuery += " and h.id in @HospitalList ";
             }
 
-            if(hospitalRequest.BedCount !=null)
+            if(hospitalRequest.BedCount !=null && hospitalRequest.BedCount.Any())
             {
                 int minRange = 0; int maxRange = 0;
                 if (hospitalRequest.BedCount.Count > 1)

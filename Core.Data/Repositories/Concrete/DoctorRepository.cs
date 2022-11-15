@@ -34,14 +34,14 @@ namespace Core.Data.Repositories.Concrete
                 sqlQuery += " JOin [Country] C on C.Id = U.CountryId ";
 
             }
-            if(doctorRequest.specialityId !=null )
+            if((doctorRequest.specialityId !=null && doctorRequest.specialityId.Any() )
+                || (doctorRequest.TreatmentIds != null && doctorRequest.TreatmentIds.Any()))
             {
-                sqlQuery += " join [DoctorSpecialityRef] DS  on DS.DoctorUserId=d.Userid";
+                sqlQuery += " join [DoctorSpecialityRef] Ds  on Ds.DoctorUserId=d.Userid";
 
             }
-          
-
-            sqlQuery += " where usertype =3  and  languageid = @LanguageId  ";
+            
+            sqlQuery += " and UserType=3 and  languageid = @LanguageId  ";
          
 
             if (!string.IsNullOrWhiteSpace(doctorRequest.SearchText))
@@ -61,6 +61,17 @@ namespace Core.Data.Repositories.Concrete
                 sqlQuery += " and Ds.SpecialityId in @SpecialityId ";
             }
 
+
+            if (doctorRequest.TreatmentIds != null && doctorRequest.TreatmentIds.Any())
+            {
+                sqlQuery += " and Ds.TreatmentId in @TreatmentIds ";
+            }
+
+            if (doctorRequest.CityList != null && doctorRequest.CityList.Any())
+            {
+                sqlQuery += " and  U.CityId in @CityList  ";
+            }
+
             if (doctorRequest.YearExperience != null && doctorRequest.YearExperience.Any())
             {
                 int minRange = 0; int maxRange = 0;
@@ -75,10 +86,6 @@ namespace Core.Data.Repositories.Concrete
                 }
             }
 
-            if (doctorRequest.TreatmentIds != null && doctorRequest.TreatmentIds.Any())
-            {
-                sqlQuery += " and Ds.TreatmentId in @TreatmentIds ";
-            }
 
 
 
